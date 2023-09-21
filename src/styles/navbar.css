@@ -15,6 +15,8 @@
   margin-top: 0 !important;
 }
 .stickyNav {
+  position: relative;
+  z-index: 99;
   box-shadow: 0 1px 20px hsla(0, 0%, 17.95%, 0.125);
   width: 1170px;
   margin: 0 auto;
@@ -27,4 +29,36 @@
     border-radius: 0px;
     width: 100%;
   }
+}
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 28px !important;
+  background-color: #7083eead;
+  color: #fff;
+  border-radius: 5px;
+  padding: 8px 5px;
+}
+@media screen and (max-width: 768px) {
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 18px !important;
+    background-color: #7083eead;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 3px;
+  }
+}
+
+.image {
+  width: 100%; /* Set the image width to 100% to fill the container */
+  height: auto; /* Maintain the image's aspect ratio */
+}
+
+.overlay {
+  position: absolute; /* Position the overlay absolutely within the container */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.226); /* Black with 50% opacity */
 }

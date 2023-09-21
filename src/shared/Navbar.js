@@ -23,20 +23,20 @@ export default Navbar;
 const TopNav = () => {
     return (
         <>
-            <section className='container mx-auto hidden md:flex justify-around items-center my-3'>
+            <section className='container mx-auto flex flex-col md:flex-row justify-around items-center my-3'>
                 <div className='flex items-center gap-3 text-lg'>
-                    <div className='flex items-center gap-2 text-[#656565]'>
+                    <div className='flex items-center gap-2 text-[#656565] text-sm md:text-base'>
                         <HiMailOpen />
                         <a href="mailto:asifsikder23@gmail.com">asifsikder23@gmail.com</a>
                     </div>
-                    |
-                    <div className='flex items-center gap-1 text-[#656565]'>
+                    <p className='text-sm md:text-base'>|</p>
+                    <div className='flex items-center gap-1 text-[#656565] text-sm md:text-base'>
                         <IoMdCall />
                         <a href="tel:+8801872400423">+8801872400423</a>
                     </div>
                 </div>
-                <div className=''>
-                    <div className='flex items-center gap-5 text-[#7AB730] text-xl'>
+                <div className='my-2 md:my-0'>
+                    <div className='flex items-center gap-5 text-[#7083ee] text-xl'>
                         <Link href={'/#'}> <BiLogoFacebook className='hover:text-[#4f791da4]' /></Link>
                         <Link href={'/#'}>  <BiLogoTwitter className='hover:text-[#4f791da4]' /></Link>
                         <Link href={'/#'}> <BiLogoLinkedin className='hover:text-[#4f791da4]' /></Link>
@@ -83,7 +83,7 @@ const BottomNav = () => {
                 className={
                     scroll
                         ? "bg-transparent sticky-bar stick"
-                        : "sticky-bar stickyNav stickNav"
+                        : "sticky-bar stickyNav stickNav bg-white bg-opacity-60 backdrop-blur-md transition-all ease-in"
                 }
             >
                 <section className='container mx-auto'>
@@ -121,7 +121,7 @@ const BottomNav = () => {
                                 ))
                             }
                             <li>
-                                <button class="bg-transparent hover:bg-[#7AB730] text-[#7AB730] font-semibold hover:text-white py-1 px-4 border border-[#7AB730] hover:border-transparent rounded">
+                                <button class="bg-transparent hover:bg-[#7083ee] text-[#7083ee] font-semibold hover:text-white py-1 px-4 border border-[#7083ee] hover:border-transparent rounded">
                                     Login
                                 </button>
                             </li>
@@ -167,7 +167,7 @@ const BottomNav = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <button class="bg-transparent hover:bg-blue-500 text-white font-semibold hover:text-white py-1 px-4 border border-white hover:border-transparent rounded">
+                            <button class="bg-transparent hover:bg-[#7083ee] text-white font-semibold hover:text-white py-1 px-4 border border-white hover:border-transparent rounded">
                             Login
                         </button>
                         </nav>
