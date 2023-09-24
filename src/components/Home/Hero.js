@@ -1,10 +1,9 @@
 "use client"
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Autoplay, Navigation } from 'swiper/modules';
-import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const image = [
     {
@@ -47,7 +46,7 @@ const Hero = () => {
                                 width={800}
                                 height={800}
                             />
-                             <div class="overlay"></div>
+                             <div className="overlay"></div>
                             <div className="absolute inset-0 flex flex-col items-center justify-center z-50">
                                 <p className="text-white md:text-xl lg:text-2xl xl:text-3xl w-[90%] md:w-[70%] text-center font-semibold mb-4">
                                     {img.content}

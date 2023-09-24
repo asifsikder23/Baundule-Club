@@ -33,19 +33,12 @@
 .swiper-button-next:after,
 .swiper-button-prev:after {
   font-size: 28px !important;
-  background-color: #7083eead;
   color: #fff;
-  border-radius: 5px;
-  padding: 8px 5px;
 }
 @media screen and (max-width: 768px) {
   .swiper-button-next:after,
   .swiper-button-prev:after {
-    font-size: 18px !important;
-    background-color: #7083eead;
-    color: #fff;
-    border-radius: 5px;
-    padding: 5px 3px;
+    font-size: 22px !important;
   }
 }
 

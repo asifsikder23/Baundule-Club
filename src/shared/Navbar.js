@@ -1,12 +1,12 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { BiLogoFacebook, BiLogoLinkedin, BiLogoTwitter, BiLogoYoutube } from 'react-icons/bi';
+import { BsInstagram } from 'react-icons/bs';
 import { HiMailOpen } from 'react-icons/hi';
 import { IoMdCall } from 'react-icons/io';
-import { BsInstagram } from 'react-icons/bs';
-import { BiLogoFacebook, BiLogoLinkedin, BiLogoTwitter, BiLogoYoutube } from 'react-icons/bi';
-import Link from 'next/link';
-import Image from 'next/image';
-import '../styles/navbar.css'
+import '../styles/navbar.css';
 
 
 const Navbar = () => {
@@ -109,11 +109,6 @@ const BottomNav = () => {
                                     <>
                                         <li key={i} className='relative p-2'>
                                             <Link href={m.label.toLowerCase()}
-                                                activelassName="active"
-                                                spy={true}
-                                                smooth={true}
-                                                offset={50}
-                                                duration={2000}
                                                 className="uppercase font-semibold text-sm  cursor-pointer ">{m.label}</Link>
                                         </li>
 
@@ -121,7 +116,7 @@ const BottomNav = () => {
                                 ))
                             }
                             <li>
-                                <button class="bg-transparent hover:bg-[#7083ee] text-[#7083ee] font-semibold hover:text-white py-1 px-4 border border-[#7083ee] hover:border-transparent rounded">
+                                <button className="bg-transparent hover:bg-[#7083ee] text-[#7083ee] font-semibold hover:text-white py-1 px-4 border border-[#7083ee] hover:border-transparent rounded">
                                     Login
                                 </button>
                             </li>
@@ -155,11 +150,6 @@ const BottomNav = () => {
                                             menu.map((m, i) => (
                                                 <li key={i} className='mb-1'>
                                                     <Link href={m.label.toLowerCase()}
-                                                        activelassName="active"
-                                                        spy={true}
-                                                        smooth={true}
-                                                        offset={50}
-                                                        duration={2000}
                                                         className="block p-4 text-sm text-white font-semibold  hover:bg-blue-50 hover:text-red-600 rounded cursor-pointer">{m.label}</Link>
                                                 </li>
                                             ))
@@ -167,7 +157,7 @@ const BottomNav = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <button class="bg-transparent hover:bg-[#7083ee] text-white font-semibold hover:text-white py-1 px-4 border border-white hover:border-transparent rounded">
+                            <button className="bg-transparent hover:bg-[#7083ee] text-white font-semibold hover:text-white py-1 px-4 border border-white hover:border-transparent rounded">
                             Login
                         </button>
                         </nav>
