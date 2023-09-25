@@ -34,13 +34,7 @@ ul.tab.tab-tabs li a.active {
 }
 @media screen and (max-width: 768px) {
     .tab {
-        display: block;
-        width: 100%;
-      }
-}
-@media screen and (max-width: 768px) {
-    ul.tab.tab-tabs li a {
-        width: 100%;
+        margin: 0 10px;
       }
 }
 .btn {
