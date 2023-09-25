@@ -5,10 +5,12 @@ export const metadata = {
   description: ' Let’s go anywhere!',
 }
 
-const RootLayout = ({children}) => {
+const RootLayout = ({ children }) => {
   return (
     <html lang="en">
-      <body className='container mx-auto'>{children}</body>
+      <body className='container mx-auto'>
+        {children}
+      </body>
     </html>
   )
 }

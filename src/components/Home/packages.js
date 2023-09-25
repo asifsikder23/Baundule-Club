@@ -81,6 +81,78 @@ const Packages = () => {
             ],
             amount: '350'
         },
+        {
+            img: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+            location: 'London',
+            duration: '3 Days',
+            person: '1',
+            rating: [
+                {
+                    rate: 4.5
+                },
+                {
+                    rate: 4.0
+                },
+                {
+                    rate: 5
+                },
+                {
+                    rate: 4.5
+                },
+                {
+                    rate: 4.5
+                },
+            ],
+            amount: '350',
+        },
+        {
+            img: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+            location: 'London',
+            duration: '3 Days',
+            person: '1',
+            rating: [
+                {
+                    rate: 4.5
+                },
+                {
+                    rate: 4.0
+                },
+                {
+                    rate: 5
+                },
+                {
+                    rate: 4.5
+                },
+                {
+                    rate: 4.5
+                },
+            ],
+            amount: '350'
+        },
+        {
+            img: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+            location: 'London',
+            duration: '3 Days',
+            person: '1',
+            rating: [
+                {
+                    rate: 4.5
+                },
+                {
+                    rate: 4.0
+                },
+                {
+                    rate: 5
+                },
+                {
+                    rate: 4.5
+                },
+                {
+                    rate: 4.5
+                },
+            ],
+            amount: '350'
+        },
     ]
     return (
         <>
