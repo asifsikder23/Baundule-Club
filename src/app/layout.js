@@ -8,7 +8,7 @@ export const metadata = {
 const RootLayout = ({ children }) => {
   return (
     <html lang="en">
-      <body className='container mx-auto'>
+      <body className=''>
         {children}
       </body>
     </html>

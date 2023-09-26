@@ -11,8 +11,7 @@ import '../../styles/packages.css';
 const Packages = () => {
     const [displayedPackages, setDisplayedPackages] = useState(3);
     const loadMore = () => {
-
-        setDisplayedPackages(displayedPackages + 3)
+        setDisplayedPackages(pkg.length);
     };
     const pkg = [
         {
@@ -167,10 +166,9 @@ const Packages = () => {
                     <h6 className="text-lime-700 uppercase" style={{ letterSpacing: '5px' }}>Packages</h6>
                     <h1 className='text-xl md:text-4xl font-bold '>Perfect Tour Packages</h1>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-10">
-
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-5 lg:mx-24 gap-10">
                     {
-                        pkg.map((packages, i) => {
+                        pkg.slice(0, displayedPackages).map((packages, i) => {
                             return (
                                 <>
                                     <div className="overflow-hidden rounded-lg shadow transition hover:shadow-lg" key={i}>
@@ -220,7 +218,7 @@ const Packages = () => {
                         })
                     }
                 </div>
-                <div className='flex md:hidden justify-center'>
+                <div className=''>
                     {displayedPackages < pkg.length && (
                         <div className="text-center mt-4">
                             <button
