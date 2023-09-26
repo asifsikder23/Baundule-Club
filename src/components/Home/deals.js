@@ -1,7 +1,7 @@
 "use client"
-import React, { useState } from 'react';
-import '../../styles/deals.css'
 import Image from 'next/image';
+import { useState } from 'react';
+import '../../styles/deals.css';
 
 const Deals = () => {
     const [selectedtab, setSelectedTab] = useState("hot");
@@ -181,34 +181,34 @@ const CatBtn = ({ selectedtab, setSelectedTab }) => {
 const All = ({ p, i }) => {
     return (
         <>
-            <div class="container mx-auto pt-5" key={i}>
-                <div class="md:flex">
-                    <div class="lg:w-1/2 hidden lg:block">
+            <div className="container mx-auto pt-5" key={i}>
+                <div className="md:flex">
+                    <div className="lg:w-1/2 hidden lg:block">
                         <Image
-                            class="inset-0 w-full h-full object-cover"
+                            className="inset-0 w-full h-full object-cover"
                             src={p.banner}
                             alt=''
                             width={500}
                             height={500}
                         />
                     </div>
-                    <div class="lg:w-1/2 pt-5 pb-20 md:pb-5">
-                        <div class="bg-white p-4 md:p-10 my-5 md:my-0">
+                    <div className="lg:w-1/2 pt-5 pb-20 md:pb-5">
+                        <div className="bg-white p-4 md:p-10 my-5 md:my-0">
                             {
                                 p.category === 'hot' ? (
-                                    <h6 class="text-primary uppercase" style={{ letterSpacing: '5px' }}>Hot Deals</h6>
+                                    <h6 className="text-primary uppercase" style={{ letterSpacing: '5px' }}>Hot Deals</h6>
                                 ) : p.category === 'resortpkg' ? (
-                                    <h6 class="text-primary uppercase" style={{ letterSpacing: '5px' }}>Resort Packages</h6>
+                                    <h6 className="text-primary uppercase" style={{ letterSpacing: '5px' }}>Resort Packages</h6>
                                 ) : (
-                                    <h6 class="text-primary uppercase" style={{ letterSpacing: '5px' }}>International Tour Pack</h6>
+                                    <h6 className="text-primary uppercase" style={{ letterSpacing: '5px' }}>International Tour Pack</h6>
                                 )
                             }
 
-                            <h1 class="text-3xl font-semibold mb-3">{p.title}</h1>
-                            <p class="mb-4">
+                            <h1 className="text-3xl font-semibold mb-3">{p.title}</h1>
+                            <p className="mb-4">
                                 {p.description}
                             </p>
-                            <div class="grid grid-cols-2 gap-5 mb-4">
+                            <div className="grid grid-cols-2 gap-5 mb-4">
                                 {
                                     p?.packages?.map((pkg, i) => {
                                         return (
