@@ -1,9 +1,11 @@
+"use client"
 import Destination from '@/components/Home/Destination';
 import Hero from '@/components/Home/Hero';
 import Blog from '@/components/Home/blog';
 import Deals from '@/components/Home/deals';
 import Packages from '@/components/Home/packages';
 import Services from '@/components/Home/services';
+import { FloatingWhatsApp } from 'react-floating-whatsapp'
 import React from 'react';
 
 const Home = () => {
@@ -13,8 +15,17 @@ const Home = () => {
             <Destination />
             <Services />
             <Packages />
-            <Deals/>
-            <Blog/>
+            <Deals />
+            <Blog />
+            <FloatingWhatsApp
+                phoneNumber="+8801872400423"
+                accountName="Baundule Club"
+                avatar='/Assets/logo/logo.png'
+                statusMessage='Online'
+                allowEsc
+                notification
+                notificationSound
+            />
         </section>
     );
 };
