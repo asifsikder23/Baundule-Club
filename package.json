@@ -1,5 +1,5 @@
 {
-  "name": "boundle_club",
+  "name": "baundule_club",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,13 +10,13 @@
   },
   "dependencies": {
     "autoprefixer": "10.4.16",
+    "emailjs-com": "^3.2.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.2",
     "next": "13.5.2",
     "postcss": "8.4.30",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-floating-whatsapp": "^5.0.8",
     "react-icons": "^4.11.0",
     "swiper": "^10.3.0",
     "tailwindcss": "3.3.3"

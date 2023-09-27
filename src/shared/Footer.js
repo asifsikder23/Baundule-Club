@@ -11,7 +11,7 @@ import { BiLogoLinkedin } from 'react-icons/bi';
 
 const Footer = () => {
     return (
-        <div className="bg-[#212121] text-white py-5 px-3 lg:px-5 mt-10">
+        <div className="bg-[#212121] text-white px-3 lg:px-5 py-10">
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
                     {/* Column 1 */}

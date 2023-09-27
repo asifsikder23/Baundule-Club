@@ -36,12 +36,12 @@ const TopNav = () => {
                     </div>
                 </div>
                 <div className='my-2 md:my-0'>
-                    <div className='flex items-center gap-5 text-[#7083ee] text-xl'>
-                        <Link href={'/#'}> <BiLogoFacebook className='hover:text-[#4f791da4]' /></Link>
-                        <Link href={'/#'}>  <BiLogoTwitter className='hover:text-[#4f791da4]' /></Link>
-                        <Link href={'/#'}> <BiLogoLinkedin className='hover:text-[#4f791da4]' /></Link>
-                        <Link href={'/#'}> <BsInstagram className='hover:text-[#4f791da4]' /></Link>
-                        <Link href={'/#'}> <BiLogoYoutube className='hover:text-[#4f791da4]' /></Link>
+                    <div className='flex items-center gap-5 text-lime-600 text-xl'>
+                        <Link href={'/#'}> <BiLogoFacebook className='hover:text-lime-700' /></Link>
+                        <Link href={'/#'}>  <BiLogoTwitter className='hover:text-lime-700' /></Link>
+                        <Link href={'/#'}> <BiLogoLinkedin className='hover:text-lime-700' /></Link>
+                        <Link href={'/#'}> <BsInstagram className='hover:text-lime-700' /></Link>
+                        <Link href={'/#'}> <BiLogoYoutube className='hover:text-lime-700' /></Link>
                     </div>
                 </div>
             </section>
@@ -116,7 +116,7 @@ const BottomNav = () => {
                                 ))
                             }
                             <li>
-                                <button className="bg-transparent hover:bg-[#7083ee] text-[#7083ee] font-semibold hover:text-white py-1 px-4 border border-[#7083ee] hover:border-transparent rounded">
+                                <button className="bg-transparent hover:bg-lime-700 text-lime-600 font-semibold hover:text-white py-1 px-4 border border-lime-600 hover:border-transparent rounded">
                                     Login
                                 </button>
                             </li>
@@ -125,18 +125,11 @@ const BottomNav = () => {
                     <div className={`navbar-menu relative z-50 ${isMenuOpen ? '' : 'hidden'}`}>
                         <div className="navbar-backdrop fixed inset-0  opacity-25" onClick={closeMenu}>
                         </div>
-                        <nav className="fixed top-0 left-0 bottom-0 flex justify-between flex-col w-5/6 max-w-sm py-6 px-6 h-screen bg-black overflow-y-auto">
+                        <nav className="fixed top-0 left-0 bottom-0 flex justify-between flex-col w-5/6 max-w-sm py-6 px-6 h-screen bg-gray-900 bg-opacity-90 backdrop-blur-md transition-all ease-in overflow-y-auto">
                             <div>
                                 <div className="flex justify-between items-center mb-8">
-                                    <Link href={"/"} className="cursor-pointer">
-                                        <div className="flex">
-                                            <div>
-                                                <Image src='/Assets/logo/logo.png' alt="" width={50} height={20} />
-                                            </div>
-                                            <div className="flex mt-5 -ml-3">
-                                                <p className="text-lg font-bold ">sif</p>
-                                            </div>
-                                        </div>
+                                    <Link href={"/"} className="cursor-pointer border text-white px-4 py-2 text-lg font-bold uppercase">
+                                        Baundule Club
                                     </Link>
                                     <button className="navbar-close" onClick={closeMenu}>
                                         <svg className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -158,10 +151,10 @@ const BottomNav = () => {
                                 </div>
                             </div>
                             <button className="bg-transparent hover:bg-[#7083ee] text-white font-semibold hover:text-white py-1 px-4 border border-white hover:border-transparent rounded">
-                            Login
-                        </button>
+                                Login
+                            </button>
                         </nav>
-                        
+
                     </div>
                 </section>
 

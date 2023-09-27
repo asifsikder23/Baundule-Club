@@ -1,6 +1,7 @@
 "use client"
 import Footer from '@/shared/Footer';
 import Navbar from '@/shared/Navbar';
+import Cta from '@/shared/cta';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
@@ -28,6 +29,7 @@ const MainLayout = ({ children }) => {
                     <>
                         <Navbar />
                         {children}
+                        <Cta/>
                         <Footer />
                     </>
             }

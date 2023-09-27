@@ -51,7 +51,7 @@ const Hero = () => {
                                 <p className="text-white md:text-xl lg:text-2xl xl:text-3xl w-[90%] md:w-[70%] text-center font-semibold mb-4">
                                     {img.content}
                                 </p>
-                                <button className="bg-[#7083ee] hover:bg-[#7083ee] text-white py-2 px-4 rounded-full">
+                                <button className="bg-lime-600 hover:bg-lime-700 text-white py-2 px-4 rounded-full">
                                     Book Now
                                 </button>
                             </div>
