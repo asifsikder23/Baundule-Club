@@ -22,7 +22,7 @@ const image = [
 
 const Hero = () => {
     return (
-        <section className='-mt-7'>
+        <section className='-mt-7 mb-14'>
             <Swiper
                 slidesPerView={1}
                 spaceBetween={30}

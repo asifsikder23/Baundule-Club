@@ -10,7 +10,7 @@ const MainLayout = ({ children }) => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-        }, 4200);
+        }, 2000);
     }, []);
     return (
         <>

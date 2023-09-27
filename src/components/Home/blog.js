@@ -32,7 +32,7 @@ const Blog = () => {
     ]
 
     return (
-        <div className="container-fluid py-5">
+        <div className="container-fluid my-14">
             <div className="container pt-5 pb-3">
                 <div className="text-center mb-3 pb-3">
                     <h6 className="text-lime-700 uppercase" style={{ letterSpacing: '5px' }}>Our Blog</h6>

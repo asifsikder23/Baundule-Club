@@ -37,7 +37,7 @@ const Destination = () => {
     ]
     return (
         <>
-            <div className="container mx-auto py-5">
+            <div className="container mx-auto my-14">
                 <div className="text-center my-5 pb-3">
                     <h6 className=" uppercase text-lime-700" style={{ letterSpacing: '5px' }}>Destination</h6>
                     <h1 className='text-xl md:text-4xl font-bold '>Explore Top Destination</h1>

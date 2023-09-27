@@ -82,7 +82,7 @@ const Deals = () => {
     ]
     return (
         <>
-            <section className='container mx-auto py-5'>
+            <section className='container mx-auto my-14'>
                 <div className="text-center mb-3 pb-3">
                     <h6 className="text-lime-700 uppercase" style={{ letterSpacing: '5px' }}>Deals</h6>
                     <h1 className='text-xl md:text-4xl font-bold '>Explore, Save, Discover More!</h1>
@@ -110,7 +110,7 @@ export default Deals;
 const CatBtn = ({ selectedtab, setSelectedTab }) => {
     return (
         <>
-            <div id='catBtn'>
+            <div id='catBtn' >
                 <ul className="tab tab-tabs" role="tablist">
                     <li
                         className="tab-item"
