@@ -11,6 +11,7 @@ import Header from '@/components/Home/about';
 import Image from 'next/image';
 import '../../../styles/home.css'
 import Link from 'next/link';
+import Cta from '@/shared/cta';
 
 
 

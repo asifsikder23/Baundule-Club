@@ -1,19 +1,65 @@
 "use client"
-import React from 'react';
+import { AuthContext } from '@/components/context/UserContext';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import { useForm } from "react-hook-form";
+import { toast } from 'react-hot-toast';
 import { BsGoogle } from 'react-icons/bs';
 
+
 const Signup = () => {
+    const { googleSignIn, updateUser, createUser, loading , user } = useContext(AuthContext)
+    const router = useRouter()
+
+    const { register, handleSubmit, formState: { errors }, } = useForm();
+
+    const handleGoogleLogIn = () => {
+        googleSignIn()
+            .then((result) => {
+                const data = result.user
+                router.push('/', { scroll: false })
+                toast.success("Signup successfully !");
+            })
+            .catch((error) => {
+                console.error("error: ", error);
+                toast.error("Signup Failed !");
+            });
+    };
+
+    const handleSignUp = (data) => {
+
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                router.push('/', { scroll: false })
+                toast.success("Signup successfully !");
+                const userInfo = {
+                    displayName: data.name,
+                }
+
+                updateUser(userInfo)
+                    .then(() => {
+                    })
+                    .catch(error => console.log(error))
+            })
+            .catch(error => {
+                console.log(error)
+                toast.error("Signup Failed !");
+
+            })
+    };
+
     const title = 'Baundule Club'
     const desc = 'Welcome to Baundule Club, your passport to extraordinary adventures and seamless travel experiences. Discover the world with us as we curate unforgettable journeys, from breathtaking destinations to personalized itineraries. Whether you seek adventure, relaxation, or cultural immersion, let Baundule Club be your trusted travel companion. Explore, dream, and embark on your next adventure today!'
 
     return (
         <>
-            <div className=''>
+            <div className='-mt-7'>
                 <section className="bg-zinc-900">
                     <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-                        <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+                        <section className="relative hidden lg:flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
                             <Image
                                 alt="Night"
                                 src="https://images.unsplash.com/photo-1609607847926-da4702f01fef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FtZXJhJTIwd2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
@@ -22,7 +68,7 @@ const Signup = () => {
                                 height={500}
                             />
 
-                            <div className="hidden lg:relative lg:block lg:p-12">
+                            <div className="lg:relative lg:p-12">
 
                                 <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl">
                                     Welcome to <span className='md:text-5xl'> {title}</span>
@@ -44,18 +90,18 @@ const Signup = () => {
                                         <h2 className="mb-3 text-3xl font-semibold text-center">
                                             SignUp to your account
                                         </h2>
-                                        <p className="text-sm text-center dark:text-gray-400">
+                                        <p className="text-sm text-center text-gray-400">
                                             Already have account?
                                             <Link
                                                 href={"/signin"}
-                                                className="focus:underline hover:underline ml-3"
+                                                className="focus:underline hover:underline ml-3 text-lime-300"
                                             >
-                                                Signin here
+                                                Sign in here
                                             </Link>
                                         </p>
                                         <div className="my-6 space-y-4">
                                             <button
-                                                // onClick={handleGoogleLogIn}
+                                                onClick={handleGoogleLogIn}
                                                 aria-label="Login with Google"
                                                 type="button"
                                                 className="btn bg-lime-600 px-3 py-2 rounded w-full gap-3 flex items-center justify-center"
@@ -65,12 +111,12 @@ const Signup = () => {
                                             </button>
                                         </div>
                                         <div className="flex items-center w-full my-4">
-                                            <hr className="w-full dark:text-gray-400" />
-                                            <p className="px-3 dark:text-gray-400">OR</p>
-                                            <hr className="w-full dark:text-gray-400" />
+                                            <hr className="w-full text-gray-400" />
+                                            <p className="px-3 text-gray-400">OR</p>
+                                            <hr className="w-full text-gray-400" />
                                         </div>
                                         <form
-                                            // onSubmit={handleEmailPasswordSignUp}
+                                            onSubmit={handleSubmit(handleSignUp)}
                                             className="space-y-8 ng-untouched ng-pristine ng-valid"
                                         >
                                             <div className="space-y-4">
@@ -81,8 +127,14 @@ const Signup = () => {
                                                         name="name"
                                                         id="name"
                                                         placeholder="John Deo"
-                                                        className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-stone-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                                        className="w-full px-3 py-2 border rounded-md border-gray-700 bg-stone-900 text-gray-100 focus:border-violet-400"
+                                                        {...register("name", { required: "Name is required*" })}
                                                     />
+                                                    {errors.name && (
+                                                        <p className="text-red-600" role="alert">
+                                                            {errors.name?.message}
+                                                        </p>
+                                                    )}
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label className="block text-sm">Email address</label>
@@ -91,8 +143,16 @@ const Signup = () => {
                                                         name="email"
                                                         id="email"
                                                         placeholder="leroy@jenkins.com"
-                                                        className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-stone-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                                        className="w-full px-3 py-2 border rounded-md border-gray-700 bg-stone-900 text-gray-100 focus:border-violet-400"
+                                                        {...register("email", {
+                                                            required: "Email Address is required*",
+                                                        })}
                                                     />
+                                                    {errors.email && (
+                                                        <p className="text-red-600 text-sm w-80 mt-1" role="alert">
+                                                            {errors.email?.message}
+                                                        </p>
+                                                    )}
                                                 </div>
                                                 <div className="space-y-2">
                                                     <div className="flex justify-between">
@@ -103,12 +163,31 @@ const Signup = () => {
                                                         name="password"
                                                         id="password"
                                                         placeholder="*****"
-                                                        className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-stone-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                                        className="w-full px-3 py-2 border rounded-md border-gray-700 bg-stone-900 text-gray-100 focus:border-violet-400"
+                                                        {...register("password", {
+                                                            required: "Password is required*",
+                                                            minLength: {
+                                                                value: 8,
+                                                                message:
+                                                                    "Password must be at least 8 characters or longer",
+                                                            },
+                                                            pattern: {
+                                                                value:
+                                                                    /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
+                                                                message:
+                                                                    "Must be one uppercase, one lowercase, one digit & one special character",
+                                                            },
+                                                        })}
                                                     />
+                                                    {errors.password && (
+                                                        <p className="text-red-600 text-sm w-80 mt-1" role="alert">
+                                                            {errors.password?.message}
+                                                        </p>
+                                                    )}
                                                 </div>
                                             </div>
                                             <button type="submit" className="w-full px3 py-2 rounded bg-lime-600">
-                                                Sign up
+                                                {loading ? "Loading..." : "Sign Up"}
                                             </button>
                                         </form>
                                     </div>

@@ -1,12 +1,13 @@
 "use client"
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BiLogoFacebook, BiLogoLinkedin, BiLogoTwitter, BiLogoYoutube } from 'react-icons/bi';
 import { BsInstagram } from 'react-icons/bs';
 import { HiMailOpen } from 'react-icons/hi';
 import { IoMdCall } from 'react-icons/io';
 import '../styles/navbar.css';
+import { AuthContext } from '@/components/context/UserContext';
 
 
 const Navbar = () => {
@@ -49,6 +50,8 @@ const TopNav = () => {
     )
 }
 const BottomNav = () => {
+    const { user, logOut } = useContext(AuthContext)
+
     const [scroll, setScroll] = useState(0);
     useEffect(() => {
         const handleScroll = () => {
@@ -116,9 +119,16 @@ const BottomNav = () => {
                                 ))
                             }
                             <li>
-                                <button className="bg-transparent hover:bg-lime-700 text-lime-600 font-semibold hover:text-white py-1 px-4 border border-lime-600 hover:border-transparent rounded">
-                                    Login
-                                </button>
+                                {
+                                    user ?
+                                        <button onClick={logOut} className="bg-transparent hover:bg-lime-700 text-lime-600 font-semibold hover:text-white py-1 px-4 border border-lime-600 hover:border-transparent rounded">
+                                            Dashboard
+                                        </button>
+                                        :
+                                        <Link href={'/signin'} className="bg-transparent hover:bg-lime-700 text-lime-600 font-semibold hover:text-white py-1 px-4 border border-lime-600 hover:border-transparent rounded">
+                                            Signin
+                                        </Link>
+                                }
                             </li>
                         </ul>
                     </div>
@@ -150,9 +160,20 @@ const BottomNav = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <button className="bg-transparent hover:bg-[#7083ee] text-white font-semibold hover:text-white py-1 px-4 border border-white hover:border-transparent rounded">
-                                Login
-                            </button>
+                            {
+                                user ?
+                                    // <Link href={'/dashboard'} className="bg-transparent hover:bg-[#7083ee] text-white font-semibold hover:text-white py-1 px-4 border border-white hover:border-transparent rounded text-center">
+                                    //     Dashboard
+                                    // </Link>
+                                    <button onClick={logOut} className="bg-transparent hover:bg-[#7083ee] text-white font-semibold hover:text-white py-1 px-4 border border-white hover:border-transparent rounded text-center">
+                                        Dashboard
+                                    </button>
+
+                                    :
+                                    <Link href={'/signin'} className="bg-transparent hover:bg-[#7083ee] text-white font-semibold hover:text-white py-1 px-4 border border-white hover:border-transparent rounded text-center">
+                                        Login
+                                    </Link>
+                            }
                         </nav>
 
                     </div>
