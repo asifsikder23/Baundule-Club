@@ -30,7 +30,6 @@ const Blog = () => {
             ]
         }
     ]
-
     return (
         <div className="container-fluid my-14">
             <div className="container pt-5 pb-3">
