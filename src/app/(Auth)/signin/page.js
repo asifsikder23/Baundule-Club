@@ -8,11 +8,15 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form';
 import { sendPasswordResetEmail } from 'firebase/auth';
+import { FaBeer, FaEye, FaEyeSlash } from 'react-icons/fa';
+
 
 const SignIn = () => {
-    const { googleSignIn, login, auth, loading } = useContext(AuthContext)
+    const { googleSignIn, login, auth } = useContext(AuthContext)
     const [userEmail, setUserEmail] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
     const router = useRouter()
     const {
         register,
@@ -78,10 +82,10 @@ const SignIn = () => {
                                 <section>
                                     <div className="p-4 rounded-md shadow sm:p-8 text-gray-100">
                                         <h2 className="mb-3 text-3xl font-semibold text-center">
-                                            SignUp to your account
+                                            Sign in to your account
                                         </h2>
                                         <p className="text-sm text-center text-gray-400">
-                                            Already have account?
+                                            New in Baundule Club?
                                             <Link
                                                 href={"/signup"}
                                                 className="focus:underline hover:underline ml-3 text-lime-300"
@@ -97,7 +101,7 @@ const SignIn = () => {
                                                 className="btn bg-lime-600 px-3 py-2 rounded w-full gap-3 flex items-center justify-center"
                                             >
                                                 <BsGoogle />
-                                                <p>Signin with Google</p>
+                                                <p>Sign in with Google</p>
                                             </button>
                                         </div>
                                         <div className="flex items-center w-full my-4">
@@ -109,7 +113,7 @@ const SignIn = () => {
                                             onSubmit={handleSubmit(handleLogin)}
                                             className="space-y-8 ng-untouched ng-pristine ng-valid"
                                         >
-                                            <div className="space-y-4">
+                                            <div className="space-y-2">
                                                 <div className="space-y-2">
                                                     <label className="block text-sm">Email address</label>
                                                     <input
@@ -132,27 +136,37 @@ const SignIn = () => {
                                                     <div className="flex justify-between">
                                                         <label className="text-sm">Password</label>
                                                     </div>
-                                                    <input
-                                                        type="password"
-                                                        name="password"
-                                                        id="password"
-                                                        placeholder="*****"
-                                                        className="w-full px-3 py-2 border rounded-md border-gray-700 bg-stone-900 text-gray-100 focus:border-violet-400"
-                                                        {...register("password", {
-                                                            required: "Password is required*",
-                                                            minLength: {
-                                                                value: 8,
-                                                                message:
-                                                                    "Password must be at least 8 characters or longer",
-                                                            },
-                                                            pattern: {
-                                                                value:
-                                                                    /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
-                                                                message:
-                                                                    "Must be one uppercase, one lowercase, one digit & one special character",
-                                                            },
-                                                        })}
-                                                    />
+                                                    <div className='relative'>
+                                                        <input
+                                                            type={showPassword ? 'text' : 'password'}
+                                                            name="password"
+                                                            id="password"
+                                                            placeholder="*****"
+                                                            className="w-full px-3 py-2 border rounded-md border-gray-700 bg-stone-900 text-gray-100 focus:border-violet-400"
+                                                            {...register("password", {
+                                                                required: "Password is required*",
+                                                                minLength: {
+                                                                    value: 8,
+                                                                    message:
+                                                                        "Password must be at least 8 characters or longer",
+                                                                },
+                                                                pattern: {
+                                                                    value:
+                                                                        /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
+                                                                    message:
+                                                                        "Must be one uppercase, one lowercase, one digit & one special character",
+                                                                },
+                                                            })}
+                                                        />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => setShowPassword(!showPassword)} 
+                                                            className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500"
+                                                        >
+                                                            {showPassword ? <FaEye className='text-white' /> : <FaEyeSlash className='text-white' />} 
+                                                        </button>
+                                                    </div>
+
                                                     {errors.password && (
                                                         <p className="text-red-600 text-sm w-80 mt-1" role="alert">
                                                             {errors.password?.message}
@@ -169,7 +183,7 @@ const SignIn = () => {
                                                 <ResetPass handleResetPass={handleResetPass} showModal={showModal} setShowModal={setShowModal} handleEmailBLur={handleEmailBLur} />
                                             </div>
                                             <button type="submit" className="w-full px3 py-2 rounded bg-lime-600">
-                                                {loading ? 'Signing in ....' : 'Sign In'}
+                                                Sign in
                                             </button>
                                         </form>
                                     </div>
@@ -190,7 +204,6 @@ const SignIn = () => {
                                 <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl">
                                     Welcome to <span className='md:text-5xl'> {title}</span>
                                 </h2>
-
                                 <p className="mt-4 leading-relaxed text-white/90">
                                     {desc}
                                 </p>
