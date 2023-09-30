@@ -13,7 +13,7 @@ const Footer = () => {
     return (
         <div className="bg-[#212121] text-white px-3 lg:px-5 py-10">
             <div className="container mx-auto">
-                <div className="flex gap-10 justify-between">
+                <div className="flex flex-col lg:flex-row gap-10 justify-between">
                     {/* Column 1 */}
                     <div className="mb-5 w-96">
                         <a href="/" className="navbar-brand">
