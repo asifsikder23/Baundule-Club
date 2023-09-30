@@ -13,9 +13,9 @@ const Footer = () => {
     return (
         <div className="bg-[#212121] text-white px-3 lg:px-5 py-10">
             <div className="container mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
+                <div className="flex gap-10 justify-between">
                     {/* Column 1 */}
-                    <div className="mb-5">
+                    <div className="mb-5 w-96">
                         <a href="/" className="navbar-brand">
                             <h1 className="text-2xl uppercase font-bold">
                                 Baundule Club
@@ -43,7 +43,7 @@ const Footer = () => {
                         </div>
                     </div>
                     {/* Column 2 */}
-                    <div className="mb-5">
+                    {/* <div className="mb-5">
                         <h5 className="text-white text-uppercase mb-4" style={{ letterSpacing: '5px' }}>
                             Our Services
                         </h5>
@@ -61,27 +61,7 @@ const Footer = () => {
                                 <AiOutlineArrowRight className="text-sm mr-2" />Blog
                             </Link>
                         </div>
-                    </div>
-                    {/* Column 3 */}
-                    <div className="mb-5">
-                        <h5 className="text-white text-uppercase mb-4" style={{ letterSpacing: '5px' }}>
-                            Useful Links
-                        </h5>
-                        <div className="flex flex-col justify-start">
-                            <Link className="text-white-50 mb-2 flex items-center" href="#">
-                                <AiOutlineArrowRight className="text-sm mr-2" />About
-                            </Link>
-                            <Link className="text-white-50 mb-2 flex items-center" href="#">
-                                <AiOutlineArrowRight className="text-sm mr-2" />Services
-                            </Link>
-                            <Link className="text-white-50 mb-2 flex items-center" href="#">
-                                <AiOutlineArrowRight className="text-sm mr-2" />Packages
-                            </Link>
-                            <Link className="text-white-50 mb-2 flex items-center" href="#">
-                                <AiOutlineArrowRight className="text-sm mr-2" />Blog
-                            </Link>
-                        </div>
-                    </div>
+                    </div> */}
                     {/* Column 4 */}
                     <div className="mb-5">
                         <h5 className="text-white text-uppercase mb-4" style={{ letterSpacing: '5px' }}>

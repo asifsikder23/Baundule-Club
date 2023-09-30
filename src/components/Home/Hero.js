@@ -22,6 +22,10 @@ const image = [
         img: 'https://i.ibb.co/35bXdqW/359815779-289988560171672-7291747113375088179-n.jpg',
         content: 'Travel exposes you to diverse cultures, traditions, and languages. It broadens your horizons and fosters cultural sensitivity and understanding.'
     },
+    {
+        img: 'https://i.ibb.co/7WmWC3w/10.jpg',
+        content: 'Travel exposes you to diverse cultures, traditions, and languages. It broadens your horizons and fosters cultural sensitivity and understanding.'
+    },
 ];
 
 const Hero = () => {

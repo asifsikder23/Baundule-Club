@@ -11,7 +11,7 @@ const Deals = () => {
             category: 'hot',
             title: 'Find Your Dream Getaway in Hot Deals',
             description: 'Are you dreaming of palm-fringed beaches, cultural immersion in exotic cities, or thrilling adventures in breathtaking landscapes? Now, those dreams can become a reality without burning a hole in your pocket. Our handpicked selection of sizzling travel deals is designed to ignite your wanderlust and leave you with unforgettable memories.',
-            banner: 'https://i.ibb.co/Wgdkktv/hotabout.jpg',
+            banner: 'https://i.ibb.co/YXXfFFM/1.jpg',
             packages: [
                 {
                     img: 'https://i.ibb.co/NTJqVLB/maldives.jpg',
@@ -35,7 +35,7 @@ const Deals = () => {
             category: 'resortpkg',
             title: 'Find Your Dream Getaway in Hot Deals',
             description: 'Are you dreaming of palm-fringed beaches, cultural immersion in exotic cities, or thrilling adventures in breathtaking landscapes? Now, those dreams can become a reality without burning a hole in your pocket. Our handpicked selection of sizzling travel deals is designed to ignite your wanderlust and leave you with unforgettable memories.',
-            banner: 'https://i.ibb.co/Wgdkktv/hotabout.jpg',
+            banner: 'https://i.ibb.co/56JKT3c/8.jpg',
             packages: [
                 {
                     img: 'https://i.ibb.co/NTJqVLB/maldives.jpg',
@@ -59,7 +59,7 @@ const Deals = () => {
             category: 'internationalpkg',
             title: 'Find Your Dream Getaway in Hot Deals',
             description: 'Are you dreaming of palm-fringed beaches, cultural immersion in exotic cities, or thrilling adventures in breathtaking landscapes? Now, those dreams can become a reality without burning a hole in your pocket. Our handpicked selection of sizzling travel deals is designed to ignite your wanderlust and leave you with unforgettable memories.',
-            banner: 'https://i.ibb.co/Wgdkktv/hotabout.jpg',
+            banner: 'https://i.ibb.co/XDTbW41/hjk.jpg',
             packages: [
                 {
                     img: 'https://i.ibb.co/NTJqVLB/maldives.jpg',
@@ -184,13 +184,17 @@ const All = ({ p, i }) => {
             <div className="container mx-auto pt-5" key={i}>
                 <div className="md:flex">
                     <div className="lg:w-1/2 hidden lg:block">
-                        <Image
-                            className="inset-0 w-full h-full object-cover"
-                            src={p.banner}
-                            alt=''
-                            width={500}
-                            height={500}
-                        />
+                        <div style={{
+                            height: '700px'
+                        }}>
+                            <Image
+                                className="inset-0 w-full h-full object-cover"
+                                src={p.banner}
+                                alt=''
+                                width={500}
+                                height={500}
+                            />
+                        </div>
                     </div>
                     <div className="lg:w-1/2 pt-5 pb-20 md:pb-5">
                         <div className="bg-white p-4 md:p-10 my-5 md:my-0">
