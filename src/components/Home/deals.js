@@ -184,15 +184,13 @@ const All = ({ p, i }) => {
             <div className="container mx-auto pt-5" key={i}>
                 <div className="md:flex">
                     <div className="lg:w-1/2 hidden lg:block">
-                        <div style={{
-                            height: '700px'
-                        }}>
+                        <div className='flex h-[700px] w-full'>
                             <Image
-                                className="inset-0 w-full h-full object-cover"
+                                className="object-cover"
                                 src={p.banner}
                                 alt=''
-                                width={500}
-                                height={500}
+                                width={640}
+                                height={700}
                             />
                         </div>
                     </div>
