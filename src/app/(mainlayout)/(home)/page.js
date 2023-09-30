@@ -7,11 +7,9 @@ import Packages from '@/components/Home/packages';
 import Services from '@/components/Home/services';
 import React from 'react';
 import Category from '@/components/Home/recommend';
-import Header from '@/components/Home/about';
 import Image from 'next/image';
 import '../../../styles/home.css'
 import Link from 'next/link';
-import Cta from '@/shared/cta';
 
 
 
@@ -20,13 +18,13 @@ const Home = () => {
     return (
         <section className='container mx-auto relative'>
             <Hero />
-            <Header />
-            <Destination />
-            <Services />
-            <Packages />
             <Deals />
+            <Packages />
+            <Destination />
             <Category />
             <Blog />
+            <Services />
+            {/* <Header /> */}
             <Link href={whatsappURL} target="_blank" rel="noopener noreferrer" className='fixed bottom-5 right-5 z-50'>
                     <Image
                         src="/Assets/whatsapp.gif"

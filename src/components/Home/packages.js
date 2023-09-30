@@ -6,7 +6,6 @@ import { TbCurrencyTaka } from 'react-icons/tb';
 
 import '../../styles/packages.css';
 
-
 const Packages = () => {
     const [displayedPackages, setDisplayedPackages] = useState(3);
     const loadMore = () => {

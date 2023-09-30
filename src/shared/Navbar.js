@@ -126,7 +126,7 @@ const BottomNav = () => {
                                         </button>
                                         :
                                         <Link href={'/signin'} className="bg-transparent hover:bg-lime-700 text-lime-600 font-semibold hover:text-white py-1 px-4 border border-lime-600 hover:border-transparent rounded">
-                                            Signin
+                                            Sign in
                                         </Link>
                                 }
                             </li>

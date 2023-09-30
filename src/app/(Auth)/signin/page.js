@@ -113,15 +113,15 @@ const SignIn = () => {
                                             onSubmit={handleSubmit(handleLogin)}
                                             className="space-y-8 ng-untouched ng-pristine ng-valid"
                                         >
-                                            <div className="space-y-2">
-                                                <div className="space-y-2">
+                                            <div className="">
+                                                <div className="">
                                                     <label className="block text-sm">Email address</label>
                                                     <input
                                                         type="email"
                                                         name="email"
                                                         id="email"
                                                         placeholder="leroy@jenkins.com"
-                                                        className="w-full px-3 py-2 border rounded-md border-gray-700 bg-stone-900 text-gray-100 focus:border-violet-400"
+                                                        className="w-full px-3 py-2 my-2 border rounded-md border-gray-700 bg-stone-900 text-gray-100 focus:border-violet-400"
                                                         {...register("email", {
                                                             required: "Email Address is required*",
                                                         })}
@@ -132,7 +132,7 @@ const SignIn = () => {
                                                         </p>
                                                     )}
                                                 </div>
-                                                <div className="space-y-2">
+                                                <div className="">
                                                     <div className="flex justify-between">
                                                         <label className="text-sm">Password</label>
                                                     </div>
@@ -142,7 +142,7 @@ const SignIn = () => {
                                                             name="password"
                                                             id="password"
                                                             placeholder="*****"
-                                                            className="w-full px-3 py-2 border rounded-md border-gray-700 bg-stone-900 text-gray-100 focus:border-violet-400"
+                                                            className="w-full px-3 py-2 my-2 border rounded-md border-gray-700 bg-stone-900 text-gray-100 focus:border-violet-400"
                                                             {...register("password", {
                                                                 required: "Password is required*",
                                                                 minLength: {
@@ -176,13 +176,13 @@ const SignIn = () => {
                                                 <p
                                                     onClick={() => setShowModal(true)}
                                                     rel="noopener noreferrer"
-                                                    className="text-xs hover:underline text-lime-300 my-4 cursor-pointer"
+                                                    className="text-xs hover:underline text-lime-300  cursor-pointer"
                                                 >
                                                     Forgot password?
                                                 </p>
                                                 <ResetPass handleResetPass={handleResetPass} showModal={showModal} setShowModal={setShowModal} handleEmailBLur={handleEmailBLur} />
                                             </div>
-                                            <button type="submit" className="w-full px3 py-2 rounded bg-lime-600">
+                                            <button type="submit" className="w-full px-3 py-2 rounded bg-lime-600">
                                                 Sign in
                                             </button>
                                         </form>
