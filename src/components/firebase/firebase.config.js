@@ -8,7 +8,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_messagingSenderId,
   appId: process.env.NEXT_PUBLIC_FIREBASE_appId,
 };
-
 const app = initializeApp(firebaseConfig);
 
 export default app;
