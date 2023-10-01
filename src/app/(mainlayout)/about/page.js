@@ -153,7 +153,7 @@ const Guild = () => {
                                     <div class="pb-1" key={i}>
                                         <div class="team-item bg-white mb-4">
                                             <div class="team-img relative overflow-hidden h-[270px]">
-                                                <Image class="object-cover " src={g.img} alt="" className='object-cover' width={500} height={500} />
+                                                <Image src={g.img} alt="" className='object-cover' width={500} height={500} />
                                                 <div class="team-social">
                                                     <a class="btn btn-outline-primary btn-square" href="">
                                                         <BsTwitter />
