@@ -46,11 +46,7 @@ const Contact = () => {
                         }}>
                         <h3 class="display-4 text-white uppercase mb-2">Contact</h3>
                         <div class="flex text-white">
-                            <p class="m-0 uppercase">
-                                <a class="text-white" href="/">Home</a>
-                            </p>
-                            <p class="px-3"> &gt; </p>
-                            <p class="m-0 uppercase">Contact</p>
+                            <p className='text-2xl' style={{ letterSpacing: '5px' }}>Contact For Any Query</p>
                         </div>
                     </div>
                 </div>
@@ -66,29 +62,9 @@ export default Contact;
 const ContactInfo = () => {
     return (
         <section className='container mx-auto'>
-            <div className=" text-center mt-10">
-                <h6 className="text-lime-700 uppercase" style={{ letterSpacing: '5px' }}>Contact</h6>
-                <h1 className='text-xl md:text-4xl font-bold '>Contact For Any Query</h1>
-            </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
-                <div className='shadow hover:shadow-md rounded py-5'>
-                    <div className='flex justify-center'>
-                        <Image
-                            src={'/Assets/icon/home.png'}
-                            alt=''
-                            className='w-16 h-16'
-                            width={500}
-                            height={500} />
-                    </div>
-                    <h1 className='text-center my-2'>
-                        Location
-                    </h1>
-                    <h1 className='text-center'>
-                        Dhanmondi 1,Beside bel tower <br />
-                        house no 518, flat-2B
-                    </h1>
-                </div>
-                <div className='shadow hover:shadow-md rounded py-5 px-3'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-3 lg:-mt-20'>
+               
+                <div className='shadow hover:shadow-md rounded py-5 px-3 bg-white'>
                     <div className='flex justify-center items-center gap-3'>
                         <Image
                             src={'/Assets/icon/call.png'}
@@ -107,13 +83,30 @@ const ContactInfo = () => {
                     <h1 className='text-center my-2'>
                         Call Us
                     </h1>
-
                     <div className='text-center'>
-                        <a href="tel:+8801976865523" className='text-lime-700 font-bold'>+8801976865523</a>
-                        <h1>Distinctively exploit optimal alignments for intuitive bandwidth</h1>
+                        <p>Reach out to us at <a href='tel:+8801976865523' className='text-lime-700 font-bold'>+8801976865523</a> and experience the difference in seamless communication.</p>
                     </div>
+
                 </div>
-                <div className='shadow hover:shadow-md rounded py-5 px-3'>
+                <div className='shadow hover:shadow-md rounded py-5 bg-white'>
+                    <div className='flex justify-center'>
+                        <Image
+                            src={'/Assets/icon/home.png'}
+                            alt=''
+                            className='w-16 h-16'
+                            width={500}
+                            height={500} />
+                    </div>
+                    <h1 className='text-center my-2'>
+                        Location
+                    </h1>
+                    <div className='text-center'>
+                        <h2>Dhanmondi 1, Beside Bell Tower</h2>
+                        <h2>House No. 518, Flat-2B</h2>
+                    </div>
+
+                </div>
+                <div className='shadow hover:shadow-md rounded py-5 px-3 bg-white'>
                     <div className='flex justify-center'>
                         <Image
                             src={'/Assets/icon/email.png'}
@@ -126,9 +119,9 @@ const ContactInfo = () => {
                         Email Us
                     </h1>
                     <div className='text-center'>
-                        <a href="mailto:baunduleclub@gmaiol.com" className='text-lime-700 font-bold'>baunduleclub@gmaiol.com</a>
-                        <h1>Interactively grow backend ideas for cross-platform models.</h1>
+                        <p>Drop us a digital letter at <a href='mailto:baunduleclub@gmaiol.com' className='text-lime-700 font-bold'>baunduleclub@gmail.com</a> and watch your thoughts spring to life in the digital realm. We&apos;re just an email away!</p>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -186,14 +179,14 @@ const ContactForm = () => {
                                 name="user_name"
                                 type="text"
                                 placeholder="Your Name..."
-                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-600 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 pl-3" />
+                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 pl-3" />
                         </div>
                         <div class="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
                             <input
                                 name="user_subject"
                                 type="text"
                                 placeholder="Subject..."
-                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-600 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 pl-3" />
+                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 pl-3" />
                         </div>
 
                         <div class="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
@@ -201,7 +194,7 @@ const ContactForm = () => {
                                 name="user_email"
                                 type="email"
                                 placeholder="Your email address..."
-                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-600 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 pl-3" />
+                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 pl-3" />
                         </div>
 
                         <label className="block">
