@@ -44,7 +44,7 @@ const Destination = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowVideo(true);
-        }, 3000);
+        }, 4000);
         return () => clearTimeout(timer);
     }, []);
     return (
