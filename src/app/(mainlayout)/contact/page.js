@@ -38,7 +38,7 @@ const Contact = () => {
             <Head>
                 <title>Contact Us | Baundule Club</title>
             </Head>
-            <div class=" page-header">
+            <div class="page-header">
                 <div class="container mx-auto">
                     <div class="flex flex-col items-center justify-center"
                         style={{
@@ -55,21 +55,7 @@ const Contact = () => {
                     </div>
                 </div>
             </div>
-            <div className="text-center mt-5">
-                <h6 className="text-lime-700 uppercase" style={{ letterSpacing: '5px' }}>Contact</h6>
-                <h1 className='text-xl md:text-4xl font-bold '>Contact For Any Query</h1>
-            </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-                <div className='shadow hover:shadow-md rounded'>
-                    <div className='flex justify-center'>
-                        <Image
-                            src={'/Assets/icon/home.png'}
-                            alt=''
-                            width={500}
-                            height={500} />
-                    </div>
-                </div>
-            </div>
+            <ContactInfo />
             <ContactForm />
         </div>
     );
@@ -77,6 +63,77 @@ const Contact = () => {
 
 export default Contact;
 
+const ContactInfo = () => {
+    return (
+        <section className='container mx-auto'>
+            <div className=" text-center mt-10">
+                <h6 className="text-lime-700 uppercase" style={{ letterSpacing: '5px' }}>Contact</h6>
+                <h1 className='text-xl md:text-4xl font-bold '>Contact For Any Query</h1>
+            </div>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
+                <div className='shadow hover:shadow-md rounded py-5'>
+                    <div className='flex justify-center'>
+                        <Image
+                            src={'/Assets/icon/home.png'}
+                            alt=''
+                            className='w-16 h-16'
+                            width={500}
+                            height={500} />
+                    </div>
+                    <h1 className='text-center my-2'>
+                        Location
+                    </h1>
+                    <h1 className='text-center'>
+                        Dhanmondi 1,Beside bel tower <br />
+                        house no 518, flat-2B
+                    </h1>
+                </div>
+                <div className='shadow hover:shadow-md rounded py-5 px-3'>
+                    <div className='flex justify-center items-center gap-3'>
+                        <Image
+                            src={'/Assets/icon/call.png'}
+                            alt=''
+                            className='w-10 h-10'
+                            width={500}
+                            height={500} />
+                        <p className='text-4xl'>+</p>
+                        <Image
+                            src={'/Assets/icon/WhatsApp_icon.png'}
+                            alt=''
+                            className='w-14 h-14'
+                            width={500}
+                            height={500} />
+                    </div>
+                    <h1 className='text-center my-2'>
+                        Call Us
+                    </h1>
+
+                    <div className='text-center'>
+                        <a href="tel:+8801976865523" className='text-lime-700 font-bold'>+8801976865523</a>
+                        <h1>Distinctively exploit optimal alignments for intuitive bandwidth</h1>
+                    </div>
+                </div>
+                <div className='shadow hover:shadow-md rounded py-5 px-3'>
+                    <div className='flex justify-center'>
+                        <Image
+                            src={'/Assets/icon/email.png'}
+                            alt=''
+                            className='w-16 h-16'
+                            width={500}
+                            height={500} />
+                    </div>
+                    <h1 className='text-center my-2'>
+                        Email Us
+                    </h1>
+                    <div className='text-center'>
+                        <a href="mailto:baunduleclub@gmaiol.com" className='text-lime-700 font-bold'>baunduleclub@gmaiol.com</a>
+                        <h1>Interactively grow backend ideas for cross-platform models.</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
 const ContactForm = () => {
     const form = useRef();
     const [loading, setLoading] = useState(false);
@@ -115,7 +172,7 @@ const ContactForm = () => {
                         marginHeight="0"
                         marginWidth="0"
                         scrolling="no"
-                        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d543.0564134288818!2d90.43934814817825!3d23.703353120422125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDQyJzExLjkiTiA5MMKwMjYnMjMuNSJF!5e0!3m2!1sen!2sbd!4v1684730247253!5m2!1sen!2sbd"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.2145144190695!2d90.37638917328326!3d23.739728642082813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b9da996db9f7%3A0x49e0e418d25d7ae5!2sBEL%20Tower!5e0!3m2!1sen!2sbd!4v1696154199426!5m2!1sen!2sbd"
                     ></iframe>
 
                     <form

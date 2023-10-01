@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="container mx-auto">
                 <div className="flex flex-col lg:flex-row gap-10 justify-between">
                     {/* Column 1 */}
-                    <div className="mb-5 w-96">
+                    <div className="mb-5 lg:w-96">
                         <a href="/" className="navbar-brand">
                             <h1 className="text-2xl uppercase font-bold">
                                 Baundule Club

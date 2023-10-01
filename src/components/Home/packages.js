@@ -5,6 +5,7 @@ import { MdLocationPin } from 'react-icons/md';
 import { TbCurrencyTaka } from 'react-icons/tb';
 
 import '../../styles/packages.css';
+import Link from 'next/link';
 
 const Packages = () => {
     const [displayedPackages, setDisplayedPackages] = useState(3);
@@ -13,6 +14,7 @@ const Packages = () => {
     };
     const pkg = [
         {
+            id: 1,
             img: 'https://i.ibb.co/W2NrFDq/cover.jpg',
             location: 'Bisnakandi, Sylhet',
             duration: '2 Days',
@@ -20,6 +22,7 @@ const Packages = () => {
             amount: 3500,
         },
         {
+            id: 2,
             img: 'https://i.ibb.co/hV46NHG/Nafakhum.jpg',
             location: 'Thanchi-Nafakhum, Bandarban',
             duration: '4 Days',
@@ -27,6 +30,7 @@ const Packages = () => {
             amount: 7000,
         },
         {
+            id: 3,
             img: 'https://i.ibb.co/hKV0xcT/cover.jpg',
             location: 'Saint Martin’s Island',
             duration: '3 Days',
@@ -34,6 +38,7 @@ const Packages = () => {
             amount: 6500,
         },
         {
+            id: 4,
             img: 'https://i.ibb.co/9HGfqsh/cover.jpg',
             location: 'Sajek-khagrachhari, Bandarban',
             duration: '2 Days',
@@ -41,6 +46,7 @@ const Packages = () => {
             amount: 3500,
         },
         {
+            id: 5,
             img: 'https://i.ibb.co/whL1r6D/cover.jpg',
             location: 'Coxs Bazar Sea Beach',
             duration: '2 Days',
@@ -48,6 +54,7 @@ const Packages = () => {
             amount: 5000,
         },
         {
+            id: 6,
             img: 'https://i.ibb.co/7jtRqFz/cover.jpg',
             location: 'Srimangal, Sylhet',
             duration: '2 Days',
@@ -86,8 +93,8 @@ const Packages = () => {
                                                 {packages.desc}
                                             </p>
                                             <div className="border-t mt-4 pt-4 flex justify-between items-center">
-                                                <a
-                                                    href="#"
+                                                <Link
+                                                    href={`/packagedetails/${packages.id}`}
                                                     className="group inline-flex items-center gap-1 text-sm font-medium text-[#65A30D]"
                                                 >
                                                     Find out more
@@ -98,7 +105,7 @@ const Packages = () => {
                                                     >
                                                         &rarr;
                                                     </span>
-                                                </a>
+                                                </Link>
                                                 <h5 className="m-0 text-lg font-semibold flex items-center">
                                                     <TbCurrencyTaka className='text-xl' /> {packages.amount}
                                                 </h5>
