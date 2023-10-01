@@ -21,7 +21,7 @@ export default About;
 const Hero = () => {
     return (
         <>
-            <div className="relative flex flex-col-reverse py-16 lg:pt-0 lg:flex-col lg:pb-0 my-5">
+            <div className="relative bg-white rounded-xl flex flex-col-reverse py-16 lg:pt-0 lg:flex-col lg:pb-0 my-5">
                 <div className="inset-y-0 top-0 right-0 z-0 w-full max-w-xl px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
                     <svg
                         className="absolute left-0 hidden h-full text-white transform -translate-x-1/2 lg:block"
@@ -32,7 +32,7 @@ const Hero = () => {
                         <path d="M50 0H100L50 100H0L50 0Z" />
                     </svg>
                     <Image
-                        className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
+                        className="object-cover w-full h-56 rounded shadow-lg lg:rounded-r-lg lg:shadow-none md:h-96 lg:h-full"
                         src="https://i.ibb.co/wQr7ZZy/aboutbnr.jpg"
                         alt=""
                         width={500}
@@ -88,7 +88,7 @@ const Feature = () => {
                         data.map((d, i) => {
                             return (
                                 <>
-                                    <div className="my-5" key={i}>
+                                    <div className="my-5 " key={i}>
                                         <div className="lg:flex mb-4 lg:mb-0">
                                             <div className='flex justify-center my-2 lg:my-0'>
                                                 <div className="flex items-center justify-center bg-lime-600 mr-5 h-[106px] w-[106px] p-10">
@@ -151,7 +151,7 @@ const Guild = () => {
                             return (
                                 <>
                                     <div class="pb-1" key={i}>
-                                        <div class="team-item bg-white mb-4">
+                                        <div class="team-item bg-white mb-4 rounded-lg">
                                             <div class="team-img relative overflow-hidden h-[270px]">
                                                 <Image src={g.img} alt="" className='object-cover' width={500} height={500} />
                                                 <div class="team-social">

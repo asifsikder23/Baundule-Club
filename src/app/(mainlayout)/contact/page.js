@@ -38,7 +38,7 @@ const Contact = () => {
             <Head>
                 <title>Contact Us | Baundule Club</title>
             </Head>
-            <div class="page-header">
+            <div class="page-header -mt-7">
                 <div class="container mx-auto">
                     <div class="flex flex-col items-center justify-center"
                         style={{
@@ -46,7 +46,7 @@ const Contact = () => {
                         }}>
                         <h3 class="display-4 text-white uppercase mb-2">Contact</h3>
                         <div class="flex text-white">
-                            <p className='text-2xl' style={{ letterSpacing: '5px' }}>Contact For Any Query</p>
+                            <p className='text-2xl text-center' style={{ letterSpacing: '5px' }}>Contact For Any Query</p>
                         </div>
                     </div>
                 </div>
@@ -179,14 +179,14 @@ const ContactForm = () => {
                                 name="user_name"
                                 type="text"
                                 placeholder="Your Name..."
-                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 pl-3" />
+                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 p-3 bg-white" />
                         </div>
                         <div class="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
                             <input
                                 name="user_subject"
                                 type="text"
                                 placeholder="Subject..."
-                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 pl-3" />
+                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 p-3 bg-white" />
                         </div>
 
                         <div class="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
@@ -194,14 +194,14 @@ const ContactForm = () => {
                                 name="user_email"
                                 type="email"
                                 placeholder="Your email address..."
-                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 pl-3" />
+                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 p-3 bg-white" />
                         </div>
 
                         <label className="block">
                             <textarea
                                 rows="3"
                                 placeholder="Message..."
-                                className="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-600 outline-none  transition border-l-4 border-l-lime-600 pl-3"
+                                className="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-600 outline-none  transition border-l-4 border-l-lime-600 p-3 bg-white"
                                 name="message"
                                 required
                             ></textarea>
