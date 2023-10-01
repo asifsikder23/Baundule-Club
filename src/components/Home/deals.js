@@ -215,7 +215,7 @@ const All = ({ p, i }) => {
                                     p?.packages?.map((pkg, i) => {
                                         return (
                                             <>
-                                                <div className="destination-item relative overflow-hidden mb-2">
+                                                <div className="destination-item relative overflow-hidden mb-2" key={i}>
                                                     <Image
                                                         src={pkg.img} alt=""
                                                         className='h-28 md:h-48'

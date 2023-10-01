@@ -79,7 +79,7 @@ const Destination = () => {
                                         )}
 
                                         <a className="destination-overlay text-white text-decoration-none" href="">
-                                            <h5 className="text-white text-xl font-bold">{img.country}</h5>
+                                            <h5 className="text-white text-xl font-bold uppercase">{img.country}</h5>
                                         </a>
                                     </div>
                                 </>
