@@ -40,7 +40,7 @@ const Blog = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-3">
                     {blogPosts.map((post, index) => (
-                        <div key={index} className=" p-4 overflow-hidden rounded-lg shadow transition hover:shadow-lg">
+                        <div key={index} className=" p-4 overflow-hidden rounded-lg shadow transition hover:shadow-lg bg-white">
                             <div className="relative">
                                 <Image className="w-full" src={post.imageUrl} alt={post.title} width={500} height={500} />
                                 <div className="blog-date">
