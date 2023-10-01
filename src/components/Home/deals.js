@@ -182,7 +182,7 @@ const All = ({ p, i }) => {
     return (
         <>
             <div className="container mx-auto pt-5" key={i}>
-                <div className="md:flex items-center">
+                <div className="md:flex justify-center items-center">
                     <div className="lg:w-1/2 hidden lg:block" >
                         <div className='h-[760px] w-full'>
                             <Image
