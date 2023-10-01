@@ -194,7 +194,7 @@ const All = ({ p, i }) => {
                             />
                         </div>
                     </div>
-                    <div className="lg:w-1/2 -ml-20">
+                    <div className="lg:w-1/2 lg:-ml-20">
                         <div className="bg-white p-4 md:p-10">
                             {
                                 p.category === 'hot' ? (

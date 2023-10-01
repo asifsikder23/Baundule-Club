@@ -10,17 +10,17 @@ import Link from 'next/link';
 
 const img = [
     {
-        img: 'https://i.ibb.co/0cQNNBS/waterfalls.jpg',
+        img: 'https://i.ibb.co/fnsmvZf/waterfall.jpg',
         title: 'Waterfall',
         subtitle: 'Charming'
     },
     {
-        img: 'https://i.ibb.co/DpdYbsX/green.jpg',
+        img: 'https://i.ibb.co/TbBYW3B/green.jpg',
         title: 'Green Tourism',
         subtitle: 'Attractive'
     },
     {
-        img: 'https://i.ibb.co/f9MyV2s/beach.jpg',
+        img: 'https://i.ibb.co/KVPR7Kx/sea.jpg',
         title: 'Beach',
         subtitle: 'Beautiful'
     },
@@ -73,7 +73,7 @@ const Category = () => {
                         {img.map((cat, i) => (
                             <SwiperSlide key={i}>
                                 <Link href={'#'}>
-                                    <div className="lg:w-96 lg:h-96 mx-auto">
+                                    <div className="w-full h-[177px] md:h-[280px] lg:h-[400px] xl:h-[500] mx-auto">
                                         <Image
                                             src={cat.img}
                                             alt=''
@@ -81,12 +81,14 @@ const Category = () => {
                                             width={500}
                                             height={500}
                                         />
-                                        <div className="image-overlay p-4">
-                                            <div className='md:mt-10'>
-                                                <h1 className=''>{cat.subtitle}</h1>
-                                                <h2 className='font-semibold  md:text-xl'>
-                                                    {cat.title}
-                                                </h2>
+                                        <div className="image-overlay">
+                                            <div className='md:mt-10 w-full'>
+                                                <div className='bg-black bg-opacity-40 py-4 lg:py-5'>
+                                                    <h1 className=''>{cat.subtitle}</h1>
+                                                    <h2 className='font-semibold '>
+                                                        {cat.title}
+                                                    </h2>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
