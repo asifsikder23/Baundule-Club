@@ -84,7 +84,7 @@ const Category = () => {
                                         <div className="image-overlay p-4">
                                             <div className='md:mt-10'>
                                                 <h1 className=''>{cat.subtitle}</h1>
-                                                <h2 className='font-semibold text-lg md:text-xl'>
+                                                <h2 className='font-semibold  md:text-xl'>
                                                     {cat.title}
                                                 </h2>
                                             </div>
