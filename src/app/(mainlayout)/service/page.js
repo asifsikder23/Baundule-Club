@@ -139,7 +139,7 @@ const Content = () => {
                     <div class="lg:bg-gray-50 lg:bg-darker lg:p-16 rounded-[4rem] space-y-6 md:flex flex-row-reverse md:gap-6 justify-center md:space-y-0 lg:items-center">
                         <div class="md:5/12 lg:w-1/2">
                             <div>
-                                <video width="640" height="360" muted autoPlay >
+                                <video width="640" height="360" muted autoPlay loop>
                                     <source src="https://firebasestorage.googleapis.com/v0/b/cineplanetvdo.appspot.com/o/vdo%2Fdhaka.mp4?alt=media&token=54424d1b-cf83-44ad-a4be-277270bcad5f" type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
