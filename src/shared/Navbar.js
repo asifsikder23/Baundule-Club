@@ -72,13 +72,12 @@ const BottomNav = () => {
     const closeMenu = () => {
         setIsMenuOpen(false);
     };
-
     const menu = [
-        { label: "About", id: 1 },
-        { label: "Service", id: 2 },
-        { label: "Packages", id: 3 },
-        { label: "Blog", id: 4 },
-        { label: "Contact", id: 5 },
+        { title: 'About', path: '/about' },
+        { title: 'Service', path: '/service' },
+        { title: 'Packages', path: '/packages' },
+        { title: 'Blog', path: '/blog' },
+        { title: 'Contact', path: '/contact' },
     ]
     return (
         <>
@@ -111,8 +110,8 @@ const BottomNav = () => {
                                 menu.map((m, i) => (
                                     <>
                                         <li key={i} className='relative p-2'>
-                                            <Link href={m.label.toLowerCase()}
-                                                className="uppercase font-semibold text-sm  cursor-pointer ">{m.label}</Link>
+                                            <Link href={m.path}
+                                                className="uppercase font-semibold text-sm  cursor-pointer ">{m.title}</Link>
                                         </li>
 
                                     </>
@@ -152,8 +151,8 @@ const BottomNav = () => {
                                         {
                                             menu.map((m, i) => (
                                                 <li key={i} className='mb-1'>
-                                                    <Link href={m.label.toLowerCase()}
-                                                        className="block p-4 text-sm text-white font-semibold  hover:bg-blue-50 hover:text-red-600 rounded cursor-pointer">{m.label}</Link>
+                                                    <Link href={m.path}
+                                                        className="block p-4 text-sm text-white font-semibold  hover:bg-blue-50 hover:text-red-600 rounded cursor-pointer">{m.title}</Link>
                                                 </li>
                                             ))
                                         }
