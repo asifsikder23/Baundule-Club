@@ -7,35 +7,35 @@ const Destination = () => {
     const images = [
         {
             img: 'https://i.ibb.co/N9PmFJn/tanguar.jpg',
-            vdo: 'https://firebasestorage.googleapis.com/v0/b/cineplanetvdo.appspot.com/o/vdo%2Ftanguar.mp4?alt=media&token=a7005ee8-c261-4775-becf-4c145a5cd53d',
+            vdo: 'https://firebasestorage.googleapis.com/v0/b/baunduleclub-7c453.appspot.com/o/tanguar.mp4?alt=media&token=2b5d5838-61fa-4e6c-8540-dfe1b1c339b6',
             country: 'Tanguar Haor',
         },
         {
             img: 'https://i.ibb.co/kcd0wtm/bandarban.jpg',
-            vdo: 'https://firebasestorage.googleapis.com/v0/b/cineplanetvdo.appspot.com/o/vdo%2Fbandorban.mp4?alt=media&token=9b2fb42b-d8ee-4072-8f86-12f2b1ebf4e6',
+            vdo: 'https://firebasestorage.googleapis.com/v0/b/baunduleclub-7c453.appspot.com/o/bandorban.mp4?alt=media&token=67ac0255-9fb6-44a7-865f-3048e09f94a4',
             country: 'Bandarban',
         },
         {
             img: 'https://i.ibb.co/XV7V6QT/cox.jpg',
-            vdo: 'https://firebasestorage.googleapis.com/v0/b/cineplanetvdo.appspot.com/o/vdo%2Fcox.mp4?alt=media&token=e2c8c8c6-4e0f-4527-a85e-1572c3b285ee',
+            vdo: 'https://firebasestorage.googleapis.com/v0/b/baunduleclub-7c453.appspot.com/o/cox.mp4?alt=media&token=63e14ef3-3503-4825-ba19-36d1ba4dee4d',
             country: 'Coxs Bazar',
             cities: '100'
         },
         {
             img: 'https://i.ibb.co/wYZdQmY/shree.jpg',
-            vdo: 'https://firebasestorage.googleapis.com/v0/b/cineplanetvdo.appspot.com/o/vdo%2Fshreemangal.mp4?alt=media&token=b12252ed-ea51-46f1-9e84-f25ecc9c44f9',
+            vdo: 'https://firebasestorage.googleapis.com/v0/b/baunduleclub-7c453.appspot.com/o/shreemangal.mp4?alt=media&token=16cd9a42-7c75-4989-87b9-43056c2ab7d7',
             country: 'Shreemangal',
             cities: '100'
         },
         {
             img: 'https://i.ibb.co/7R1SJtw/rajshahi.jpg',
-            vdo: 'https://firebasestorage.googleapis.com/v0/b/cineplanetvdo.appspot.com/o/vdo%2Frajshahi.mp4?alt=media&token=4d6e2b08-650e-4565-9fd6-af54eb3b43c9',
+            vdo: 'https://firebasestorage.googleapis.com/v0/b/baunduleclub-7c453.appspot.com/o/rajshahi.mp4?alt=media&token=73659949-a816-4de4-9bbb-3f4ea2fc2acd',
             country: 'Rajshahi',
             cities: '100'
         },
         {
             img: 'https://i.ibb.co/Sd8xxgj/dhaka.png',
-            vdo: 'https://firebasestorage.googleapis.com/v0/b/cineplanetvdo.appspot.com/o/vdo%2Fdhaka.mp4?alt=media&token=54424d1b-cf83-44ad-a4be-277270bcad5f',
+            vdo: 'https://firebasestorage.googleapis.com/v0/b/baunduleclub-7c453.appspot.com/o/dhaka.mp4?alt=media&token=1bc526c4-0627-45e3-a865-c22ee6772460',
             country: 'Dhaka',
             cities: '100'
         },
@@ -44,7 +44,7 @@ const Destination = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowVideo(true);
-        }, 4000);
+        }, 5000);
         return () => clearTimeout(timer);
     }, []);
     return (
