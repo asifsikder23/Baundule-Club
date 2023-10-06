@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
 import app from '../firebase/firebase.config';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -36,11 +38,6 @@ const UserContext = ({ children }) => {
 
         });
     }
-    // const logOut = () =>{
-    //     setUser("")
-    //     setLoading(true)
-    //     return signOut(auth);
-    //   }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -52,6 +49,8 @@ const UserContext = ({ children }) => {
         }
 
     }, [])
+
+
     const authInfo = {
         user,
         updateUser,
@@ -60,7 +59,7 @@ const UserContext = ({ children }) => {
         login,
         logOut,
         googleSignIn,
-        auth
+        auth,
     }
     return (
         <AuthContext.Provider value={authInfo}>

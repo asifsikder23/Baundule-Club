@@ -7,16 +7,21 @@ import { TbCurrencyTaka } from 'react-icons/tb';
 import '../../styles/packages.css';
 import Link from 'next/link';
 import axios from 'axios';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 
 const Packages = () => {
     const [displayedPackages, setDisplayedPackages] = useState(3);
     const loadMore = () => {
-        setDisplayedPackages(pkg.length);
+        setDisplayedPackages(data.length);
     };
-    const { data, refetch } = useQuery("package", () =>
-        axios(`http://localhost:5000/packages`)
-    );
+
+    const { data, isLoading } = useQuery("packages", async () => {
+        const response = await axios.get("http://localhost:5000/allpackages");
+        return response.data;
+    });
+
+    const queryClient = useQueryClient();
+    queryClient.invalidateQueries('package');
     return (
         <>
             <div className="container mx-auto my-14">
@@ -26,7 +31,7 @@ const Packages = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-5 lg:mx-24 gap-10">
                     {
-                        data?.data?.slice(0, displayedPackages).map((packages, i) => {
+                        data?.slice(0, displayedPackages).map((packages, i) => {
                             return (
                                 <>
                                     <div className="overflow-hidden rounded-lg shadow transition hover:shadow-lg" key={i}>
@@ -72,7 +77,7 @@ const Packages = () => {
                     }
                 </div>
                 <div className=''>
-                    {displayedPackages < data?.data?.length && (
+                    {displayedPackages < data?.length && (
                         <div className="text-center mt-4">
                             <button
                                 onClick={loadMore}

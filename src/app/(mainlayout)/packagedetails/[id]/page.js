@@ -14,7 +14,7 @@ const PackagesDetails = () => {
     console.log(data);
     return (
         <>
-            Package details
+
         </>
     );
 };
