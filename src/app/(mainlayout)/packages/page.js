@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../styles/packages.css'
 import Image from 'next/image';
 import { useQuery, useQueryClient } from 'react-query';
@@ -7,22 +7,54 @@ import axios from 'axios';
 import Link from 'next/link';
 
 const Packages = () => {
-    const { data, isLoading } = useQuery("packages", async () => {
-        const response = await axios.get("http://localhost:5000/allpackages");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerpage, setItemsPerpage] = useState(2)
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const fetchData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await axios.get(`http://localhost:5000/allpackages?page=${currentPage}&pageSize=${itemsPerpage}`);
+            setData(response.data);
+            setIsLoading(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [currentPage, itemsPerpage]);
+
+    const { data: totalcount } = useQuery("totalpackagecount", async () => {
+        const response = await axios.get("http://localhost:5000/totalpackagecount");
         return response.data;
     });
-    const { data: totalpackages, isLoading: totalpackagesloading } = useQuery("totalpackages", async () => {
-        const response = await axios.get("http://localhost:5000/totalpackages");
-        return response.data;
-    });
-    console.log(totalpackages);
+    const totalPkg = totalcount?.totalpackagecount
+
+    const totalPages = Math.ceil(totalPkg / itemsPerpage)
+    const pageNumber = totalPages >= 0 ? [...Array(totalPages).keys()].map(page => page + 1) : [];
+
+    const handleItemsPerPageChange = (event) => {
+        const selectedItemsPerPage = parseInt(event.target.value);
+        setItemsPerpage(selectedItemsPerPage);
+        setCurrentPage(1);
+    };
 
     const queryClient = useQueryClient();
-    queryClient.invalidateQueries('package');
+    queryClient.invalidateQueries('package, totalpackage');
+
     return (
         <>
             <Hero />
-            <Pkg data={data} isLoading={isLoading}/>
+            <Pkg data={data} isLoading={isLoading} />
+
+            <div className='container mx-auto mb-10'>
+                <Pagination pageNumber={pageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} handleItemsPerPageChange={handleItemsPerPageChange} setItemsPerpage={setItemsPerpage} itemsPerpage={itemsPerpage} totalPages={totalPages} />
+            </div>
+
         </>
     );
 };
@@ -56,7 +88,7 @@ const Hero = () => {
     )
 }
 
-const Pkg = ({ data, isLoading}) => {
+const Pkg = ({ data, isLoading }) => {
     return (
         <>
             <div className="container mx-auto lg:flex gap-5 my-10">
@@ -129,9 +161,7 @@ const Pkg = ({ data, isLoading}) => {
                 </div>
 
             </div>
-            <div className='container mx-auto mb-10'>
-                <Pagination/>
-            </div>
+
         </>
     )
 }
@@ -169,18 +199,47 @@ const Loader = () => {
     )
 }
 
-const Pagination = () => {
+const Pagination = ({ pageNumber, setCurrentPage, currentPage, itemsPerpage, handleItemsPerPageChange, totalPages }) => {
+    const isActive = (number) => number === currentPage;
+
+    const goToPreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const goToNextPage = () => {
+        if (currentPage < pageNumber.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const option = [2, 5, 10]
     return (
         <div className='flex justify-end'>
+            <p>page : {currentPage} of {totalPages}</p>
             <div class="flex select-none space-x-1 text-gray-700">
-                <a href="#" class="rounded-md bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400"> Previous </a>
-                <a href="#" class="rounded-md bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400"> 1 </a>
-                <a href="#" class="rounded-md bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400"> 2 </a>
-                <a href="#" class="rounded-md bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400"> 3 </a>
-                <span class="rounded-md px-4 py-2"> ... </span>
-                <a href="#" class="rounded-md bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400"> 10 </a>
-                <a href="#" class="rounded-md bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400"> Next </a>
+                <button onClick={goToPreviousPage} class={`rounded-md bg-gray-200 px-4 py-2 transition duration-300 ${currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-gray-400'
+                    } ${currentPage === 1 ? 'opacity-50' : ''}`}
+                    disabled={currentPage === 1}> Previous </button>
+                {
+                    pageNumber.map(number => <button onClick={() => setCurrentPage(number)} class={`rounded-md ${isActive(number) ? 'bg-gray-400' : 'bg-gray-200'} px-4 py-2 transition duration-300 hover:bg-gray-400`} key={number}>{number}</button>)
+                }
+                <button onClick={goToNextPage} class={`rounded-md bg-gray-200 px-4 py-2 transition duration-300 ${currentPage === pageNumber.length ? 'cursor-not-allowed' : 'hover:bg-gray-400'
+                    } ${currentPage === pageNumber.length ? 'opacity-50' : ''}`}
+                    disabled={currentPage === pageNumber.length}> Next </button>
             </div>
+            <select
+                value={itemsPerpage}
+                onChange={handleItemsPerPageChange}
+                className="ml-3 py-2 px-4 rounded-md bg-gray-200 text-gray-700  border-none "
+            >
+                {
+                    option.map(options => (
+                        <option value={options} key={options}>{options} items per page</option>
+                    ))
+                }
+            </select>
         </div>
     );
 }
