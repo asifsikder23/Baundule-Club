@@ -5,17 +5,37 @@ import Image from 'next/image';
 import { useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
 import Link from 'next/link';
+import { RxCross2 } from 'react-icons/rx';
+
 
 const Packages = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerpage, setItemsPerpage] = useState(3)
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedDuration, setSelectedDuration] = useState(null);
+
+    const { data: totalcount } = useQuery("totalpackagecount", async () => {
+        const response = await axios.get("http://localhost:5000/totalpackagecount");
+        return response.data;
+    });
 
     const fetchData = async () => {
         try {
             setIsLoading(true);
-            const response = await axios.get(`http://localhost:5000/allpackages?page=${currentPage}&pageSize=${itemsPerpage}`);
+            const params = {
+                page: currentPage,
+                pageSize: itemsPerpage,
+            };
+
+            if (selectedDuration !== null) {
+                params.duration = selectedDuration;
+            }
+
+            const response = await axios.get('http://localhost:5000/allpackages', {
+                params,
+            });
+
             setData(response.data);
             setIsLoading(false);
         } catch (error) {
@@ -24,16 +44,13 @@ const Packages = () => {
         }
     };
 
+
+
     useEffect(() => {
         fetchData();
-    }, [currentPage, itemsPerpage]);
+    }, [currentPage, itemsPerpage, selectedDuration]);
 
-    const { data: totalcount, } = useQuery("totalpackagecount", async () => {
-        const response = await axios.get("http://localhost:5000/totalpackagecount");
-        return response.data;
-    });
     const totalPkg = totalcount?.totalpackagecount
-
     const totalPages = Math.ceil(totalPkg / itemsPerpage)
     const pageNumber = totalPages >= 0 ? [...Array(totalPages).keys()].map(page => page + 1) : [];
 
@@ -50,7 +67,7 @@ const Packages = () => {
     return (
         <>
             <Hero />
-            <Pkg data={data} isLoading={isLoading} totalPkg={totalPkg} />
+            <Pkg data={data} isLoading={isLoading} totalPkg={totalPkg} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} />
 
             <div className='container mx-auto mb-10'>
                 <Pagination pageNumber={pageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} handleItemsPerPageChange={handleItemsPerPageChange} setItemsPerpage={setItemsPerpage} itemsPerpage={itemsPerpage} totalPages={totalPages} totalPkg={totalPkg} />
@@ -89,23 +106,18 @@ const Hero = () => {
     )
 }
 
-const Pkg = ({ data, isLoading, totalPkg }) => {
+const Pkg = ({ data, isLoading, totalPkg, selectedDuration, setSelectedDuration }) => {
     const durations = [
-        { id: 1, label: '1 day' },
-        { id: 2, label: '2 days' },
-        { id: 3, label: '3-4 days' },
-        { id: 4, label: '5+ days' },
+        { value: 1, label: '1 day' },
+        { value: 2, label: '2 days' },
+        { value: 3, label: '3-4 days' },
+        { value: 4, label: '5+ days' },
     ];
-
-
-    const [checkedItems, setCheckedItems] = useState({
-        duration: {},
-    });
     return (
         <>
             <div className="container mx-auto lg:flex gap-5 my-10">
                 <div className="lg:w-1/4 shadow-lg rounded border p-5 h-full lg:sticky top-20">
-                    <Filtering totalPkg={totalPkg} durations={durations} checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
+                    <Filtering totalPkg={totalPkg} durations={durations} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} />
                 </div>
                 <div className="lg:w-3/4 shadow-lg rounded border p-5 h-full">
                     {
@@ -127,7 +139,7 @@ const Pkg = ({ data, isLoading, totalPkg }) => {
                                                         >
                                                             <span>{pkg.amount} TK</span>
                                                             <span class="w-px flex-1 bg-gray-900/10"></span>
-                                                            <span>{pkg.duration}</span>
+                                                            <span>{pkg.duration} Days</span>
                                                         </time>
                                                     </div>
 
@@ -178,52 +190,69 @@ const Pkg = ({ data, isLoading, totalPkg }) => {
     )
 }
 
-const Filtering = ({ totalPkg, durations, checkedItems, setCheckedItems }) => {
-    const checkDuration = checkedItems.duration
-
-    const handleCheckboxChange = (id, filterType) => {
-        setCheckedItems((prevState) => ({
-            ...prevState,
-            [filterType]: {
-                ...prevState[filterType],
-                [id]: !prevState[filterType][id],
-            },
-        }));
-    };
+const Filtering = ({
+    totalPkg,
+    durations,
+    selectedDuration,
+    setSelectedDuration,
+}) => {
+    const handleShowAllDataChange = (event) => { };
 
     return (
         <>
-            <p>Packages: {totalPkg} Packages found</p>
-            <p className='py-3 font-semibold'>Filter By</p>
-            <p>
-                {checkDuration.length > 0 ? (
-                    <>{checkDuration.join(', ')} days</>
-                ) : (
-                    <></>
-                )}
-            </p>
+            <p className='mb-3'>Packages: {totalPkg} Packages found</p>
             <hr />
+            <div>
+                <p className='my-3 font-bold'>Filter type :</p>
+                <div className='flex items-center'>
+                    {selectedDuration ? (
+                        selectedDuration > 1 ? (
+                            <>
+                                <div className='px-3 py-1 bg-red-500 text-white rounded-lg cursor-pointer flex items-center gap-1 mb-3' onClick={() => {
+                                    setSelectedDuration(null);
+                                    handleShowAllDataChange({ target: { checked: true } });
+                                }}><p><RxCross2 /></p><p>{selectedDuration} Days</p></div><span className='mx-2'>,</span>
+                            </>
+                        ) : (
+                            <>
+                                <div className='px-3 py-1 bg-red-500 text-white rounded-lg cursor-pointer flex items-center gap-1 mb-3' onClick={() => {
+                                    setSelectedDuration(null);
+                                    handleShowAllDataChange({ target: { checked: true } });
+                                }}><p><RxCross2 /></p><p>{selectedDuration} Day</p></div><span className='mx-2'>,</span>
+                            </>
+                        )
+                    ) : (
+                        <></>
+                    )}
+                </div>
+                <hr />
+            </div>
             <div className="py-4">
                 <h2 className="text-lg font-semibold mb-2">Select Travel Duration:</h2>
                 <div className="space-y-2">
-                    {durations.map((option) => (
-                        <label key={option.id} className="flex items-center">
+                    {durations.map((duration) => (
+                        <label key={duration.value}>
                             <input
-                                type="checkbox"
-                                value={option.id}
-                                checked={checkedItems['duration'][option.id] || false}
-                                onChange={() => handleCheckboxChange(option.id, 'duration')}
-                                className="form-checkbox h-5 w-5 text-blue-600 cursor-pointer"
+                                type="radio"
+                                name="duration"
+                                id={`duration-${duration.value}`}
+                                value={duration.value}
+                                checked={duration.value === selectedDuration}
+                                onChange={() => {
+                                    handleShowAllDataChange({ target: { checked: false } });
+                                    setSelectedDuration(duration.value);
+                                }}
                             />
-                            <span className="ml-2 cursor-pointer">{option.label}</span>
+                            <span>{duration.label}</span>
                         </label>
                     ))}
                 </div>
             </div>
             <hr />
         </>
-    )
-}
+    );
+};
+
 const Loader = () => {
     return (
         <>
