@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 const Packages = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerpage, setItemsPerpage] = useState(2)
+    const [itemsPerpage, setItemsPerpage] = useState(3)
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -28,7 +28,7 @@ const Packages = () => {
         fetchData();
     }, [currentPage, itemsPerpage]);
 
-    const { data: totalcount } = useQuery("totalpackagecount", async () => {
+    const { data: totalcount, } = useQuery("totalpackagecount", async () => {
         const response = await axios.get("http://localhost:5000/totalpackagecount");
         return response.data;
     });
@@ -36,6 +36,7 @@ const Packages = () => {
 
     const totalPages = Math.ceil(totalPkg / itemsPerpage)
     const pageNumber = totalPages >= 0 ? [...Array(totalPages).keys()].map(page => page + 1) : [];
+
 
     const handleItemsPerPageChange = (event) => {
         const selectedItemsPerPage = parseInt(event.target.value);
@@ -49,10 +50,10 @@ const Packages = () => {
     return (
         <>
             <Hero />
-            <Pkg data={data} isLoading={isLoading} />
+            <Pkg data={data} isLoading={isLoading} totalPkg={totalPkg} />
 
             <div className='container mx-auto mb-10'>
-                <Pagination pageNumber={pageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} handleItemsPerPageChange={handleItemsPerPageChange} setItemsPerpage={setItemsPerpage} itemsPerpage={itemsPerpage} totalPages={totalPages} />
+                <Pagination pageNumber={pageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} handleItemsPerPageChange={handleItemsPerPageChange} setItemsPerpage={setItemsPerpage} itemsPerpage={itemsPerpage} totalPages={totalPages} totalPkg={totalPkg} />
             </div>
 
         </>
@@ -88,12 +89,23 @@ const Hero = () => {
     )
 }
 
-const Pkg = ({ data, isLoading }) => {
+const Pkg = ({ data, isLoading, totalPkg }) => {
+    const durations = [
+        { id: 1, label: '1 day' },
+        { id: 2, label: '2 days' },
+        { id: 3, label: '3-4 days' },
+        { id: 4, label: '5+ days' },
+    ];
+
+
+    const [checkedItems, setCheckedItems] = useState({
+        duration: {},
+    });
     return (
         <>
             <div className="container mx-auto lg:flex gap-5 my-10">
                 <div className="lg:w-1/4 shadow-lg rounded border p-5 h-full lg:sticky top-20">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis explicabo suscipit cumque libero saepe dolore corporis minus impedit quidem possimus, repellat, consequatur quod quo! Mollitia blanditiis aperiam reprehenderit autem vitae.
+                    <Filtering totalPkg={totalPkg} durations={durations} checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
                 </div>
                 <div className="lg:w-3/4 shadow-lg rounded border p-5 h-full">
                     {
@@ -166,6 +178,52 @@ const Pkg = ({ data, isLoading }) => {
     )
 }
 
+const Filtering = ({ totalPkg, durations, checkedItems, setCheckedItems }) => {
+    const checkDuration = checkedItems.duration
+
+    const handleCheckboxChange = (id, filterType) => {
+        setCheckedItems((prevState) => ({
+            ...prevState,
+            [filterType]: {
+                ...prevState[filterType],
+                [id]: !prevState[filterType][id],
+            },
+        }));
+    };
+
+    return (
+        <>
+            <p>Packages: {totalPkg} Packages found</p>
+            <p className='py-3 font-semibold'>Filter By</p>
+            <p>
+                {checkDuration.length > 0 ? (
+                    <>{checkDuration.join(', ')} days</>
+                ) : (
+                    <></>
+                )}
+            </p>
+            <hr />
+            <div className="py-4">
+                <h2 className="text-lg font-semibold mb-2">Select Travel Duration:</h2>
+                <div className="space-y-2">
+                    {durations.map((option) => (
+                        <label key={option.id} className="flex items-center">
+                            <input
+                                type="checkbox"
+                                value={option.id}
+                                checked={checkedItems['duration'][option.id] || false}
+                                onChange={() => handleCheckboxChange(option.id, 'duration')}
+                                className="form-checkbox h-5 w-5 text-blue-600 cursor-pointer"
+                            />
+                            <span className="ml-2 cursor-pointer">{option.label}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+            <hr />
+        </>
+    )
+}
 const Loader = () => {
     return (
         <>
@@ -199,7 +257,7 @@ const Loader = () => {
     )
 }
 
-const Pagination = ({ pageNumber, setCurrentPage, currentPage, itemsPerpage, handleItemsPerPageChange, totalPages }) => {
+const Pagination = ({ pageNumber, setCurrentPage, currentPage, itemsPerpage, handleItemsPerPageChange, totalPages, totalPkg }) => {
     const isActive = (number) => number === currentPage;
 
     const goToPreviousPage = () => {
@@ -213,33 +271,43 @@ const Pagination = ({ pageNumber, setCurrentPage, currentPage, itemsPerpage, han
             setCurrentPage(currentPage + 1);
         }
     };
+    const option = [3, 5, 10]
 
-    const option = [2, 5, 10]
+    const startIndex = (currentPage - 1) * itemsPerpage + 1;
+    const endIndex = Math.min(currentPage * itemsPerpage, totalPkg);
     return (
-        <div className='flex justify-end'>
-            <p>page : {currentPage} of {totalPages}</p>
-            <div class="flex select-none space-x-1 text-gray-700">
-                <button onClick={goToPreviousPage} class={`rounded-md bg-gray-200 px-4 py-2 transition duration-300 ${currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-gray-400'
+        <div className='flex flex-col md:flex-row justify-between items-center'>
+            <div className='flex items-center gap-5'>
+                <select
+                    value={itemsPerpage}
+                    onChange={handleItemsPerPageChange}
+                    className="py-1 px-3 rounded-md bg-gray-200 text-gray-700  border-none"
+                >
+                    {
+                        option.map(options => (
+                            <option value={options} key={options}>Show: {options}</option>
+                        ))
+                    }
+                </select>
+                <p>
+                    {currentPage === totalPages
+                        ? `Showing ${totalPkg} of ${totalPkg} Results`
+                        : `Showing ${startIndex} to ${endIndex} of ${totalPkg} Results`
+                    }
+                </p>
+
+            </div>
+            <div class="flex select-none space-x-1 text-gray-700 my-5 md:my-0">
+                <button onClick={goToPreviousPage} class={`rounded-md bg-gray-200 px-3 py-1 md:px-4  md:py-2 transition duration-300 ${currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-gray-400'
                     } ${currentPage === 1 ? 'opacity-50' : ''}`}
                     disabled={currentPage === 1}> Previous </button>
                 {
-                    pageNumber.map(number => <button onClick={() => setCurrentPage(number)} class={`rounded-md ${isActive(number) ? 'bg-gray-400' : 'bg-gray-200'} px-4 py-2 transition duration-300 hover:bg-gray-400`} key={number}>{number}</button>)
+                    pageNumber.map(number => <button onClick={() => setCurrentPage(number)} class={`rounded-md ${isActive(number) ? 'bg-gray-400' : 'bg-gray-200'} px-3 py-1 md:px-4 md:py-2 transition duration-300 hover:bg-gray-400`} key={number}>{number}</button>)
                 }
-                <button onClick={goToNextPage} class={`rounded-md bg-gray-200 px-4 py-2 transition duration-300 ${currentPage === pageNumber.length ? 'cursor-not-allowed' : 'hover:bg-gray-400'
+                <button onClick={goToNextPage} class={`rounded-md bg-gray-200 px-3 py-1 md:px-4  md:py-2 transition duration-300 ${currentPage === pageNumber.length ? 'cursor-not-allowed' : 'hover:bg-gray-400'
                     } ${currentPage === pageNumber.length ? 'opacity-50' : ''}`}
                     disabled={currentPage === pageNumber.length}> Next </button>
             </div>
-            <select
-                value={itemsPerpage}
-                onChange={handleItemsPerPageChange}
-                className="ml-3 py-2 px-4 rounded-md bg-gray-200 text-gray-700  border-none "
-            >
-                {
-                    option.map(options => (
-                        <option value={options} key={options}>{options} items per page</option>
-                    ))
-                }
-            </select>
         </div>
     );
 }

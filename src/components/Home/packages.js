@@ -16,7 +16,7 @@ const Packages = () => {
     };
 
     const { data, isLoading } = useQuery("packages", async () => {
-        const response = await axios.get("http://localhost:5000/packages");
+        const response = await axios.get("http://localhost:5000/toppackages");
         return response.data;
     });
 
