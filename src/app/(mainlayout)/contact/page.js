@@ -4,10 +4,7 @@ import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import emailjs from "@emailjs/browser";
 import toast from 'react-hot-toast';
-import { FiMail, FiMapPin, FiPhoneCall } from 'react-icons/fi';
-import { LiaAngleDoubleRightSolid } from 'react-icons/lia';
 import '../../../styles/contact.css'
-import { BiSolidHome } from 'react-icons/bi';
 
 const Contact = () => {
     const time = [

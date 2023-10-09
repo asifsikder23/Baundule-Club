@@ -198,6 +198,16 @@ const Filtering = ({
 }) => {
     const handleShowAllDataChange = (event) => { };
 
+    const [minPrice, setMinPrice] = useState(300);
+    const [maxPrice, setMaxPrice] = useState(3500);
+    const handleMinPriceChange = (event) => {
+        setMinPrice(Number(event.target.value));
+    };
+
+    const handleMaxPriceChange = (event) => {
+        setMaxPrice(Number(event.target.value));
+    };
+
     return (
         <>
             <p className='mb-3'>Packages: {totalPkg} Packages found</p>
@@ -224,6 +234,61 @@ const Filtering = ({
                     ) : (
                         <></>
                     )}
+                </div>
+                <hr />
+                <div class="wrapper my-3">
+                    <header>
+                        <h2 className='text-lg font-semibold mb-2'>Price Range</h2>
+                        <p>Enter or Select your min and max price</p>
+                    </header>
+                    <div class="price-input">
+                        <div class="field">
+                            <span>Min</span>
+                            <input
+                                type="number"
+                                value={minPrice}
+                                class="min-input"
+                                onChange={handleMinPriceChange}
+                            />
+                        </div>
+                        <div class="seperator">-</div>
+                        <div class="field">
+                            <span>Max</span>
+                            <input
+                                type="number"
+                                value={maxPrice}
+                                class="max-input"
+                                onChange={handleMaxPriceChange}
+                            />
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div
+                            class="progress"
+                            style={{
+                                width: `${((maxPrice - minPrice) / (10000 - 0)) * 100}%`,
+                                left: `${((minPrice - 0) / (10000 - 0)) * 100}%`,
+                            }}
+                        ></div>
+                    </div>
+                    <div class="range-input">
+                        <input
+                            type="range"
+                            min="0"
+                            max="10000"
+                            value={minPrice}
+                            class="min-range"
+                            onChange={handleMinPriceChange}
+                        />
+                        <input
+                            type="range"
+                            min="0"
+                            max="10000"
+                            value={maxPrice}
+                            class="max-range"
+                            onChange={handleMaxPriceChange}
+                        />
+                    </div>
                 </div>
                 <hr />
             </div>
@@ -319,10 +384,7 @@ const Pagination = ({ pageNumber, setCurrentPage, currentPage, itemsPerpage, han
                     }
                 </select>
                 <p>
-                    {currentPage === totalPages
-                        ? `Showing ${totalPkg} of ${totalPkg} Results`
-                        : `Showing ${startIndex} to ${endIndex} of ${totalPkg} Results`
-                    }
+                    Showing {startIndex} to {endIndex} of {totalPkg} Results
                 </p>
 
             </div>
