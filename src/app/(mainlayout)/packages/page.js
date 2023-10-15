@@ -131,7 +131,7 @@ const Pkg = ({ data, isLoading, totalPkg, selectedDuration, setSelectedDuration 
                                     data.map((pkg, i) => {
                                         return (
                                             <>
-                                                <article class="md:flex bg-white transition hover:shadow-xl mb-5 sticky top-20" key={i}>
+                                                <article class="md:flex bg-white transition hover:shadow-xl mb-5" key={i}>
                                                     <div class="hidden md:block rotate-180 p-2 [writing-mode:_vertical-lr]">
                                                         <time
                                                             datetime="2022-10-10"

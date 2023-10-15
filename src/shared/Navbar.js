@@ -90,14 +90,14 @@ const BottomNav = () => {
             >
                 <section className='container mx-auto'>
                     <div className="flex justify-between items-center  lg:rounded-lg">
-                        <Link href={"/"} className="cursor-pointer">
+                        <a href={"/"} className="cursor-pointer">
                             <div className="flex items-center">
                                 <div>
                                     <Image src='/Assets/logo/logo.png' alt="" width={60} height={60} />
                                 </div>
                                 <h1 className='text-xl font-bold uppercase'>Baundule Club</h1>
                             </div>
-                        </Link>
+                        </a>
                         <div className="lg:hidden">
                             <button className="navbar-burger flex items-center p-3" onClick={toggleMenu}>
                                 <svg className="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

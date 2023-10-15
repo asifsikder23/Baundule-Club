@@ -1,0 +1,85 @@
+[
+  {
+    "location": "BISNAKANDI, SYLHET",
+    "mapURL": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118830.72124502272!2d91.91866843712305!3d21.450458662339898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30adc7ea2ab928c3%3A0x3b539e0a68970810!2sCox&#39;s%20Bazar!5e0!3m2!1sen!2sbd!4v1697352357297!5m2!1sen!2sbd\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+    "coverimg": "https://i.ibb.co/W2NrFDq/cover.jpg",
+    "members": "10-30",
+    "amount": 3500,
+    "information": [
+      {
+        "desc": "Imagine exploring the tourist spots of the worlds largest sea beach, Coxs Bazar in a double-decker tourist bus. Having the wide ocean view on one side and hill view on the other, this tour is an excellent opportunity for you to enjoy an entire day while fulfilling a major portion of your Coxs Bazar checklist. Driving through the iconic marine drive, Aquaholic Tourist Caravan offers you a stoppage at every spot to hop around comfortably. This tour also comes with special meal services, a mini library, washroom and refreshments - all inside the tourist bus! Overall, this unique experience of roaming around and visiting spots in a double-decker tourist bus is definitely going to be one of the activities to cherish with your friends or family in Coxs Bazar."
+      }
+    ],
+    "pickup": "Ground Floor, Motel Upal, Shaibal Road, Coxs Bazar",
+    "duration": 1,
+    "inorexclu": [
+      {
+        "in": [
+          "All Entry Tickets of Hopping Destinations",
+          "Welcome Breakfast",
+          "Lunch Platter",
+          "Evening Snacks",
+          "Washroom",
+          "Library",
+          "WIFI",
+          "Guide",
+          "Wrist band",
+          "First Aid Kit (In case of emergency)"
+        ],
+        "out": [
+          "Personal expenses",
+          "Anything else that isnt mentioned on Inclusions"
+        ]
+      }
+    ],
+    "description": [
+      {
+        "desc": "Aquaholic Tourist Caravan is the first hop-on hop-off service in Bangladesh. For the first time in Bangladesh, it brings to you the opportunity to experience the majestic aura of the Marine Drive road in such a unique setting. The travelers will be starting for the day long tour at 09:00 AM. The daylong will be covering all the spots of Marine Drive as you are entertained with fantastic meals on board. The travelers will be dropped-off at Kolatoli at 06:00 PM.",
+        "facilitated": [
+          "Washroom",
+          "Kitchen",
+          "Library",
+          "CC Camera Surveillance",
+          "Skilled Guide",
+          "Experienced Chef"
+        ],
+        "hopdestination": [
+          "Patuartak beach",
+          "Shamlapur Hill View Beach",
+          "Teknaf Beach",
+          "Sabrang Zero Point"
+        ],
+        "food": [
+          {
+            "welcome": "Sandwich, Coconut Water, Apple, Mineral Water",
+            "lunch": "Chicken Fried Rice, Cashew Nut Salad, Vegetable, Masala Chicken, Cold Drinks, Mineral Water",
+            "evening": "Fried Chicken, Bun, French Fry, Sauce, Green Tea, Mineral Water"
+          }
+        ]
+      }
+    ],
+    "additional": [
+      "Tickets of Aquaholic Tourist Caravan are highly dependent on the availability. GoZayaan will issue tickets that are available and does not promise to provide any specific seat(s) for a booking.",
+      "Confirmation will be received at the time of booking",
+      "Children must be accompanied by an adult",
+      "Face masks are required for travelers in public areas",
+      "Social distancing is enforced throughout the experience",
+      "Due to maintenance work on Rezu khal Bridge (15 km from kolatoli) Aquaholic Tourist Caravan will provide Special transportation service till the bridge. The remaining distance of the sixty-five (65) km will be facilitated by the Caravan."
+    ],
+    "tips": [
+      "Carry drinking water. Stay hydrated, travel healthy.",
+      "It is advised to carry a set of fresh clothes for the beach.",
+      "Always be respectful of the rules and guidelines of the tourist spots.",
+      "Please do not litter. Use a polybag as a portable trash bin."
+    ],
+    "images": [
+      "https://i.ibb.co/W2NrFDq/cover.jpg",
+      "https://i.ibb.co/W2NrFDq/cover.jpg",
+      "https://i.ibb.co/W2NrFDq/cover.jpg",
+      "https://i.ibb.co/W2NrFDq/cover.jpg",
+      "https://i.ibb.co/W2NrFDq/cover.jpg",
+      "https://i.ibb.co/W2NrFDq/cover.jpg",
+      "https://i.ibb.co/W2NrFDq/cover.jpg"
+    ]
+  }
+]
