@@ -37,7 +37,7 @@ const Packages = () => {
                                     <div className="overflow-hidden rounded-lg shadow transition hover:shadow-lg" key={i}>
                                         <Image
                                             alt="Office"
-                                            src={packages.img}
+                                            src={packages.coverimg}
                                             className="h-56 w-full object-cover"
                                             width={500}
                                             height={500}
@@ -49,7 +49,9 @@ const Packages = () => {
                                                 <h1>{packages.location}</h1>
                                             </div>
                                             <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
-                                                {packages.desc}
+                                                {
+                                                    packages.description.map(desc => desc.desc)
+                                                }
                                             </p>
                                             <div className="border-t mt-4 pt-4 flex justify-between items-center">
                                                 <Link

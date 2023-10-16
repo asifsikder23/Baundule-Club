@@ -146,7 +146,7 @@ const Pkg = ({ data, isLoading, totalPkg, selectedDuration, setSelectedDuration 
                                                     <div class="sm:basis-56">
                                                         <Image
                                                             alt="Guitar"
-                                                            src={pkg.img}
+                                                            src={pkg.coverimg}
                                                             class="aspect-square h-48 md:h-full w-full object-cover"
                                                             width={500}
                                                             height={500}
@@ -162,7 +162,7 @@ const Pkg = ({ data, isLoading, totalPkg, selectedDuration, setSelectedDuration 
                                                             </a>
 
                                                             <p class="mt-2 line-clamp-4 text-sm/relaxed text-gray-700">
-                                                                {pkg.desc}
+                                                                {pkg.description.map(desc => desc.desc)}
                                                             </p>
                                                         </div>
 

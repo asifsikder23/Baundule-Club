@@ -11,7 +11,7 @@ import { Autoplay, Navigation, FreeMode } from 'swiper/modules';
 import Image from 'next/image';
 
 import { useQuery } from 'react-query';
-import { BsGlobe2, BsInfoCircle } from 'react-icons/bs';
+import { BsFillFlagFill, BsGlobe2, BsInfoCircle } from 'react-icons/bs';
 import { RiTeamFill } from 'react-icons/ri';
 import { MdLocationPin, MdOutlineDescription, MdOutlineTipsAndUpdates } from 'react-icons/md';
 import { BiPurchaseTag, BiSolidLocationPlus, BiSolidTime, BiTimer } from 'react-icons/bi';
@@ -37,6 +37,7 @@ const PackagesDetails = () => {
         const response = await axios.get(`http://localhost:5000/packages/${id}`);
         return response.data;
     });
+    console.log(details);
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
     const handleOpen = () => setOpen(true);
@@ -57,15 +58,15 @@ const PackagesDetails = () => {
     const { handleSubmit, control, reset } = useForm();
     const handleFormSubmit = async (data) => {
 
-        const phoneNumber = '+8801872400423'; 
+        const phoneNumber = '+8801872400423';
         const packageLink = `http://localhost:3000/packagedetails/${details._id}`;
 
         const message = `Hello, I am ${data.name}.
         I want to book ${details.location}. I already submit a booking form in your mail.
-        Here is the link to the package: (${packageLink})`; 
-        
+        Here is the link to the package: (${packageLink})`;
+
         const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-        
+
 
         const mergedData = {
             location: details.location,
@@ -119,28 +120,32 @@ const PackagesDetails = () => {
                     <div className="lg:w-2/3 box">
                         <Accord details={details} />
                     </div>
-                    <div className="lg:w-1/3 box sticky top-20">
+                    <div className="lg:w-1/3 box sticky top-16">
                         <div className='mb-3'>
                             <div >
-                                <div dangerouslySetInnerHTML={{ __html: iframeHtml }} className='googlemap' />
+                                <div dangerouslySetInnerHTML={{ __html: iframeHtml }}/>
                             </div>
                         </div>
                         <div className='flex items-center gap-2 mb-3'>
                             <MdLocationPin className='text-lime-500 text-lg' />
                             <h1>{details?.location}</h1>
                         </div>
+                        <div className='flex items-center gap-2 mb-3'>
+                            <BsFillFlagFill className='text-lime-500 text-lg' />
+                            <h1>{details?.division}</h1>
+                        </div>
 
                         <div className='flex items-center gap-2 mb-3'>
                             <RiTeamFill className='text-lime-500 text-lg' />
-                            <h1>From 1 to 48 people</h1>
+                            <h1>From {details?.minmember} to {details?.maxmember} people</h1>
                         </div>
                         <div className='flex justify-between items-center
                         '>
-                            <div className='flex items-center gap-2 mb-3'>
+                            <div className='flex items-center gap-2 '>
                                 <BiSolidTime className='text-lime-500 text-lg' />
                                 <h1>{details?.duration} days</h1>
                             </div>
-                            <div className='flex items-center gap-2 mb-3'>
+                            <div className='flex items-center gap-2 '>
                                 <TbCurrencyTaka className='text-lime-500 text-xl' />
                                 <h1 className='font-bold text-xl'>{details?.amount} TK</h1>
                             </div>
@@ -153,12 +158,12 @@ const PackagesDetails = () => {
                         <button className='btn text-center w-full bg-lime-500 text-white hover:bg-lime-700 py-2 rounded-lg' onClick={handleOpen}>
                             Book Now
                         </button>
-                        <Forminfo open={open} setOpen={setOpen} handleClose={handleClose} handleOpen={handleOpen} details={details} handleDecrement={handleDecrement} handleIncrement={handleIncrement} quantity={quantity} totalValue={totalValue} handleFormSubmit={handleFormSubmit} setQuantity={setQuantity} handleSubmit={handleSubmit} control={control}/>
+                        <Forminfo open={open} setOpen={setOpen} handleClose={handleClose} handleOpen={handleOpen} details={details} handleDecrement={handleDecrement} handleIncrement={handleIncrement} quantity={quantity} totalValue={totalValue} handleFormSubmit={handleFormSubmit} setQuantity={setQuantity} handleSubmit={handleSubmit} control={control} />
                     </div>
                 </div>
             </div>
             <div className="container mx-auto">
-                <Gallery />
+                <Gallery details={details}/>
             </div>
         </>
     );
@@ -353,83 +358,7 @@ const Forminfo = ({ open, handleClose, details, handleFormSubmit, quantity, hand
     )
 }
 
-const Accord = () => {
-    const details = [
-        {
-            title: 'BISNAKANDI, SYLHET',
-            coverimg: "https://i.ibb.co/W2NrFDq/cover.jpg",
-            members: '10-30',
-            amount: 3500,
-            information: [
-                {
-                    desc: 'Imagine exploring the tourist spots of the worlds largest sea beach, Coxs Bazar in a double-decker tourist bus. Having the wide ocean view on one side and hill view on the other, this tour is an excellent opportunity for you to enjoy an entire day while fulfilling a major portion of your Coxs Bazar checklist. Driving through the iconic marine drive, Aquaholic Tourist Caravan offers you a stoppage at every spot to hop around comfortably. This tour also comes with special meal services, a mini library, washroom and refreshments - all inside the tourist bus! Overall, this unique experience of roaming around and visiting spots in a double-decker tourist bus is definitely going to be one of the activities to cherish with your friends or family in Coxs Bazar.'
-                }
-            ],
-            pickup: 'Ground Floor, Motel Upal, Shaibal Road, Coxs Bazar',
-            duration: 1,
-            inorexclu: [
-                {
-                    in: [
-                        'All Entry Tickets of Hopping Destinations',
-                        'Welcome Breakfast',
-                        'Lunch Platter',
-                        'Evening Snacks',
-                        'Washroom',
-                        'Library',
-                        'WIFI',
-                        'Guide',
-                        'Wrist band',
-                        'First Aid Kit (In case of emergency)'
-                    ],
-                    out: [
-                        'Personal expenses',
-                        'Anything else that isnt mentioned on Inclusions'
-                    ]
-                }
-            ],
-            description: [
-                {
-                    desc: 'Aquaholic Tourist Caravan is the first hop-on hop-off service in Bangladesh. For the first time in Bangladesh, it brings to you the opportunity to experience the majestic aura of the Marine Drive road in such a unique setting. The travelers will be starting for the day long tour at 09:00 AM. The daylong will be covering all the spots of Marine Drive as you are entertained with fantastic meals on board. The travelers will be dropped-off at Kolatoli at 06:00 PM.',
-                    facilitated: [
-                        'Washroom',
-                        'Kitchen',
-                        'Library',
-                        'CC Camera Surveillance',
-                        'Skilled Guide',
-                        'Experienced Chef'
-                    ],
-                    hopdestination: [
-                        'Patuartak beach',
-                        'Shamlapur Hill View Beach',
-                        'Teknaf Beach',
-                        'Sabrang Zero Point'
-                    ],
-                    food: [
-                        {
-                            welcome: 'Sandwich, Coconut Water, Apple, Mineral Water',
-                            lunch: 'Chicken Fried Rice, Cashew Nut Salad, Vegetable, Masala Chicken, Cold Drinks, Mineral Water',
-                            evening: 'Fried Chicken, Bun, French Fry, Sauce, Green Tea, Mineral Water'
-                        }
-                    ]
-                }
-            ],
-            additional: [
-                'Tickets of Aquaholic Tourist Caravan are highly dependent on the availability. GoZayaan will issue tickets that are available and does not promise to provide any specific seat(s) for a booking.',
-                'Confirmation will be received at the time of booking',
-                'Children must be accompanied by an adult',
-                'Face masks are required for travelers in public areas',
-                'Social distancing is enforced throughout the experience',
-                'Due to maintenance work on Rezu khal Bridge (15 km from kolatoli) Aquaholic Tourist Caravan will provide Special transportation service till the bridge. The remaining distance of the sixty-five (65) km will be facilitated by the Caravan.'
-            ],
-            tips: [
-                'Carry drinking water. Stay hydrated, travel healthy.',
-                'It is advised to carry a set of fresh clothes for the beach.',
-                'Always be respectful of the rules and guidelines of the tourist spots.',
-                'Please do not litter. Use a polybag as a portable trash bin.'
-            ]
-        }
-    ]
-
+const Accord = ({ details }) => {
     const [expanded, setExpanded] = useState('panel1');
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -437,370 +366,356 @@ const Accord = () => {
     };
     return (
         <>
-            <div className="">
-                {details.map((item, i) => (
-                    <div key={i}>
-                        <Accordion
-                            elevation={0}
-                            expanded={expanded === 'panel1'}
-                            onChange={handleChange('panel1')}
+            <div >
+                <Accordion
+                    elevation={0}
+                    expanded={expanded === 'panel1'}
+                    onChange={handleChange('panel1')}
+                >
+                    <AccordionSummary
+                        id="panel1d-header"
+                        focusVisibleClassName="text-blue-300"
+                        expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
                         >
-                            <AccordionSummary
-                                id="panel1d-header"
-                                focusVisibleClassName="text-blue-300"
-                                expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
-                                >
-                                    <AiOutlineArrowDown className='tabicon' />
-                                </div>}
-                                aria-controls="panel1a-content"
-                                className="faqHeader"
-                            >
-                                <div className='flex items-center gap-2'>
-                                    <BsGlobe2 className='tabicon' /> <h1 className='font-bold text-lg uppercase'>Information</h1>
-                                </div>
-                            </AccordionSummary>
-                            <AccordionDetails sx={{
-                                padding: '0'
-                            }}>
-                                <div className="p-4 ease duration-500">
-                                    {item.information.map((info, i) => (
-                                        <p key={i}>{info.desc}</p>
-                                    ))}
-                                    <div className='mb-3'>
-                                        <h2 className='font-bold my-3'>
-                                            For booking this tour, please follow the following steps :
-                                        </h2>
-                                        <ul>
-                                            <li>
-                                                <div class="flex relative pb-12">
-                                                    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                                                        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-                                                    </div>
-                                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
-                                                        <GiClick />
-                                                    </div>
-                                                    <div class="flex-grow pl-4">
-                                                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 1</h2>
-                                                        <p class="leading-relaxed">Click on the Book Now Button</p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex relative pb-12">
-                                                    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                                                        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-                                                    </div>
-                                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
-                                                        <AiOutlineForm />
-                                                    </div>
-                                                    <div class="flex-grow pl-4">
-                                                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 2</h2>
-                                                        <p class="leading-relaxed">Then fill up the form and submit.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex relative">
-                                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
-                                                        <RiContactsFill />
-                                                    </div>
-                                                    <div class="flex-grow pl-4">
-                                                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 3</h2>
-                                                        <p class="leading-relaxed">After submitting you contact with admin about Tour and Payment</p>
-                                                    </div>
-                                                </div>
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            elevation={0}
-                            expanded={expanded === 'panel2'}
-                            onChange={handleChange('panel2')}
-                        >
-                            <AccordionSummary
-                                id="panel2d-header"
-                                focusVisibleClassName="text-blue-300"
-                                expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
-                                >
-                                    <AiOutlineArrowDown className='tabicon' />
-                                </div>}
-                                aria-controls="panel2a-content"
-                                className="faqHeader"
-                            >
-                                <div className='flex items-center gap-2'>
-                                    <MdOutlineDescription className='tabicon' /> <h1 className='font-bold text-lg'>Description</h1>
-                                </div>
-                            </AccordionSummary>
-                            <AccordionDetails sx={{
-                                padding: '0'
-                            }}>
-                                <div className="p-4 ease duration-500">
-                                    {
-                                        item.description.map((desc, i) => {
-                                            return (
-                                                <div key={i}>
-                                                    <p>
-                                                        {desc.desc}
-                                                    </p>
-                                                    <div>
-                                                        <p className='font-semibold my-2'>
-                                                            The Caravan is facilitated with:
-                                                        </p>
-                                                        <ul className='list-disc ml-5'>
-                                                            {desc.facilitated.map((facility, k) => (
-                                                                <li key={k} className='list-outside'>
-                                                                    {facility}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                    <div>
-                                                        <p className='font-semibold my-2'>
-                                                            Hopping Destinations:
-                                                        </p>
-                                                        <ul className='list-disc mb-3 ml-5'>
-                                                            {desc.hopdestination.map((hopping, k) => (
-                                                                <li key={k} className='list-outside'>
-                                                                    {hopping}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                    <div>
-                                                        <p className='font-semibold my-2'>
-                                                            Complementary Food Menu:
-                                                        </p>
-                                                        <ul className='list-disc ml-5'>
-                                                            {desc.food.map((menu, k) => (
-                                                                <li key={k} className='list-outside'>
-                                                                    <span className='underline'>Welcome Snacks</span>:  {menu.welcome}
-                                                                </li>
-                                                            ))}
-                                                            {desc.food.map((menu, k) => (
-                                                                <li key={k} className='list-outside'>
-                                                                    <span className='underline'>Lunch Platter</span>:  {menu.lunch}
-                                                                </li>
-                                                            ))}
-                                                            {desc.food.map((menu, k) => (
-                                                                <li key={k} className='list-outside'>
-                                                                    <span className='underline'>Evening Snacks</span>:  {menu.evening}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
-
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            elevation={0}
-                            expanded={expanded === 'panel3'}
-                            onChange={handleChange('panel3')}
-                        >
-                            <AccordionSummary
-                                id="panel2d-header"
-                                focusVisibleClassName="text-blue-300"
-                                expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
-                                >
-                                    <AiOutlineArrowDown className='tabicon' />
-                                </div>}
-                                aria-controls="panel2a-content"
-                                className="faqHeader"
-                            >
-                                <div className='flex items-center gap-2'>
-                                    <MdOutlineTipsAndUpdates className='tabicon' /> <h1 className='font-bold text-lg'>Travel Tips</h1>
-                                </div>
-                            </AccordionSummary>
-                            <AccordionDetails sx={{
-                                padding: '0'
-                            }}>
-                                <div className="p-4 overflow-hidden ease duration-500 ">
-                                    <div className=''>
-                                        <ul className='list-disc ml-5'>
-                                            {item.tips.map((tip, k) => (
-                                                <li key={k} className='list-outside'>
-                                                    {tip}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            elevation={0}
-                            expanded={expanded === 'panel4'}
-                            onChange={handleChange('panel4')}
-                        >
-                            <AccordionSummary
-                                id="panel2d-header"
-                                focusVisibleClassName="text-blue-300"
-                                expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
-                                >
-                                    <AiOutlineArrowDown className='tabicon' />
-                                </div>}
-                                aria-controls="panel2a-content"
-                                className="faqHeader"
-                            >
-                                <div className='flex items-center gap-2'>
-                                    <BiPurchaseTag className='tabicon' /> <h1 className='font-bold text-lg'>Inclusion & Exclusion</h1>
-                                </div>
-                            </AccordionSummary>
-                            <AccordionDetails sx={{
-                                padding: '0'
-                            }}>
-                                <div className="p-4 overflow-hidden ease duration-500">
-                                    <div className=''>
-                                        <div className='list-disc ml-5'>
-                                            {item.inorexclu.map((into, k) => (
-                                                <div key={k}>
-                                                    <ul className=''>
-                                                        {into.in.map((enter, j) => (
-                                                            <li key={j} className='flex items-center gap-3'>
-                                                                <GiCheckMark className='text-green-600' />
-                                                                {enter}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                    <ul className=''>
-                                                        {into.out.map((outt, j) => (
-                                                            <li key={j} className='flex items-center gap-3'>
-                                                                <RxCross2 className='text-red-600' />
-                                                                {outt}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            ))}
+                            <AiOutlineArrowDown className='tabicon' />
+                        </div>}
+                        aria-controls="panel1a-content"
+                        className="faqHeader"
+                    >
+                        <div className='flex items-center gap-2'>
+                            <BsGlobe2 className='tabicon' /> <h1 className='font-bold text-lg uppercase'>Information</h1>
+                        </div>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{
+                        padding: '0'
+                    }}>
+                        <div className="p-4 ease duration-500">
+                            {details?.information?.map((info, i) => (
+                                <p key={i}>{info.desc}</p>
+                            ))}
+                            <div className='mb-3'>
+                                <h2 className='font-bold my-3'>
+                                    For booking this tour, please follow the following steps :
+                                </h2>
+                                <ul>
+                                    <li>
+                                        <div class="flex relative pb-12">
+                                            <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                                                <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                                            </div>
+                                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
+                                                <GiClick />
+                                            </div>
+                                            <div class="flex-grow pl-4">
+                                                <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 1</h2>
+                                                <p class="leading-relaxed">Click on the Book Now Button</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex relative pb-12">
+                                            <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                                                <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                                            </div>
+                                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
+                                                <AiOutlineForm />
+                                            </div>
+                                            <div class="flex-grow pl-4">
+                                                <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 2</h2>
+                                                <p class="leading-relaxed">Then fill up the form and submit.</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex relative">
+                                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
+                                                <RiContactsFill />
+                                            </div>
+                                            <div class="flex-grow pl-4">
+                                                <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 3</h2>
+                                                <p class="leading-relaxed">After submitting you contact with admin about Tour and Payment</p>
+                                            </div>
                                         </div>
 
-                                    </div>
-
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            elevation={0}
-                            expanded={expanded === 'panel5'}
-                            onChange={handleChange('panel5')}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion
+                    elevation={0}
+                    expanded={expanded === 'panel2'}
+                    onChange={handleChange('panel2')}
+                >
+                    <AccordionSummary
+                        id="panel2d-header"
+                        focusVisibleClassName="text-blue-300"
+                        expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
                         >
-                            <AccordionSummary
-                                id="panel2d-header"
-                                focusVisibleClassName="text-blue-300"
-                                expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
-                                >
-                                    <AiOutlineArrowDown className='tabicon' />
-                                </div>}
-                                aria-controls="panel2a-content"
-                                className="faqHeader"
-                            >
+                            <AiOutlineArrowDown className='tabicon' />
+                        </div>}
+                        aria-controls="panel2a-content"
+                        className="faqHeader"
+                    >
+                        <div className='flex items-center gap-2'>
+                            <MdOutlineDescription className='tabicon' /> <h1 className='font-bold text-lg'>Description</h1>
+                        </div>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{
+                        padding: '0'
+                    }}>
+                        <div className="p-4 ease duration-500">
+                            {
+                                details?.description?.map((desc, i) => {
+                                    return (
+                                        <div key={i}>
+                                            <p>
+                                                {desc.desc}
+                                            </p>
+                                            <div>
+                                                <p className='font-semibold my-2'>
+                                                    The Caravan is facilitated with:
+                                                </p>
+                                                <ul className='list-disc ml-5'>
+                                                    {desc.facilitated.map((facility, k) => (
+                                                        <li key={k} className='list-outside'>
+                                                            {facility}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <p className='font-semibold my-2'>
+                                                    Hopping Destinations:
+                                                </p>
+                                                <ul className='list-disc mb-3 ml-5'>
+                                                    {desc.hopdestination.map((hopping, k) => (
+                                                        <li key={k} className='list-outside'>
+                                                            {hopping}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <p className='font-semibold my-2'>
+                                                    Complementary Food Menu:
+                                                </p>
+                                                <ul className='list-disc ml-5'>
+                                                    {desc.food.map((menu, k) => (
+                                                        <li key={k} className='list-outside'>
+                                                            <span className='underline'>Welcome Snacks</span>:  {menu.welcome}
+                                                        </li>
+                                                    ))}
+                                                    {desc.food.map((menu, k) => (
+                                                        <li key={k} className='list-outside'>
+                                                            <span className='underline'>Lunch Platter</span>:  {menu.lunch}
+                                                        </li>
+                                                    ))}
+                                                    {desc.food.map((menu, k) => (
+                                                        <li key={k} className='list-outside'>
+                                                            <span className='underline'>Evening Snacks</span>:  {menu.evening}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
 
-                                <div className='flex items-center gap-2'>
-                                    <BiSolidLocationPlus className='tabicon' /> <h1 className='font-bold text-lg'>Pick Up Location</h1>
-                                </div>
-                            </AccordionSummary>
-                            <AccordionDetails sx={{
-                                padding: '0'
-                            }}>
-                                <div className="p-4 overflow-hidden ease duration-500 ">
-                                    <p className=''><span className='font-bold'>Pick Up: </span>{item.pickup}</p>
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            elevation={0}
-                            expanded={expanded === 'panel6'}
-                            onChange={handleChange('panel6')}
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion
+                    elevation={0}
+                    expanded={expanded === 'panel3'}
+                    onChange={handleChange('panel3')}
+                >
+                    <AccordionSummary
+                        id="panel2d-header"
+                        focusVisibleClassName="text-blue-300"
+                        expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
                         >
-                            <AccordionSummary
-                                id="panel2d-header"
-                                focusVisibleClassName="text-blue-300"
-                                expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
-                                >
-                                    <AiOutlineArrowDown className='tabicon' />
-                                </div>}
-                                aria-controls="panel2a-content"
-                                className="faqHeader"
-                            >
-                                <div className='flex items-center gap-2'>
-                                    <BiTimer className='tabicon' /> <h1 className='font-bold text-lg'>Duration</h1>
-                                </div>
-                            </AccordionSummary>
-                            <AccordionDetails sx={{
-                                padding: '0'
-                            }}>
-                                <div className="p-4 overflow-hidden ease duration-500 ">
-                                    <p className=''>
-                                        <span className='font-bold'>Timing Duration: </span>
-                                        {item.duration <= 1 ? `${item.duration} Day` : `${item.duration} Days`}
-                                    </p>
+                            <AiOutlineArrowDown className='tabicon' />
+                        </div>}
+                        aria-controls="panel2a-content"
+                        className="faqHeader"
+                    >
+                        <div className='flex items-center gap-2'>
+                            <MdOutlineTipsAndUpdates className='tabicon' /> <h1 className='font-bold text-lg'>Travel Tips</h1>
+                        </div>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{
+                        padding: '0'
+                    }}>
+                        <div className="p-4 overflow-hidden ease duration-500 ">
+                            <div className=''>
+                                <ul className='list-disc ml-5'>
+                                    {details?.tips?.map((tip, k) => (
+                                        <li key={k} className='list-outside'>
+                                            {tip}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
 
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            elevation={0}
-                            expanded={expanded === 'panel7'}
-                            onChange={handleChange('panel7')}
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion
+                    elevation={0}
+                    expanded={expanded === 'panel4'}
+                    onChange={handleChange('panel4')}
+                >
+                    <AccordionSummary
+                        id="panel2d-header"
+                        focusVisibleClassName="text-blue-300"
+                        expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
                         >
-                            <AccordionSummary
-                                id="panel2d-header"
-                                focusVisibleClassName="text-blue-300"
-                                expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
-                                >
-                                    <AiOutlineArrowDown className='tabicon' />
-                                </div>}
-                                aria-controls="panel2a-content"
-                                className="faqHeader"
-                            >
-                                <div className='flex items-center gap-2'>
-                                    <BsInfoCircle className='tabicon' /> <h1 className='font-bold text-lg'>Additional Information</h1>
+                            <AiOutlineArrowDown className='tabicon' />
+                        </div>}
+                        aria-controls="panel2a-content"
+                        className="faqHeader"
+                    >
+                        <div className='flex items-center gap-2'>
+                            <BiPurchaseTag className='tabicon' /> <h1 className='font-bold text-lg'>Inclusion & Exclusion</h1>
+                        </div>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{
+                        padding: '0'
+                    }}>
+                        <div className="p-4 overflow-hidden ease duration-500">
+                            <div className=''>
+                                <div className='list-disc ml-5'>
+                                    {details?.inorexclu?.map((into, k) => (
+                                        <div key={k}>
+                                            <ul className=''>
+                                                {into.in.map((enter, j) => (
+                                                    <li key={j} className='flex items-center gap-3'>
+                                                        <GiCheckMark className='text-green-600' />
+                                                        {enter}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <ul className=''>
+                                                {into.out.map((outt, j) => (
+                                                    <li key={j} className='flex items-center gap-3'>
+                                                        <RxCross2 className='text-red-600' />
+                                                        {outt}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ))}
                                 </div>
-                            </AccordionSummary>
-                            <AccordionDetails sx={{
-                                padding: '0'
-                            }}>
-                                <div className="p-4 overflow-hidden ease duration-500">
-                                    <div className=''>
-                                        <ul className='list-disc ml-5'>
-                                            {item.additional.map((addinfo, k) => (
-                                                <li key={k} className='list-outside'>
-                                                    {addinfo}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
 
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
-                    </div>
-                ))}
+                            </div>
+
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion
+                    elevation={0}
+                    expanded={expanded === 'panel5'}
+                    onChange={handleChange('panel5')}
+                >
+                    <AccordionSummary
+                        id="panel2d-header"
+                        focusVisibleClassName="text-blue-300"
+                        expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
+                        >
+                            <AiOutlineArrowDown className='tabicon' />
+                        </div>}
+                        aria-controls="panel2a-content"
+                        className="faqHeader"
+                    >
+
+                        <div className='flex items-center gap-2'>
+                            <BiSolidLocationPlus className='tabicon' /> <h1 className='font-bold text-lg'>Pick Up Location</h1>
+                        </div>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{
+                        padding: '0'
+                    }}>
+                        <div className="p-4 overflow-hidden ease duration-500 ">
+                            <p className=''><span className='font-bold'>Pick Up: </span>{details?.pickup}</p>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion
+                    elevation={0}
+                    expanded={expanded === 'panel6'}
+                    onChange={handleChange('panel6')}
+                >
+                    <AccordionSummary
+                        id="panel2d-header"
+                        focusVisibleClassName="text-blue-300"
+                        expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
+                        >
+                            <AiOutlineArrowDown className='tabicon' />
+                        </div>}
+                        aria-controls="panel2a-content"
+                        className="faqHeader"
+                    >
+                        <div className='flex items-center gap-2'>
+                            <BiTimer className='tabicon' /> <h1 className='font-bold text-lg'>Duration</h1>
+                        </div>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{
+                        padding: '0'
+                    }}>
+                        <div className="p-4 overflow-hidden ease duration-500 ">
+                            <p className=''>
+                                <span className='font-bold'>Timing Duration: </span>
+                                {details?.duration <= 1 ? `${details?.duration} Day` : `${details?.duration} Days`}
+                            </p>
+
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion
+                    elevation={0}
+                    expanded={expanded === 'panel7'}
+                    onChange={handleChange('panel7')}
+                >
+                    <AccordionSummary
+                        id="panel2d-header"
+                        focusVisibleClassName="text-blue-300"
+                        expandIcon={<div className="h-8 w-8 border border-gray-700 rounded-full items-center inline-flex justify-center transform transition ease duration-500 group-focus:-rotate-180"
+                        >
+                            <AiOutlineArrowDown className='tabicon' />
+                        </div>}
+                        aria-controls="panel2a-content"
+                        className="faqHeader"
+                    >
+                        <div className='flex items-center gap-2'>
+                            <BsInfoCircle className='tabicon' /> <h1 className='font-bold text-lg'>Additional Information</h1>
+                        </div>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{
+                        padding: '0'
+                    }}>
+                        <div className="p-4 overflow-hidden ease duration-500">
+                            <div className=''>
+                                <ul className='list-disc ml-5'>
+                                    {details?.additional?.map((addinfo, k) => (
+                                        <li key={k} className='list-outside'>
+                                            {addinfo}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
             </div>
         </>
     )
 }
-
-
-const Gallery = () => {
+const Gallery = ({details}) => {
 
     const [lightboxController, setLightboxController] = useState({
         toggler: false,
         slide: 0
     });
-    const images = [
-        { img: "https://i.ibb.co/W2NrFDq/cover.jpg", id: 1 },
-        { img: "https://i.ibb.co/hV46NHG/Nafakhum.jpg", id: 2 },
-        { img: "https://i.ibb.co/hKV0xcT/cover.jpg", id: 3 },
-        { img: "https://i.ibb.co/9HGfqsh/cover.jpg", id: 4 },
-        { img: "https://i.ibb.co/whL1r6D/cover.jpg", id: 5 },
-        { img: "https://i.ibb.co/7jtRqFz/cover.jpg", id: 6 },
-    ]
     const openLightbox = (slideIndex) => {
         setLightboxController({ toggler: !lightboxController.toggler, slide: slideIndex });
     };
@@ -854,7 +769,7 @@ const Gallery = () => {
                 className="mySwiper"
             >
                 {
-                    images.map((img, i) => (
+                    details?.images?.map((img, i) => (
                         <SwiperSlide key={img.id} onClick={() => openLightbox(i)}>
                             <Image
                                 src={img.img}
@@ -878,7 +793,7 @@ const Gallery = () => {
             </Swiper>
             <FsLightbox
                 toggler={lightboxController.toggler}
-                sources={images.map((image) => image.img)}
+                sources={details?.images?.map((image) => image.img)}
                 sourceIndex={lightboxController.slide}
                 type="image"
             />
