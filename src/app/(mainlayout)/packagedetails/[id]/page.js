@@ -58,7 +58,7 @@ const PackagesDetails = () => {
     const handleFormSubmit = async (data) => {
 
         const phoneNumber = '+8801872400423';
-        const packageLink = `http://localhost:3000/packagedetails/${details._id}`;
+        const packageLink = `https://baundule-club.vercel.app/packagedetails/${details._id}`;
 
         const message = `Hello, I am ${data.name}.
         I want to book ${details.location}. I already submit a booking form in your mail.
