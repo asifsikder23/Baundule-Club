@@ -36,7 +36,6 @@ const PackagesDetails = () => {
         const response = await axios.get(`https://baundule-club-server.vercel.app/packages/${id}`);
         return response.data;
     });
-    console.log(details);
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
     const handleOpen = () => setOpen(true);
@@ -739,7 +738,6 @@ const Gallery = ({details}) => {
             <Swiper
                 onSwiper={setSwiperInstance}
                 grabCursor={true}
-                centeredSlides={true}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
@@ -749,7 +747,7 @@ const Gallery = ({details}) => {
                     nextEl: '.swiper-button-next',
                 }}
                 slidesPerView={3}
-
+                spaceBetween={25}
                 breakpoints={{
                     100: {
                         slidesPerView: 1,
@@ -775,7 +773,7 @@ const Gallery = ({details}) => {
                                 className='w-full h-56 object-cover'
                                 width={800}
                                 height={500}
-                                alt=''
+                                alt={details.location}
                             />
                         </SwiperSlide>
                     ))

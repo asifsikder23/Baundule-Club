@@ -60,6 +60,7 @@ const Category = () => {
                             disableOnInteraction: false,
                         }}
                         slidesPerView={3}
+                        spaceBetween={25}
                         coverflowEffect={{
                             rotate: 50,
                             stretch: 0,
