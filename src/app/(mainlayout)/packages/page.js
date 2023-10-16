@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { useQuery, useQueryClient } from 'react-query';
 import '../../../styles/packages.css';
+import { FormControl, MenuItem, Select } from '@mui/material';
 
 
 const Packages = () => {
@@ -113,11 +114,21 @@ const Pkg = ({ data, isLoading, totalPkg, selectedDuration, setSelectedDuration 
         { value: 3, label: '3-4 days' },
         { value: 4, label: '5+ days' },
     ];
+    const division = [
+        { value: 1, label: 'Dhaka' },
+        { value: 2, label: 'Chittagong' },
+        { value: 3, label: 'Barisal' },
+        { value: 4, label: 'Khulna' },
+        { value: 5, label: 'Rajshahi' },
+        { value: 6, label: 'Rangpur' },
+        { value: 7, label: 'Sylhet' },
+        { value: 8, label: 'Mymensingh' },
+    ];
     return (
         <>
-            <div className="container mx-auto lg:flex gap-5 my-10">
+            <div className="container mx-auto lg:flex gap-5 my-10 h-full">
                 <div className="lg:w-1/4 shadow-lg rounded border p-5 h-full lg:sticky top-20">
-                    <Filtering totalPkg={totalPkg} durations={durations} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} />
+                    <Filtering totalPkg={totalPkg} durations={durations} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} division={division} />
                 </div>
                 <div className="lg:w-3/4 shadow-lg rounded border p-5 h-full">
                     {
@@ -183,9 +194,7 @@ const Pkg = ({ data, isLoading, totalPkg, selectedDuration, setSelectedDuration 
                             </>
                     }
                 </div>
-
             </div>
-
         </>
     )
 }
@@ -195,17 +204,24 @@ const Filtering = ({
     durations,
     selectedDuration,
     setSelectedDuration,
+    division
 }) => {
-    const handleShowAllDataChange = (event) => { };
+    const handleShowAllDataChange = (event) => { }
 
-    const [minPrice, setMinPrice] = useState(300);
-    const [maxPrice, setMaxPrice] = useState(3500);
-    const handleMinPriceChange = (event) => {
-        setMinPrice(Number(event.target.value));
+    const [age, setAge] = useState('');
+    const [selected, setSelected] = useState('');
+    
+    const handleChange = (event) => {
+        const selectedValue = event.target.value;
+        const selectedLabel = division.find(item => item.value === selectedValue)?.label;
+        setSelected(selectedLabel)
+        setAge(selectedValue);
     };
 
-    const handleMaxPriceChange = (event) => {
-        setMaxPrice(Number(event.target.value));
+    const clearDivision = () => {
+        setSelected('');
+        setAge('');
+        handleShowAllDataChange();
     };
 
     return (
@@ -234,63 +250,17 @@ const Filtering = ({
                     ) : (
                         <></>
                     )}
+                    {
+                        selected ?
+                            <>
+                                <div className='px-3 py-1 bg-red-500 text-white rounded-lg cursor-pointer flex items-center gap-1 mb-3' onClick={clearDivision}><p><RxCross2 /></p><p>{selected}</p></div>
+                            </>
+                            : (
+                                <></>
+                            )}
                 </div>
                 <hr />
-                <div class="wrapper my-3">
-                    <header>
-                        <h2 className='text-lg font-semibold mb-2'>Price Range</h2>
-                        <p>Enter or Select your min and max price</p>
-                    </header>
-                    <div class="price-input">
-                        <div class="field">
-                            <span>Min</span>
-                            <input
-                                type="number"
-                                value={minPrice}
-                                class="min-input"
-                                onChange={handleMinPriceChange}
-                            />
-                        </div>
-                        <div class="seperator">-</div>
-                        <div class="field">
-                            <span>Max</span>
-                            <input
-                                type="number"
-                                value={maxPrice}
-                                class="max-input"
-                                onChange={handleMaxPriceChange}
-                            />
-                        </div>
-                    </div>
-                    <div class="slider">
-                        <div
-                            class="progress"
-                            style={{
-                                width: `${((maxPrice - minPrice) / (10000 - 0)) * 100}%`,
-                                left: `${((minPrice - 0) / (10000 - 0)) * 100}%`,
-                            }}
-                        ></div>
-                    </div>
-                    <div class="range-input">
-                        <input
-                            type="range"
-                            min="0"
-                            max="10000"
-                            value={minPrice}
-                            class="min-range"
-                            onChange={handleMinPriceChange}
-                        />
-                        <input
-                            type="range"
-                            min="0"
-                            max="10000"
-                            value={maxPrice}
-                            class="max-range"
-                            onChange={handleMaxPriceChange}
-                        />
-                    </div>
-                </div>
-                <hr />
+
             </div>
             <div className="py-4">
                 <h2 className="text-lg font-semibold mb-2">Select Travel Duration:</h2>
@@ -314,6 +284,29 @@ const Filtering = ({
                 </div>
             </div>
             <hr />
+            <div className="py-4">
+                <h2 className="text-lg font-semibold mb-2">Select Division:</h2>
+                <div className="space-y-2">
+                    <FormControl sx={{ width: '100%' }}>
+                        <Select
+                            value={age}
+                            onChange={handleChange}
+                            displayEmpty
+                            inputProps={{ 'aria-label': 'Without label' }}
+                        >
+                            <MenuItem value="">
+                                <em>All</em>
+                            </MenuItem>
+                            {division.map(item => (
+                                <MenuItem key={item.value} value={item.value}>
+                                    {item.label} Division
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </div>
+            </div>
+
         </>
     );
 };

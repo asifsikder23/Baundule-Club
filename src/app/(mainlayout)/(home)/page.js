@@ -32,7 +32,6 @@ const Home = () => {
                         className="whatsapp-image"
                     />
             </Link>
-
         </section>
     );
 };
