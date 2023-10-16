@@ -1,31 +1,30 @@
 "use client"
 import axios from 'axios';
 import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Autoplay, Navigation, FreeMode } from 'swiper/modules';
 import Image from 'next/image';
+import { Autoplay, FreeMode, Navigation } from 'swiper/modules';
 
-import { useQuery } from 'react-query';
-import { BsFillFlagFill, BsGlobe2, BsInfoCircle } from 'react-icons/bs';
-import { RiTeamFill } from 'react-icons/ri';
-import { MdLocationPin, MdOutlineDescription, MdOutlineTipsAndUpdates } from 'react-icons/md';
-import { BiPurchaseTag, BiSolidLocationPlus, BiSolidTime, BiTimer } from 'react-icons/bi';
-import { GiCheckMark, GiClick } from 'react-icons/gi';
-import { AiOutlineArrowDown, AiOutlineForm } from 'react-icons/ai';
-import { RiContactsFill } from 'react-icons/ri';
-import { RxCross2 } from 'react-icons/rx';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Fade, Modal, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
+import { AiOutlineArrowDown, AiOutlineForm } from 'react-icons/ai';
+import { BiPurchaseTag, BiSolidLocationPlus, BiSolidTime, BiTimer } from 'react-icons/bi';
+import { BsFillFlagFill, BsGlobe2, BsInfoCircle } from 'react-icons/bs';
+import { GiCheckMark, GiClick } from 'react-icons/gi';
+import { MdLocationPin, MdOutlineDescription, MdOutlineTipsAndUpdates } from 'react-icons/md';
+import { RiContactsFill, RiTeamFill } from 'react-icons/ri';
+import { RxCross2 } from 'react-icons/rx';
 import { TbCurrencyTaka } from 'react-icons/tb';
+import { useQuery } from 'react-query';
 
-import '../../../../styles/pkgdetails.css'
 import FsLightbox from 'fslightbox-react';
 import toast from 'react-hot-toast';
+import '../../../../styles/pkgdetails.css';
 
 
 
@@ -34,7 +33,7 @@ const PackagesDetails = () => {
     const id = params.id;
 
     const { data: details } = useQuery("details", async () => {
-        const response = await axios.get(`http://localhost:5000/packages/${id}`);
+        const response = await axios.get(`https://baundule-club-server.vercel.app/packages/${id}`);
         return response.data;
     });
     console.log(details);
@@ -74,7 +73,7 @@ const PackagesDetails = () => {
             total: totalValue,
             ...data,
         }
-        fetch('http://localhost:5000/bookingform', {
+        fetch('https://baundule-club-server.vercel.app/bookingform', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

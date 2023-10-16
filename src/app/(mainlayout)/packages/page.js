@@ -1,11 +1,11 @@
 "use client"
-import React, { useEffect, useState } from 'react';
-import '../../../styles/packages.css'
-import Image from 'next/image';
-import { useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
+import { useQuery, useQueryClient } from 'react-query';
+import '../../../styles/packages.css';
 
 
 const Packages = () => {
@@ -16,7 +16,7 @@ const Packages = () => {
     const [selectedDuration, setSelectedDuration] = useState(null);
 
     const { data: totalcount } = useQuery("totalpackagecount", async () => {
-        const response = await axios.get("http://localhost:5000/totalpackagecount");
+        const response = await axios.get("https://baundule-club-server.vercel.app/totalpackagecount");
         return response.data;
     });
 
@@ -32,7 +32,7 @@ const Packages = () => {
                 params.duration = selectedDuration;
             }
 
-            const response = await axios.get('http://localhost:5000/allpackages', {
+            const response = await axios.get('https://baundule-club-server.vercel.app/allpackages', {
                 params,
             });
 

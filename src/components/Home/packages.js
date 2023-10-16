@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { MdLocationPin } from 'react-icons/md';
 import { TbCurrencyTaka } from 'react-icons/tb';
 
-import '../../styles/packages.css';
-import Link from 'next/link';
 import axios from 'axios';
+import Link from 'next/link';
 import { useQuery, useQueryClient } from 'react-query';
+import '../../styles/packages.css';
 
 const Packages = () => {
     const [displayedPackages, setDisplayedPackages] = useState(3);
@@ -16,7 +16,7 @@ const Packages = () => {
     };
 
     const { data, isLoading } = useQuery("packages", async () => {
-        const response = await axios.get("http://localhost:5000/toppackages");
+        const response = await axios.get("https://baundule-club-server.vercel.app/toppackages");
         return response.data;
     });
 
