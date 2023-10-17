@@ -68,11 +68,11 @@ const Packages = () => {
     return (
         <>
             <Hero />
-            <Pkg data={data} isLoading={isLoading} totalPkg={totalPkg} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} />
+            {/* <Pkg data={data} isLoading={isLoading} totalPkg={totalPkg} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} />
 
             <div className='container mx-auto mb-10'>
                 <Pagination pageNumber={pageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} handleItemsPerPageChange={handleItemsPerPageChange} setItemsPerpage={setItemsPerpage} itemsPerpage={itemsPerpage} totalPages={totalPages} totalPkg={totalPkg} />
-            </div>
+            </div> */}
 
         </>
     );
