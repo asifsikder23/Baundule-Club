@@ -1,9 +1,22 @@
+import Link from "next/link";
 import React from "react";
+import { BiArrowToRight } from "react-icons/bi";
 
 const Blog = () => {
   return (
     <div>
-      <div>cover picture</div>
+      <div className="bg-black">
+        <div className="h-[400px] w-full border sm:-mt-8 bg-[url('/Assets/contact.jpg')] opacity-50">
+          <div className="text-white max-w-fit">
+            <h1 className="text-5xl font-semibold uppercase">Blog</h1>
+            <div className="flex items-center justify-between text-lg">
+              <Link href={"/home"}>Home</Link>
+              <BiArrowToRight />
+              <Link href={"/blog"}>Blog</Link>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="container px-4 py-12 mx-auto">
         <div className="flex flex-wrap justify-center gap-6">
           {/* blog cards start */}
