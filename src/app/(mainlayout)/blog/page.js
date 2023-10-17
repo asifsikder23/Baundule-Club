@@ -1,10 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import { BiArrowToRight } from "react-icons/bi";
+import { BiArrowToLeft, BiArrowToRight } from "react-icons/bi";
 
 const Blog = () => {
   return (
     <div>
+      {/* blog cover start */}
       <div className="bg-black">
         <div className="h-[400px] w-full border sm:-mt-8 bg-[url('/Assets/contact.jpg')] opacity-50">
           <div className="text-white max-w-fit">
@@ -17,6 +18,8 @@ const Blog = () => {
           </div>
         </div>
       </div>
+      {/* blog cover end */}
+
       <div className="container px-4 py-12 mx-auto">
         <div className="flex flex-wrap justify-center gap-6">
           {/* blog cards start */}
@@ -34,6 +37,24 @@ const Blog = () => {
                 </div>
               </div>
             ))}
+            <div className="col-span-2 px-40 py-8 bg-white">
+              <div className="grid grid-cols-6 text-lime-600">
+                <button className="text-2xl border border-lime-600 hover:bg-gray-200 hover:text-lime-800">
+                  <BiArrowToLeft />
+                </button>
+                {[1, 2, 3, 4].map((e, i) => (
+                  <button
+                    key={i}
+                    className="py-4 text-xl border hover:bg-gray-200 border-y hover:text-lime-800"
+                  >
+                    {e}
+                  </button>
+                ))}
+                <button className="text-2xl border border-lime-600 hover:bg-gray-200 hover:text-lime-800">
+                  <BiArrowToRight />
+                </button>
+              </div>
+            </div>
           </div>
           {/* blog cards end */}
 
