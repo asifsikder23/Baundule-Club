@@ -100,14 +100,14 @@ const PackagesDetails = () => {
 
     return (
         <>
-            <div class="page-header bg-scroll bg-inner division -mt-7">
-                <div class="container mx-auto">
-                    <div class="flex flex-col items-center justify-center"
+            <div className="page-header bg-scroll bg-inner division -mt-7">
+                <div className="container mx-auto">
+                    <div className="flex flex-col items-center justify-center"
                         style={{
                             minHeight: '400px'
                         }}>
-                        <h3 class="display-4 text-white uppercase mb-2 text-center">{details?.location}</h3>
-                        <div class="flex text-white">
+                        <h3 className="display-4 text-white uppercase mb-2 text-center">{details?.location}</h3>
+                        <div className="flex text-white">
                             <p className='text-2xl text-center' style={{ letterSpacing: '5px' }}>Your Amazing Tour</p>
                         </div>
                     </div>
@@ -289,10 +289,10 @@ const Forminfo = ({ open, handleClose, details, handleFormSubmit, quantity, hand
                                 </div>
                                 <div className='flex items-center justify-between border mt-3 bg-[#E8E8E8]'>
                                     <p className='pl-3'>Member</p>
-                                    <div class="flex items-center rounded">
+                                    <div className="flex items-center rounded">
                                         <button
                                             type="button"
-                                            class="w-10 h-10 leading-10 text-white text-lg bg-lime-600 transition hover:opacity-75"
+                                            className="w-10 h-10 leading-10 text-white text-lg bg-lime-600 transition hover:opacity-75"
                                             onClick={handleDecrement}
                                         >
                                             -
@@ -302,13 +302,13 @@ const Forminfo = ({ open, handleClose, details, handleFormSubmit, quantity, hand
                                             type="number"
                                             id="Quantity"
                                             value={quantity}
-                                            class="h-10 w-10 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                                            className="h-10 w-10 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                                             onChange={handleQuantityChange}
                                         />
 
                                         <button
                                             type="button"
-                                            class="w-10 h-10 leading-10 bg-lime-600 text-white text-lg transition hover:opacity-75"
+                                            className="w-10 h-10 leading-10 bg-lime-600 text-white text-lg transition hover:opacity-75"
                                             onClick={handleIncrement}
                                         >
                                             +
@@ -316,31 +316,31 @@ const Forminfo = ({ open, handleClose, details, handleFormSubmit, quantity, hand
                                     </div>
 
                                 </div>
-                                <div class="flex justify-end mt-8">
-                                    <div class="w-screen max-w-lg">
-                                        <dl class=" text-sm text-gray-700">
-                                            <div class="flex justify-between">
+                                <div className="flex justify-end mt-8">
+                                    <div className="w-screen max-w-lg">
+                                        <dl className=" text-sm text-gray-700">
+                                            <div className="flex justify-between">
                                                 <dt>Subtotal</dt>
                                                 <dd>{details?.amount}</dd>
                                             </div>
 
-                                            <div class="flex justify-between">
+                                            <div className="flex justify-between">
                                                 <dt>Members</dt>
                                                 <dd>* {quantity}</dd>
                                             </div>
                                             <hr className='my-3' />
 
-                                            <div class="flex justify-between !text-base font-medium mb-3">
+                                            <div className="flex justify-between !text-base font-medium mb-3">
                                                 <dt>Total</dt>
                                                 <dd>{totalValue} TK</dd>
                                             </div>
                                         </dl>
 
 
-                                        <div class="flex justify-end">
+                                        <div className="flex justify-end">
                                             <button
                                                 type='submit'
-                                                class="block rounded bg-lime-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-lime-600"
+                                                className="block rounded bg-lime-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-lime-600"
                                             >
                                                 Submit
                                             </button>
@@ -397,37 +397,37 @@ const Accord = ({ details }) => {
                                 </h2>
                                 <ul>
                                     <li>
-                                        <div class="flex relative pb-12">
-                                            <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                                                <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                                        <div className="flex relative pb-12">
+                                            <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
+                                                <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
                                             </div>
-                                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
+                                            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
                                                 <GiClick />
                                             </div>
-                                            <div class="flex-grow pl-4">
-                                                <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 1</h2>
-                                                <p class="leading-relaxed">Click on the Book Now Button</p>
+                                            <div className="flex-grow pl-4">
+                                                <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 1</h2>
+                                                <p className="leading-relaxed">Click on the Book Now Button</p>
                                             </div>
                                         </div>
-                                        <div class="flex relative pb-12">
-                                            <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                                                <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                                        <div className="flex relative pb-12">
+                                            <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
+                                                <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
                                             </div>
-                                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
+                                            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
                                                 <AiOutlineForm />
                                             </div>
-                                            <div class="flex-grow pl-4">
-                                                <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 2</h2>
-                                                <p class="leading-relaxed">Then fill up the form and submit.</p>
+                                            <div className="flex-grow pl-4">
+                                                <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 2</h2>
+                                                <p className="leading-relaxed">Then fill up the form and submit.</p>
                                             </div>
                                         </div>
-                                        <div class="flex relative">
-                                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
+                                        <div className="flex relative">
+                                            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-lime-500 inline-flex items-center justify-center text-white relative z-10">
                                                 <RiContactsFill />
                                             </div>
-                                            <div class="flex-grow pl-4">
-                                                <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 3</h2>
-                                                <p class="leading-relaxed">After submitting you contact with admin about Tour and Payment</p>
+                                            <div className="flex-grow pl-4">
+                                                <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 3</h2>
+                                                <p className="leading-relaxed">After submitting you contact with admin about Tour and Payment</p>
                                             </div>
                                         </div>
 

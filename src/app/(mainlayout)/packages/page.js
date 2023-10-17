@@ -1,4 +1,5 @@
 "use client"
+import { FormControl, MenuItem, Select } from '@mui/material';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,7 +7,6 @@ import { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { useQuery, useQueryClient } from 'react-query';
 import '../../../styles/packages.css';
-import { FormControl, MenuItem, Select } from '@mui/material';
 
 
 const Packages = () => {
@@ -142,45 +142,45 @@ const Pkg = ({ data, isLoading, totalPkg, selectedDuration, setSelectedDuration 
                                     data.map((pkg, i) => {
                                         return (
                                             <>
-                                                <article class="md:flex bg-white transition hover:shadow-xl mb-5" key={i}>
-                                                    <div class="hidden md:block rotate-180 p-2 [writing-mode:_vertical-lr]">
+                                                <article className="md:flex bg-white transition hover:shadow-xl mb-5" key={i}>
+                                                    <div className="hidden md:block rotate-180 p-2 [writing-mode:_vertical-lr]">
                                                         <time
                                                             datetime="2022-10-10"
-                                                            class="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900"
+                                                            className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900"
                                                         >
                                                             <span>{pkg.amount} TK</span>
-                                                            <span class="w-px flex-1 bg-gray-900/10"></span>
+                                                            <span className="w-px flex-1 bg-gray-900/10"></span>
                                                             <span>{pkg.duration} Days</span>
                                                         </time>
                                                     </div>
 
-                                                    <div class="sm:basis-56">
+                                                    <div className="sm:basis-56">
                                                         <Image
                                                             alt="Guitar"
                                                             src={pkg.coverimg}
-                                                            class="aspect-square h-48 md:h-full w-full object-cover"
+                                                            className="aspect-square h-48 md:h-full w-full object-cover"
                                                             width={500}
                                                             height={500}
                                                         />
                                                     </div>
 
-                                                    <div class="flex flex-1 flex-col justify-between">
-                                                        <div class="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+                                                    <div className="flex flex-1 flex-col justify-between">
+                                                        <div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
                                                             <a href="#">
-                                                                <h3 class="font-bold uppercase text-gray-900">
+                                                                <h3 className="font-bold uppercase text-gray-900">
                                                                     {pkg.location}
                                                                 </h3>
                                                             </a>
 
-                                                            <p class="mt-2 line-clamp-4 text-sm/relaxed text-gray-700">
+                                                            <p className="mt-2 line-clamp-4 text-sm/relaxed text-gray-700">
                                                                 {pkg.description.map(desc => desc.desc)}
                                                             </p>
                                                         </div>
 
-                                                        <div class="sm:flex sm:items-end sm:justify-end">
+                                                        <div className="sm:flex sm:items-end sm:justify-end">
                                                             <Link
                                                                 href={`/packagedetails/${pkg._id}`}
-                                                                class="block bg-lime-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-lime-400"
+                                                                className="block bg-lime-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-lime-400"
                                                             >
                                                                 Visit here
                                                             </Link>
@@ -210,7 +210,7 @@ const Filtering = ({
 
     const [age, setAge] = useState('');
     const [selected, setSelected] = useState('');
-    
+
     const handleChange = (event) => {
         const selectedValue = event.target.value;
         const selectedLabel = division.find(item => item.value === selectedValue)?.label;
@@ -287,7 +287,7 @@ const Filtering = ({
             <div className="py-4">
                 <h2 className="text-lg font-semibold mb-2">Select Division:</h2>
                 <div className="space-y-2">
-                    <FormControl sx={{ width: '100%' }}>
+                    <FormControl sx={{ width: '100%' }} size="small">
                         <Select
                             value={age}
                             onChange={handleChange}
@@ -381,14 +381,14 @@ const Pagination = ({ pageNumber, setCurrentPage, currentPage, itemsPerpage, han
                 </p>
 
             </div>
-            <div class="flex select-none space-x-1 text-gray-700 my-5 md:my-0">
-                <button onClick={goToPreviousPage} class={`rounded-md bg-gray-200 px-3 py-1 md:px-4  md:py-2 transition duration-300 ${currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-gray-400'
+            <div className="flex select-none space-x-1 text-gray-700 my-5 md:my-0">
+                <button onClick={goToPreviousPage} className={`rounded-md bg-gray-200 px-3 py-1 md:px-4  md:py-2 transition duration-300 ${currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-gray-400'
                     } ${currentPage === 1 ? 'opacity-50' : ''}`}
                     disabled={currentPage === 1}> Previous </button>
                 {
-                    pageNumber.map(number => <button onClick={() => setCurrentPage(number)} class={`rounded-md ${isActive(number) ? 'bg-gray-400' : 'bg-gray-200'} px-3 py-1 md:px-4 md:py-2 transition duration-300 hover:bg-gray-400`} key={number}>{number}</button>)
+                    pageNumber.map(number => <button onClick={() => setCurrentPage(number)} className={`rounded-md ${isActive(number) ? 'bg-gray-400' : 'bg-gray-200'} px-3 py-1 md:px-4 md:py-2 transition duration-300 hover:bg-gray-400`} key={number}>{number}</button>)
                 }
-                <button onClick={goToNextPage} class={`rounded-md bg-gray-200 px-3 py-1 md:px-4  md:py-2 transition duration-300 ${currentPage === pageNumber.length ? 'cursor-not-allowed' : 'hover:bg-gray-400'
+                <button onClick={goToNextPage} className={`rounded-md bg-gray-200 px-3 py-1 md:px-4  md:py-2 transition duration-300 ${currentPage === pageNumber.length ? 'cursor-not-allowed' : 'hover:bg-gray-400'
                     } ${currentPage === pageNumber.length ? 'opacity-50' : ''}`}
                     disabled={currentPage === pageNumber.length}> Next </button>
             </div>

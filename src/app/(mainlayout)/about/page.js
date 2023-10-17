@@ -1,9 +1,8 @@
-import React from 'react';
-import '../../../styles/about.css'
 import Image from 'next/image';
-import { FaAward, FaMoneyCheckAlt } from 'react-icons/fa';
 import { AiOutlineGlobal } from 'react-icons/ai';
 import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs';
+import { FaAward, FaMoneyCheckAlt } from 'react-icons/fa';
+import '../../../styles/about.css';
 
 const About = () => {
     return (
@@ -140,38 +139,38 @@ const Guild = () => {
     ]
     return (
         <>
-            <div class="my-10">
+            <div className="my-10">
                 <div className="text-center my-10">
                     <h6 className="text-lime-700 uppercase" style={{ letterSpacing: '5px' }}>Our Team</h6>
                     <h1 className='text-xl md:text-4xl font-bold '>Meet The Travel Pros</h1>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 px-10">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 px-10">
                     {
                         guild.map((g, i) => {
                             return (
                                 <>
-                                    <div class="pb-1" key={i}>
-                                        <div class="team-item bg-white mb-4 rounded-lg">
-                                            <div class="team-img relative overflow-hidden h-[270px]">
+                                    <div className="pb-1" key={i}>
+                                        <div className="team-item bg-white mb-4 rounded-lg">
+                                            <div className="team-img relative overflow-hidden h-[270px]">
                                                 <Image src={g.img} alt="" className='object-cover' width={500} height={500} />
-                                                <div class="team-social">
-                                                    <a class="btn btn-outline-primary btn-square" href="">
+                                                <div className="team-social">
+                                                    <a className="btn btn-outline-primary btn-square" href="">
                                                         <BsTwitter />
                                                     </a>
-                                                    <a class="btn btn-outline-primary btn-square" href="">
+                                                    <a className="btn btn-outline-primary btn-square" href="">
                                                         <BsFacebook />
                                                     </a>
-                                                    <a class="btn btn-outline-primary btn-square" href="">
+                                                    <a className="btn btn-outline-primary btn-square" href="">
                                                         <BsInstagram />
                                                     </a>
-                                                    <a class="btn btn-outline-primary btn-square" href="">
+                                                    <a className="btn btn-outline-primary btn-square" href="">
                                                         <BsLinkedin />
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-center py-4">
-                                                <h5 class="truncate text-xl font-semibold">{g.name}</h5>
-                                                <p class="m-0">{g.pos}</p>
+                                            <div className="text-center py-4">
+                                                <h5 className="truncate text-xl font-semibold">{g.name}</h5>
+                                                <p className="m-0">{g.pos}</p>
                                             </div>
                                         </div>
                                     </div>
