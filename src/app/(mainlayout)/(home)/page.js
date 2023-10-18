@@ -21,7 +21,7 @@ const Home = () => {
             <Deals />
             <Packages />
             <Destination />
-            {/* <Category /> */}
+            <Category />
             <Gallery/>
             <Blog />
             <Link href={whatsappURL} target="_blank" rel="noopener noreferrer" className='fixed bottom-5 right-5 z-50'>

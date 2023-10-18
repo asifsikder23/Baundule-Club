@@ -85,7 +85,7 @@ const Destination = () => {
                                             </div>
                                         )}
 
-                                        <Link className="destination-overlay text-white text-decoration-none" href={`/tour/${img.id}`}>
+                                        <Link className="destination-overlay text-white text-decoration-none" href={`/destination/${img.id}`}>
                                             <h5 className="text-white text-xl font-bold uppercase">{img.country}</h5>
                                         </Link>
                                     </div>

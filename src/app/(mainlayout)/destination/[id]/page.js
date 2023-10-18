@@ -1,28 +1,19 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-
-import { FormControl, FormControlLabel, MenuItem, Pagination, Radio, RadioGroup, Select, Stack } from '@mui/material';
+import { Button, FormControl, FormControlLabel, Link, MenuItem, Pagination, Radio, RadioGroup, Select, Stack } from '@mui/material';
 import Image from 'next/image';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { RxCross2 } from 'react-icons/rx';
-
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
-
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, FreeMode, Navigation } from 'swiper/modules';
-import '../../../../styles/tour.css'
+import '../../../../styles/packages.css'
 
 
-
-
-const Tour = () => {
-    const params = useParams();
-    const id = params.id;
+const Destination = () => {
     // division
     const [divi, setDivi] = useState('');
     const [selected, setSelected] = useState('');
@@ -35,21 +26,12 @@ const Tour = () => {
     // filtering
     const [filteredDetails, setFilteredDetails] = useState([]);
 
-    // fetch by category id
-    const [data, setData] = useState([]);
-    const [isLoading, setLoading] = useState(true);
+    // fetch
+    const { data, isLoading } = useQuery("tour", async () => {
+        const response = await axios.get("http://localhost:5000/tour");
+        return response.data;
+    });
 
-    useEffect(() => {
-        setLoading(true);
-        fetch(`http://localhost:5000/category/${id}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data);
-                setLoading(false);
-            });
-    }, [id]);
-
-    // fetch category
     const { data: category } = useQuery("category", async () => {
         const response = await axios.get("http://localhost:5000/category");
         return response.data;
@@ -57,6 +39,8 @@ const Tour = () => {
 
     const applyFilters = () => {
         const filtered = data?.filter((info) => {
+            // status
+            const statusFilter = selectedStatus === '' || info.category === selectedStatus;
 
             const divisionFilter = selected === '' || info.division === selected;
 
@@ -65,44 +49,43 @@ const Tour = () => {
             // Check if the duration is less than or equal to the selected duration value
             const durationFilter = isNaN(intValue) || info.duration <= intValue;
             return (
-                divisionFilter && durationFilter
+                statusFilter && divisionFilter && durationFilter
             );
         });
         setFilteredDetails(filtered);
     };
     useEffect(() => {
         applyFilters();
-    }, [data, selected, selectedDuration, value]);
+    }, [selectedStatus, data, selected, selectedDuration, value]);
     return (
         <>
-            <Hero data={data} category={category} />
-            <Pkg data={data} isLoading={isLoading} divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} filteredDetails={filteredDetails} value={value} setValue={setValue} category={category} />
+            <Hero />
+            <Pkg data={data} isLoading={isLoading} divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} filteredDetails={filteredDetails} value={value} setValue={setValue} category={category}/>
         </>
     );
 };
 
-export default Tour;
+export default Destination;
 
-const Hero = ({ category, data }) => {
+const Hero = () => {
     return (
         <>
             <div className="page-header -mt-7">
                 <div className="container mx-auto">
                     <div className="flex flex-col items-center justify-center"
                         style={{
-                            minHeight: '350px'
+                            minHeight: '400px'
                         }}>
                         <h3 className="display-4 text-white uppercase mb-4">Your Destination</h3>
                         <div className="w-3/4">
-                            {/* <div className="bg-white items-center justify-between w-full flex rounded-full shadow-lg p-1 mb-5 sticky" style={{ top: '5px' }}>
+                            <div className="bg-white items-center justify-between w-full flex rounded-full shadow-lg p-1 mb-5 sticky" style={{ top: '5px' }}>
                                 <input className="font-bold uppercase rounded-full w-full py-2 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs" type="text" placeholder="Search" />
                                 <div className="bg-gray-600 p-2 hover:bg-lime-400 cursor-pointer  rounded-full">
                                     <svg className="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                            </div> */}
-                            <Category data={data} category={category} />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,12 +99,12 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
         <>
             <div className="container mx-auto lg:flex gap-5 my-10 h-full">
                 <div className="lg:w-1/4 shadow-lg rounded border p-5 h-full lg:sticky top-20">
-                    <Filtering divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} value={value} setValue={setValue} data={data} />
+                    <Filtering divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} value={value} setValue={setValue} />
                 </div>
                 <div className="lg:w-3/4">
-                    {/* <div className='mb-3'>
-                        <Category category={category} data={data} />
-                    </div> */}
+                    <div className='shadow-lg rounded border p-5 mb-5'>
+                        <Category selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} category={category}/>
+                    </div>
                     <div className='shadow-lg rounded border p-5'>
                         {
                             isLoading ?
@@ -172,7 +155,21 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
                                                             <div className="sm:flex sm:items-end sm:justify-end">
                                                                 <Link
                                                                     href={`/packagedetails/${pkg._id}`}
-                                                                    className='block bg-lime-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-lime-400  '
+                                                                    className="MuiButton-root MuiButton-contained MuiButton-text"
+                                                                    sx={{
+                                                                        px: 5,
+                                                                        py: 1,
+                                                                        fontSize: '0.75rem',
+                                                                        fontWeight: 'bold',
+                                                                        textTransform: 'uppercase',
+                                                                        color: 'black',
+                                                                        background: '#BEF264',
+                                                                        textDecoration: 'none',
+                                                                        '&:hover': {
+                                                                            backgroundColor: '#A3E635',
+                                                                        },
+
+                                                                    }}
                                                                 >
                                                                     Visit here
                                                                 </Link>
@@ -194,7 +191,7 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
     )
 }
 const Filtering = ({
-    divi, setDivi, selected, setSelected, selectedDuration, setSelectedDuration, value, setValue, data
+    divi, setDivi, selected, setSelected, selectedStatus, selectedDuration, setSelectedDuration, value, setValue
 }) => {
 
     const handleShowAllDataChange = (event) => { }
@@ -247,7 +244,7 @@ const Filtering = ({
 
     return (
         <>
-            <p className='mb-3'>Packages: {data?.length > 1 ? <span>{data?.length} Packages found</span> : <span>{data?.length} Package found</span>} </p>
+            <p className='mb-3'>Packages: 4 Packages found</p>
             <hr />
             <div>
                 <p className='my-3 font-bold'>Filter type :</p>
@@ -264,6 +261,14 @@ const Filtering = ({
                         selected ?
                             <>
                                 <div className='px-3 py-1 bg-red-500 text-white rounded-lg cursor-pointer flex items-center gap-1 mb-3' onClick={clearDivision}><p><RxCross2 /></p><p>{selected}</p></div><span className='mx-2'>,</span>
+                            </>
+                            : (
+                                <></>
+                            )}
+                    {
+                        selectedStatus ?
+                            <>
+                                <div className='px-3 py-1 bg-red-500 text-white rounded-lg cursor-pointer flex items-center gap-1 mb-3'><p><RxCross2 /></p><p>{selectedStatus}</p></div>
                             </>
                             : (
                                 <></>
@@ -321,51 +326,14 @@ const Filtering = ({
     );
 };
 
-// const Category = ({ category, data }) => {
-//     console.log('data:', data, 'category:', category);
-//     return (
-//         <>
-//             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-
-//                 {
-//                     category?.map((category, i) => (
-//                         <Link href={`/tour/${category?.catId}`} key={i}>
-//                             <div className={`p-2 shadow hover:shadow-lg rounded flex gap-3  justify-between items-center cursor-pointer h-full hover:bg-blue-800 ease-in-out duration-400 text-black hover:text-white text-sm ${data?.some(title => title?.category === category?.title) ? 'bg-blue-800 text-white active' : 'bg-white'}`}>
-//                                 <h1>{category.title}</h1>
-//                                 <Image
-//                                     src={category.icon}
-//                                     alt={category.title}
-//                                     width={200}
-//                                     height={200}
-//                                     className='w-10 h-10' />
-//                             </div>
-
-//                         </Link>
-
-//                     ))
-//                 }
-//             </div>
-//         </>
-//     )
-// }
-const Category = ({ category, data }) => {
-    const [swiperInstance, setSwiperInstance] = useState(null);
-    const goPrev = () => {
-        if (swiperInstance) {
-            swiperInstance.slidePrev();
-        }
-    };
-    const goNext = () => {
-        if (swiperInstance) {
-            swiperInstance.slideNext();
-        }
+const Category = ({ selectedStatus, setSelectedStatus, category }) => {
+    const handleStatusClick = (optionName) => {
+        setSelectedStatus((prevSelected) => (prevSelected === optionName ? '' : optionName));
     };
     return (
         <>
             <div className="">
-
                 <Swiper
-                    onSwiper={setSwiperInstance}
                     grabCursor={true}
                     autoplay={{
                         delay: 2500,
@@ -394,32 +362,24 @@ const Category = ({ category, data }) => {
                     modules={[Autoplay, Navigation, FreeMode]}
                     className="mySwiper"
                 >
+
                     {
-                        category?.map((category, i) => (
+                        category?.map((cat, i) => (
                             <SwiperSlide key={i}>
-                                <Link href={`/tour/${category?.catId}`} >
-                                    <div className={`p-2 shadow hover:shadow-lg rounded flex gap-3  justify-around items-center cursor-pointer h-full hover:bg-blue-800 ease-in-out duration-400 text-black hover:text-white text-sm ${data?.some(title => title?.category === category?.title) ? 'bg-blue-800 text-white active' : 'bg-white'}`}>
-                                        <h1>{category.title}</h1>
-                                        <Image
-                                            src={category.icon}
-                                            alt={category.title}
-                                            width={200}
-                                            height={200}
-                                            className='w-10 h-10' />
-                                    </div>
-                                </Link>
+                                <div className={` p-4 shadow hover:shadow-lg rounded flex gap-3 justify-between items-center cursor-pointer ${selectedStatus === cat.title ? 'bg-blue-800 text-white catbg' : 'bg-white'
+                                    }`} onClick={() => handleStatusClick(cat.title)}>
+
+                                    <h1 style={{ lineHeight: '1.3rem' }}>{cat.title}</h1>
+                                    <Image
+                                        src={cat.icon}
+                                        alt={cat.title}
+                                        width={200}
+                                        height={200}
+                                        className='w-10 h-10' />
+                                </div>
                             </SwiperSlide>
                         ))
                     }
-                    <div className='relative flex justify-center'>
-                        <div className="swiper-button-container">
-                            <button className="swiper-button-prev" onClick={goPrev}>
-                            </button>
-                            <button className="swiper-button-next" onClick={goNext}>
-                            </button>
-
-                        </div>
-                    </div>
                 </Swiper>
             </div>
         </>
