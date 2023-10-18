@@ -138,7 +138,7 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
                                                                 </a>
 
                                                                 <p className="mt-2 line-clamp-4 text-sm/relaxed text-gray-700">
-                                                                    {pkg.description.map(desc => desc.desc)}
+                                                                    {pkg?.description?.map(desc => desc.desc)}
                                                                 </p>
                                                             </div>
 
