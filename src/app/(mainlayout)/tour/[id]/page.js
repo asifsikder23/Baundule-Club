@@ -119,9 +119,6 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
                     <Filtering divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} value={value} setValue={setValue} data={data} />
                 </div>
                 <div className="lg:w-3/4">
-                    {/* <div className='mb-3'>
-                        <Category category={category} data={data} />
-                    </div> */}
                     <div className='shadow-lg rounded border p-5'>
                         {
                             isLoading ?

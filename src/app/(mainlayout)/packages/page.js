@@ -1,11 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { Button, FormControl, FormControlLabel, Link, MenuItem, Pagination, Radio, RadioGroup, Select, Stack } from '@mui/material';
+import {  FormControl, FormControlLabel, MenuItem, Pagination, Radio, RadioGroup, Select, Stack } from '@mui/material';
 import Image from 'next/image';
 import axios from 'axios';
 import { useQuery, useQueryClient } from 'react-query';
 import { RxCross2 } from 'react-icons/rx';
 import '../../../styles/packages.css'
+import Link from 'next/link';
 
 
 const Tour = () => {
@@ -89,7 +90,7 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
         <>
             <div className="container mx-auto lg:flex gap-5 my-10 h-full">
                 <div className="lg:w-1/4 shadow-lg rounded border p-5 h-full lg:sticky top-20">
-                    <Filtering divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} value={value} setValue={setValue} />
+                    <Filtering divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} value={value} setValue={setValue} filteredDetails={filteredDetails}/>
                 </div>
                 <div className="lg:w-3/4">
                     <div className='shadow-lg rounded border p-5 mb-5'>
@@ -131,11 +132,11 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
 
                                                         <div className="flex flex-1 flex-col justify-between">
                                                             <div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
-                                                                <a href="#">
+                                                               
                                                                     <h3 className="font-bold uppercase text-gray-900">
                                                                         {pkg.location}
                                                                     </h3>
-                                                                </a>
+                                        
 
                                                                 <p className="mt-2 line-clamp-4 text-sm/relaxed text-gray-700">
                                                                     {pkg?.description?.map(desc => desc.desc)}
@@ -145,21 +146,7 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
                                                             <div className="sm:flex sm:items-end sm:justify-end">
                                                                 <Link
                                                                     href={`/packagedetails/${pkg._id}`}
-                                                                    className="MuiButton-root MuiButton-contained MuiButton-text"
-                                                                    sx={{
-                                                                        px: 5,
-                                                                        py: 1,
-                                                                        fontSize: '0.75rem',
-                                                                        fontWeight: 'bold',
-                                                                        textTransform: 'uppercase',
-                                                                        color: 'black',
-                                                                        background: '#BEF264',
-                                                                        textDecoration: 'none',
-                                                                        '&:hover': {
-                                                                            backgroundColor: '#A3E635',
-                                                                        },
-
-                                                                    }}
+                                                                    className='block bg-lime-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-lime-400  '
                                                                 >
                                                                     Visit here
                                                                 </Link>
@@ -181,7 +168,7 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
     )
 }
 const Filtering = ({
-    divi, setDivi, selected, setSelected, selectedStatus, selectedDuration, setSelectedDuration, value, setValue
+    divi, setDivi, selected, setSelected, selectedStatus, selectedDuration, setSelectedDuration, value, setValue, filteredDetails
 }) => {
 
     const handleShowAllDataChange = (event) => { }
@@ -234,7 +221,7 @@ const Filtering = ({
 
     return (
         <>
-            <p className='mb-3'>Packages: 4 Packages found</p>
+            <p className='mb-3'>Packages: {filteredDetails?.length > 1 ? <span>{filteredDetails?.length} Packages found</span> : <span>{filteredDetails?.length} Package found</span>} </p>
             <hr />
             <div>
                 <p className='my-3 font-bold'>Filter type :</p>
@@ -348,7 +335,7 @@ const Category = ({ selectedStatus, setSelectedStatus }) => {
 
                 {
                     cat.map((category, i) => (
-                        <div className={` p-4 shadow hover:shadow-lg rounded flex gap-3 justify-between items-center cursor-pointer ${selectedStatus === category.title ? 'bg-blue-800 text-white catbg' : 'bg-white'
+                        <div className={` p-4 shadow hover:shadow-lg rounded flex gap-3 justify-between items-center cursor-pointer ${selectedStatus === category.title ? 'bg-blue-800 text-white active' : 'bg-white'
                             }`} key={i} onClick={() => handleStatusClick(category.title)}>
 
                             <h1 style={{lineHeight: '1.3rem'}}>{category.title}</h1>

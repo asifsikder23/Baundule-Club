@@ -155,21 +155,7 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
                                                             <div className="sm:flex sm:items-end sm:justify-end">
                                                                 <Link
                                                                     href={`/packagedetails/${pkg._id}`}
-                                                                    className="MuiButton-root MuiButton-contained MuiButton-text"
-                                                                    sx={{
-                                                                        px: 5,
-                                                                        py: 1,
-                                                                        fontSize: '0.75rem',
-                                                                        fontWeight: 'bold',
-                                                                        textTransform: 'uppercase',
-                                                                        color: 'black',
-                                                                        background: '#BEF264',
-                                                                        textDecoration: 'none',
-                                                                        '&:hover': {
-                                                                            backgroundColor: '#A3E635',
-                                                                        },
-
-                                                                    }}
+                                                                    className="block bg-lime-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-lime-400"
                                                                 >
                                                                     Visit here
                                                                 </Link>
@@ -332,7 +318,7 @@ const Category = ({ selectedStatus, setSelectedStatus, category }) => {
     };
     return (
         <>
-            <div className="">
+            <div id='swipericon'>
                 <Swiper
                     grabCursor={true}
                     autoplay={{
