@@ -6,10 +6,16 @@ const Blog = () => {
   return (
     <div>
       {/* blog cover start */}
-      <div className="bg-black">
-        <div className="h-[400px] w-full border sm:-mt-8 bg-[url('/Assets/contact.jpg')] opacity-50">
+      <div className="">
+        <div
+          className="bg-cover bg-no-repeat h-[400px] w-full sm:-mt-8 flex justify-center items-center"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/Assets/contact.jpg")',
+          }}
+        >
           <div className="text-white max-w-fit">
-            <h1 className="text-5xl font-semibold uppercase">Blog</h1>
+            <h1 className="text-6xl font-semibold uppercase">Blog</h1>
             <div className="flex items-center justify-between text-lg">
               <Link href={"/home"}>Home</Link>
               <BiArrowToRight />
