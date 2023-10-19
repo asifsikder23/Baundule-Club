@@ -1,8 +1,16 @@
 import Link from "next/link";
 import React from "react";
 import { BiArrowToLeft, BiArrowToRight } from "react-icons/bi";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import { Typography } from "@mui/material";
 
 const Blog = () => {
+  const customStyles = {
+    "& .MuiPaginationItem-text": {
+      fontSize: "24px", // Adjust the font size to your preference
+    },
+  };
   return (
     <div className="relative">
       {/* blog cover start */}
@@ -41,6 +49,14 @@ const Blog = () => {
                 </div>
               </div>
             ))}
+            <Stack spacing={2}>
+              <Pagination
+                count={10}
+                variant="outlined"
+                shape="rounded"
+                sx={customStyles}
+              />
+            </Stack>
             {/* <div className="col-span-2 px-40 py-8 bg-white">
               <div className="grid grid-cols-6 text-lime-600">
                 <button className="text-2xl border border-lime-600 hover:bg-gray-200 hover:text-lime-800">
