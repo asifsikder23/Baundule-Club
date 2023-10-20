@@ -7,42 +7,14 @@ import 'swiper/css/pagination';
 import { Autoplay, EffectCoverflow } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
-const img = [
-    {
-        img: 'https://i.ibb.co/fnsmvZf/waterfall.jpg',
-        title: 'Waterfall',
-        subtitle: 'Charming'
-    },
-    {
-        img: 'https://i.ibb.co/TbBYW3B/green.jpg',
-        title: 'Green Tourism',
-        subtitle: 'Attractive'
-    },
-    {
-        img: 'https://i.ibb.co/KVPR7Kx/sea.jpg',
-        title: 'Beach',
-        subtitle: 'Beautiful'
-    },
-    {
-        img: 'https://i.ibb.co/9vZV9cv/food.jpg',
-        title: 'Food',
-        subtitle: 'Tasty'
-    },
-    {
-        img: 'https://i.ibb.co/PzFHHc6/heritage.jpg',
-        title: 'Heritage Tour',
-        subtitle: 'Historical'
-    },
-    {
-        img: 'https://i.ibb.co/pdxh1y7/luxury.jpg',
-        title: 'Luxury',
-        subtitle: 'Comfortable'
-    },
-]
-
-
-const Category = () => {
+const Categories = () => {
+    const { data } = useQuery("tour", async () => {
+        const response = await axios.get("http://localhost:5000/category");
+        return response.data;
+    });
     return (
         <>
             <section className='container mx-auto my-14'>
@@ -71,9 +43,9 @@ const Category = () => {
                         modules={[EffectCoverflow, Autoplay]}
                         className="mySwiper"
                     >
-                        {img.map((cat, i) => (
+                        {data?.map((cat, i) => (
                             <SwiperSlide key={i}>
-                                <Link href={'#'}>
+                                <Link href={`/tour/${cat.catId}`}>
                                     <div className="w-full h-[177px] md:h-[280px] lg:h-[400px] xl:h-[500] mx-auto">
                                         <Image
                                             src={cat.img}
@@ -102,4 +74,4 @@ const Category = () => {
         </>
     );
 }
-export default Category;
+export default Categories;

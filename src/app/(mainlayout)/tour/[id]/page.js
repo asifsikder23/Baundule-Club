@@ -1,15 +1,28 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import {  FormControl, FormControlLabel, MenuItem, Pagination, Radio, RadioGroup, Select, Stack } from '@mui/material';
+
+import { FormControl, FormControlLabel, MenuItem, Pagination, Radio, RadioGroup, Select, Stack } from '@mui/material';
 import Image from 'next/image';
 import axios from 'axios';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { RxCross2 } from 'react-icons/rx';
-import '../../../styles/packages.css'
+
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, FreeMode, Navigation } from 'swiper/modules';
+import '../../../../styles/tour.css'
+
+
 
 
 const Tour = () => {
+    const params = useParams();
+    const id = params.id;
     // division
     const [divi, setDivi] = useState('');
     const [selected, setSelected] = useState('');
@@ -22,16 +35,28 @@ const Tour = () => {
     // filtering
     const [filteredDetails, setFilteredDetails] = useState([]);
 
-    // fetch
-    const { data, isLoading } = useQuery("tour", async () => {
-        const response = await axios.get("http://localhost:5000/tour");
+    // fetch by category id
+    const [data, setData] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(true);
+        fetch(`http://localhost:5000/category/${id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setData(data);
+                setLoading(false);
+            });
+    }, [id]);
+
+    // fetch category
+    const { data: category } = useQuery("category", async () => {
+        const response = await axios.get("http://localhost:5000/category");
         return response.data;
     });
 
     const applyFilters = () => {
         const filtered = data?.filter((info) => {
-            // status
-            const statusFilter = selectedStatus === '' || info.category === selectedStatus;
 
             const divisionFilter = selected === '' || info.division === selected;
 
@@ -40,43 +65,44 @@ const Tour = () => {
             // Check if the duration is less than or equal to the selected duration value
             const durationFilter = isNaN(intValue) || info.duration <= intValue;
             return (
-                statusFilter && divisionFilter && durationFilter
+                divisionFilter && durationFilter
             );
         });
         setFilteredDetails(filtered);
     };
     useEffect(() => {
         applyFilters();
-    }, [selectedStatus, data, selected, selectedDuration, value]);
+    }, [data, selected, selectedDuration, value]);
     return (
         <>
-            <Hero />
-            <Pkg data={data} isLoading={isLoading} divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} filteredDetails={filteredDetails} value={value} setValue={setValue} />
+            <Hero data={data} category={category} />
+            <Pkg data={data} isLoading={isLoading} divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} filteredDetails={filteredDetails} value={value} setValue={setValue} category={category} />
         </>
     );
 };
 
 export default Tour;
 
-const Hero = () => {
+const Hero = ({ category, data }) => {
     return (
         <>
             <div className="page-header -mt-7">
                 <div className="container mx-auto">
                     <div className="flex flex-col items-center justify-center"
                         style={{
-                            minHeight: '400px'
+                            minHeight: '350px'
                         }}>
                         <h3 className="display-4 text-white uppercase mb-4">Your Destination</h3>
                         <div className="w-3/4">
-                            <div className="bg-white items-center justify-between w-full flex rounded-full shadow-lg p-1 mb-5 sticky" style={{ top: '5px' }}>
+                            {/* <div className="bg-white items-center justify-between w-full flex rounded-full shadow-lg p-1 mb-5 sticky" style={{ top: '5px' }}>
                                 <input className="font-bold uppercase rounded-full w-full py-2 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs" type="text" placeholder="Search" />
                                 <div className="bg-gray-600 p-2 hover:bg-lime-400 cursor-pointer  rounded-full">
                                     <svg className="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                            </div>
+                            </div> */}
+                            <Category data={data} category={category} />
                         </div>
                     </div>
                 </div>
@@ -85,17 +111,14 @@ const Hero = () => {
     )
 }
 
-const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedStatus, setSelectedStatus, selectedDuration, setSelectedDuration, filteredDetails, value, setValue }) => {
+const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedStatus, setSelectedStatus, selectedDuration, setSelectedDuration, filteredDetails, value, setValue, category }) => {
     return (
         <>
             <div className="container mx-auto lg:flex gap-5 my-10 h-full">
                 <div className="lg:w-1/4 shadow-lg rounded border p-5 h-full lg:sticky top-20">
-                    <Filtering divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} value={value} setValue={setValue} filteredDetails={filteredDetails}/>
+                    <Filtering divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} value={value} setValue={setValue} data={data} />
                 </div>
                 <div className="lg:w-3/4">
-                    <div className='shadow-lg rounded border p-5 mb-5'>
-                        <Category selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />
-                    </div>
                     <div className='shadow-lg rounded border p-5'>
                         {
                             isLoading ?
@@ -132,11 +155,11 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
 
                                                         <div className="flex flex-1 flex-col justify-between">
                                                             <div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
-                                                               
+                                                                <a href="#">
                                                                     <h3 className="font-bold uppercase text-gray-900">
                                                                         {pkg.location}
                                                                     </h3>
-                                        
+                                                                </a>
 
                                                                 <p className="mt-2 line-clamp-4 text-sm/relaxed text-gray-700">
                                                                     {pkg?.description?.map(desc => desc.desc)}
@@ -168,7 +191,7 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
     )
 }
 const Filtering = ({
-    divi, setDivi, selected, setSelected, selectedStatus, selectedDuration, setSelectedDuration, value, setValue, filteredDetails
+    divi, setDivi, selected, setSelected, selectedDuration, setSelectedDuration, value, setValue, data
 }) => {
 
     const handleShowAllDataChange = (event) => { }
@@ -221,7 +244,7 @@ const Filtering = ({
 
     return (
         <>
-            <p className='mb-3'>Packages: {filteredDetails?.length > 1 ? <span>{filteredDetails?.length} Packages found</span> : <span>{filteredDetails?.length} Package found</span>} </p>
+            <p className='mb-3'>Packages: {data?.length > 1 ? <span>{data?.length} Packages found</span> : <span>{data?.length} Package found</span>} </p>
             <hr />
             <div>
                 <p className='my-3 font-bold'>Filter type :</p>
@@ -238,14 +261,6 @@ const Filtering = ({
                         selected ?
                             <>
                                 <div className='px-3 py-1 bg-red-500 text-white rounded-lg cursor-pointer flex items-center gap-1 mb-3' onClick={clearDivision}><p><RxCross2 /></p><p>{selected}</p></div><span className='mx-2'>,</span>
-                            </>
-                            : (
-                                <></>
-                            )}
-                    {
-                        selectedStatus ?
-                            <>
-                                <div className='px-3 py-1 bg-red-500 text-white rounded-lg cursor-pointer flex items-center gap-1 mb-3'><p><RxCross2 /></p><p>{selectedStatus}</p></div>
                             </>
                             : (
                                 <></>
@@ -303,51 +318,106 @@ const Filtering = ({
     );
 };
 
-const Category = ({ selectedStatus, setSelectedStatus }) => {
-    const cat = [
-        {
-            title: 'Beach',
-            icon: '/Assets/icon/beach.png'
-        },
-        {
-            title: 'Waterfall',
-            icon: '/Assets/icon/waterfall.png'
-        },
-        {
-            title: 'Green Tourism',
-            icon: '/Assets/icon/hill.png'
-        },
-        {
-            title: 'Historical',
-            icon: '/Assets/icon/historical.png'
-        },
-        {
-            title: 'Adventure',
-            icon: '/Assets/icon/adventure.png'
+// const Category = ({ category, data }) => {
+//     console.log('data:', data, 'category:', category);
+//     return (
+//         <>
+//             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+
+//                 {
+//                     category?.map((category, i) => (
+//                         <Link href={`/tour/${category?.catId}`} key={i}>
+//                             <div className={`p-2 shadow hover:shadow-lg rounded flex gap-3  justify-between items-center cursor-pointer h-full hover:bg-blue-800 ease-in-out duration-400 text-black hover:text-white text-sm ${data?.some(title => title?.category === category?.title) ? 'bg-blue-800 text-white active' : 'bg-white'}`}>
+//                                 <h1>{category.title}</h1>
+//                                 <Image
+//                                     src={category.icon}
+//                                     alt={category.title}
+//                                     width={200}
+//                                     height={200}
+//                                     className='w-10 h-10' />
+//                             </div>
+
+//                         </Link>
+
+//                     ))
+//                 }
+//             </div>
+//         </>
+//     )
+// }
+const Category = ({ category, data }) => {
+    const [swiperInstance, setSwiperInstance] = useState(null);
+    const goPrev = () => {
+        if (swiperInstance) {
+            swiperInstance.slidePrev();
         }
-    ]
-    const handleStatusClick = (optionName) => {
-        setSelectedStatus((prevSelected) => (prevSelected === optionName ? '' : optionName));
+    };
+    const goNext = () => {
+        if (swiperInstance) {
+            swiperInstance.slideNext();
+        }
     };
     return (
         <>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+            <div className="">
 
-                {
-                    cat.map((category, i) => (
-                        <div className={` p-4 shadow hover:shadow-lg rounded flex gap-3 justify-between items-center cursor-pointer ${selectedStatus === category.title ? 'bg-blue-800 text-white active' : 'bg-white'
-                            }`} key={i} onClick={() => handleStatusClick(category.title)}>
+                <Swiper
+                    onSwiper={setSwiperInstance}
+                    grabCursor={true}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    }}
+                    navigation={{
+                        prevEl: '.swiper-button-prev',
+                        nextEl: '.swiper-button-next',
+                    }}
+                    slidesPerView={3}
+                    spaceBetween={25}
+                    breakpoints={{
+                        100: {
+                            slidesPerView: 2,
 
-                            <h1 style={{lineHeight: '1.3rem'}}>{category.title}</h1>
-                            <Image
-                                src={category.icon}
-                                alt={category.title}
-                                width={200}
-                                height={200}
-                                className='w-10 h-10' />
+                        },
+                        768: {
+                            slidesPerView: 3,
+
+                        },
+                        1024: {
+                            slidesPerView: 4,
+
+                        },
+                    }}
+                    modules={[Autoplay, Navigation, FreeMode]}
+                    className="mySwiper"
+                >
+                    {
+                        category?.map((category, i) => (
+                            <SwiperSlide key={i}>
+                                <Link href={`/tour/${category?.catId}`} >
+                                    <div className={`p-2 shadow hover:shadow-lg rounded flex gap-3  justify-around items-center cursor-pointer h-full hover:bg-blue-800 ease-in-out duration-400 text-black hover:text-white text-sm ${data?.some(title => title?.category === category?.title) ? 'bg-blue-800 text-white active' : 'bg-white'}`}>
+                                        <h1>{category.title}</h1>
+                                        <Image
+                                            src={category.icon}
+                                            alt={category.title}
+                                            width={200}
+                                            height={200}
+                                            className='w-10 h-10' />
+                                    </div>
+                                </Link>
+                            </SwiperSlide>
+                        ))
+                    }
+                    <div className='relative flex justify-center'>
+                        <div className="swiper-button-container">
+                            <button className="swiper-button-prev" onClick={goPrev}>
+                            </button>
+                            <button className="swiper-button-next" onClick={goNext}>
+                            </button>
+
                         </div>
-                    ))
-                }
+                    </div>
+                </Swiper>
             </div>
         </>
     )

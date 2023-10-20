@@ -1,15 +1,19 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import {  FormControl, FormControlLabel, MenuItem, Pagination, Radio, RadioGroup, Select, Stack } from '@mui/material';
+import { Button, FormControl, FormControlLabel, Link, MenuItem, Pagination, Radio, RadioGroup, Select, Stack } from '@mui/material';
 import Image from 'next/image';
 import axios from 'axios';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { RxCross2 } from 'react-icons/rx';
-import '../../../styles/packages.css'
-import Link from 'next/link';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, FreeMode, Navigation } from 'swiper/modules';
+import '../../../../styles/packages.css'
 
 
-const Tour = () => {
+const Destination = () => {
     // division
     const [divi, setDivi] = useState('');
     const [selected, setSelected] = useState('');
@@ -25,6 +29,11 @@ const Tour = () => {
     // fetch
     const { data, isLoading } = useQuery("tour", async () => {
         const response = await axios.get("http://localhost:5000/tour");
+        return response.data;
+    });
+
+    const { data: category } = useQuery("category", async () => {
+        const response = await axios.get("http://localhost:5000/category");
         return response.data;
     });
 
@@ -51,12 +60,12 @@ const Tour = () => {
     return (
         <>
             <Hero />
-            <Pkg data={data} isLoading={isLoading} divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} filteredDetails={filteredDetails} value={value} setValue={setValue} />
+            <Pkg data={data} isLoading={isLoading} divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} filteredDetails={filteredDetails} value={value} setValue={setValue} category={category}/>
         </>
     );
 };
 
-export default Tour;
+export default Destination;
 
 const Hero = () => {
     return (
@@ -85,16 +94,16 @@ const Hero = () => {
     )
 }
 
-const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedStatus, setSelectedStatus, selectedDuration, setSelectedDuration, filteredDetails, value, setValue }) => {
+const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedStatus, setSelectedStatus, selectedDuration, setSelectedDuration, filteredDetails, value, setValue, category }) => {
     return (
         <>
             <div className="container mx-auto lg:flex gap-5 my-10 h-full">
                 <div className="lg:w-1/4 shadow-lg rounded border p-5 h-full lg:sticky top-20">
-                    <Filtering divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} value={value} setValue={setValue} filteredDetails={filteredDetails}/>
+                    <Filtering divi={divi} setDivi={setDivi} selected={selected} setSelected={setSelected} selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} selectedDuration={selectedDuration} setSelectedDuration={setSelectedDuration} value={value} setValue={setValue} />
                 </div>
                 <div className="lg:w-3/4">
                     <div className='shadow-lg rounded border p-5 mb-5'>
-                        <Category selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />
+                        <Category selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} category={category}/>
                     </div>
                     <div className='shadow-lg rounded border p-5'>
                         {
@@ -132,11 +141,11 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
 
                                                         <div className="flex flex-1 flex-col justify-between">
                                                             <div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
-                                                               
+                                                                <a href="#">
                                                                     <h3 className="font-bold uppercase text-gray-900">
                                                                         {pkg.location}
                                                                     </h3>
-                                        
+                                                                </a>
 
                                                                 <p className="mt-2 line-clamp-4 text-sm/relaxed text-gray-700">
                                                                     {pkg?.description?.map(desc => desc.desc)}
@@ -146,7 +155,7 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
                                                             <div className="sm:flex sm:items-end sm:justify-end">
                                                                 <Link
                                                                     href={`/packagedetails/${pkg._id}`}
-                                                                    className='block bg-lime-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-lime-400  '
+                                                                    className="block bg-lime-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-lime-400"
                                                                 >
                                                                     Visit here
                                                                 </Link>
@@ -168,7 +177,7 @@ const Pkg = ({ data, isLoading, divi, setDivi, selected, setSelected, selectedSt
     )
 }
 const Filtering = ({
-    divi, setDivi, selected, setSelected, selectedStatus, selectedDuration, setSelectedDuration, value, setValue, filteredDetails
+    divi, setDivi, selected, setSelected, selectedStatus, selectedDuration, setSelectedDuration, value, setValue
 }) => {
 
     const handleShowAllDataChange = (event) => { }
@@ -221,7 +230,7 @@ const Filtering = ({
 
     return (
         <>
-            <p className='mb-3'>Packages: {filteredDetails?.length > 1 ? <span>{filteredDetails?.length} Packages found</span> : <span>{filteredDetails?.length} Package found</span>} </p>
+            <p className='mb-3'>Packages: 4 Packages found</p>
             <hr />
             <div>
                 <p className='my-3 font-bold'>Filter type :</p>
@@ -303,51 +312,61 @@ const Filtering = ({
     );
 };
 
-const Category = ({ selectedStatus, setSelectedStatus }) => {
-    const cat = [
-        {
-            title: 'Beach',
-            icon: '/Assets/icon/beach.png'
-        },
-        {
-            title: 'Waterfall',
-            icon: '/Assets/icon/waterfall.png'
-        },
-        {
-            title: 'Green Tourism',
-            icon: '/Assets/icon/hill.png'
-        },
-        {
-            title: 'Historical',
-            icon: '/Assets/icon/historical.png'
-        },
-        {
-            title: 'Adventure',
-            icon: '/Assets/icon/adventure.png'
-        }
-    ]
+const Category = ({ selectedStatus, setSelectedStatus, category }) => {
     const handleStatusClick = (optionName) => {
         setSelectedStatus((prevSelected) => (prevSelected === optionName ? '' : optionName));
     };
     return (
         <>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+            <div id='swipericon'>
+                <Swiper
+                    grabCursor={true}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    }}
+                    navigation={{
+                        prevEl: '.swiper-button-prev',
+                        nextEl: '.swiper-button-next',
+                    }}
+                    slidesPerView={3}
+                    spaceBetween={25}
+                    breakpoints={{
+                        100: {
+                            slidesPerView: 2,
 
-                {
-                    cat.map((category, i) => (
-                        <div className={` p-4 shadow hover:shadow-lg rounded flex gap-3 justify-between items-center cursor-pointer ${selectedStatus === category.title ? 'bg-blue-800 text-white active' : 'bg-white'
-                            }`} key={i} onClick={() => handleStatusClick(category.title)}>
+                        },
+                        768: {
+                            slidesPerView: 3,
 
-                            <h1 style={{lineHeight: '1.3rem'}}>{category.title}</h1>
-                            <Image
-                                src={category.icon}
-                                alt={category.title}
-                                width={200}
-                                height={200}
-                                className='w-10 h-10' />
-                        </div>
-                    ))
-                }
+                        },
+                        1024: {
+                            slidesPerView: 4,
+
+                        },
+                    }}
+                    modules={[Autoplay, Navigation, FreeMode]}
+                    className="mySwiper"
+                >
+
+                    {
+                        category?.map((cat, i) => (
+                            <SwiperSlide key={i}>
+                                <div className={` p-4 shadow hover:shadow-lg rounded flex gap-3 justify-between items-center cursor-pointer ${selectedStatus === cat.title ? 'bg-blue-800 text-white catbg' : 'bg-white'
+                                    }`} onClick={() => handleStatusClick(cat.title)}>
+
+                                    <h1 style={{ lineHeight: '1.3rem' }}>{cat.title}</h1>
+                                    <Image
+                                        src={cat.icon}
+                                        alt={cat.title}
+                                        width={200}
+                                        height={200}
+                                        className='w-10 h-10' />
+                                </div>
+                            </SwiperSlide>
+                        ))
+                    }
+                </Swiper>
             </div>
         </>
     )

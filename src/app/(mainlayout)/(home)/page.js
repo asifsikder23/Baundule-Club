@@ -9,6 +9,7 @@ import Category from '@/components/Home/recommend';
 import Image from 'next/image';
 import '../../../styles/home.css'
 import Link from 'next/link';
+import Gallery from '@/components/Home/gallery';
 
 
 
@@ -21,6 +22,7 @@ const Home = () => {
             <Packages />
             <Destination />
             <Category />
+            <Gallery/>
             <Blog />
             <Link href={whatsappURL} target="_blank" rel="noopener noreferrer" className='fixed bottom-5 right-5 z-50'>
                     <Image
@@ -32,7 +34,6 @@ const Home = () => {
                         className="whatsapp-image"
                     />
             </Link>
-
         </section>
     );
 };

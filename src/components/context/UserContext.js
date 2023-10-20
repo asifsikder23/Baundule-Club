@@ -51,6 +51,11 @@ const UserContext = ({ children }) => {
     }, [])
 
 
+    const { data: tour, isLoading: tourloading } = useQuery("tour", async () => {
+        const response = await axios.get("http://localhost:5000/tour");
+        return response.data;
+    });
+    
     const authInfo = {
         user,
         updateUser,
@@ -60,6 +65,8 @@ const UserContext = ({ children }) => {
         logOut,
         googleSignIn,
         auth,
+        tour,
+        tourloading
     }
     return (
         <AuthContext.Provider value={authInfo}>

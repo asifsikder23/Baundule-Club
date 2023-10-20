@@ -1,10 +1,10 @@
 "use client"
+import emailjs from "@emailjs/browser";
 import Head from 'next/head';
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
-import emailjs from "@emailjs/browser";
+import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import '../../../styles/contact.css'
+import '../../../styles/contact.css';
 
 const Contact = () => {
     const time = [
@@ -35,14 +35,14 @@ const Contact = () => {
             <Head>
                 <title>Contact Us | Baundule Club</title>
             </Head>
-            <div class="page-header -mt-7">
-                <div class="container mx-auto">
-                    <div class="flex flex-col items-center justify-center"
+            <div className="page-header -mt-7">
+                <div className="container mx-auto">
+                    <div className="flex flex-col items-center justify-center"
                         style={{
                             minHeight: '400px'
                         }}>
-                        <h3 class="display-4 text-white uppercase mb-2">Contact</h3>
-                        <div class="flex text-white">
+                        <h3 className="display-4 text-white uppercase mb-2">Contact</h3>
+                        <div className="flex text-white">
                             <p className='text-2xl text-center' style={{ letterSpacing: '5px' }}>Contact For Any Query</p>
                         </div>
                     </div>
@@ -171,27 +171,27 @@ const ContactForm = () => {
                         className="flex flex-col py-6 space-y-6 md:py-0 md:px-6"
                     >
 
-                        <div class="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
+                        <div className="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
                             <input
                                 name="user_name"
                                 type="text"
                                 placeholder="Your Name..."
-                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 p-3 bg-white" />
+                                className="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 p-3 bg-white" />
                         </div>
-                        <div class="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
+                        <div className="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
                             <input
                                 name="user_subject"
                                 type="text"
                                 placeholder="Subject..."
-                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 p-3 bg-white" />
+                                className="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 p-3 bg-white" />
                         </div>
 
-                        <div class="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
+                        <div className="relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-lime-500 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-500 before:transition before:duration-300">
                             <input
                                 name="user_email"
                                 type="email"
                                 placeholder="Your email address..."
-                                class="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 p-3 bg-white" />
+                                className="w-full bg-transparent pb-2  border-b  placeholder-gray-300 border-lime-800 outline-none  invalid:border-red-500 transition border-l-4 border-l-lime-600 p-3 bg-white" />
                         </div>
 
                         <label className="block">
